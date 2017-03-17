@@ -1,5 +1,10 @@
 	.file	"main.c"
-	.intel_syntax noprefix
+	.globl	global_int
+	.data
+	.align 4
+global_int:
+	.long	10
+	.comm	global_not_int, 4, 2
 	.def	__main;	.scl	2;	.type	32;	.endef
 	.section .rdata,"dr"
 .LC0:
@@ -12,80 +17,91 @@
 	.ascii "Input angle: \0"
 .LC8:
 	.ascii "Square = %7.4f\0"
+.LC9:
+	.ascii "Test %d %d\0"
 	.text
 	.globl	main
 	.def	main;	.scl	2;	.type	32;	.endef
 	.seh_proc	main
 main:
-	push	rbp
-	.seh_pushreg	rbp
-	mov	rbp, rsp
-	.seh_setframe	rbp, 0
-	sub	rsp, 80
+	pushq	%rbp
+	.seh_pushreg	%rbp
+	movq	%rsp, %rbp
+	.seh_setframe	%rbp, 0
+	subq	$80, %rsp
 	.seh_stackalloc	80
-	movaps	XMMWORD PTR -16[rbp], xmm6
-	.seh_savexmm	xmm6, 64
+	movaps	%xmm6, -16(%rbp)
+	.seh_savexmm	%xmm6, 64
 	.seh_endprologue
 	call	__main
-	lea	rcx, .LC0[rip]
+	leaq	.LC0(%rip), %rcx
 	call	printf
-	lea	rax, -32[rbp]
-	mov	rdx, rax
-	lea	rcx, .LC1[rip]
+	leaq	-32(%rbp), %rax
+	movq	%rax, %rdx
+	leaq	.LC1(%rip), %rcx
 	call	scanf
-	lea	rcx, .LC2[rip]
+	leaq	.LC2(%rip), %rcx
 	call	printf
-	lea	rax, -28[rbp]
-	mov	rdx, rax
-	lea	rcx, .LC1[rip]
+	leaq	-28(%rbp), %rax
+	movq	%rax, %rdx
+	leaq	.LC1(%rip), %rcx
 	call	scanf
-	lea	rcx, .LC3[rip]
+	leaq	.LC3(%rip), %rcx
 	call	printf
-	lea	rax, -24[rbp]
-	mov	rdx, rax
-	lea	rcx, .LC1[rip]
+	leaq	-24(%rbp), %rax
+	movq	%rax, %rdx
+	leaq	.LC1(%rip), %rcx
 	call	scanf
-	movss	xmm0, DWORD PTR -32[rbp]
-	movss	xmm1, DWORD PTR -28[rbp]
-	subss	xmm0, xmm1
-	movss	xmm1, DWORD PTR .LC4[rip]
-	andps	xmm0, xmm1
-	cvtss2sd	xmm0, xmm0
-	movsd	xmm1, QWORD PTR .LC5[rip]
-	movapd	xmm6, xmm0
-	divsd	xmm6, xmm1
-	movss	xmm0, DWORD PTR -24[rbp]
-	cvtss2sd	xmm0, xmm0
-	movsd	xmm1, QWORD PTR .LC6[rip]
-	mulsd	xmm0, xmm1
-	movsd	xmm1, QWORD PTR .LC7[rip]
-	divsd	xmm0, xmm1
+	movss	-32(%rbp), %xmm0
+	movss	-28(%rbp), %xmm1
+	subss	%xmm1, %xmm0
+	movss	.LC4(%rip), %xmm1
+	andps	%xmm1, %xmm0
+	cvtss2sd	%xmm0, %xmm0
+	movsd	.LC5(%rip), %xmm1
+	movapd	%xmm0, %xmm6
+	divsd	%xmm1, %xmm6
+	movss	-24(%rbp), %xmm0
+	cvtss2sd	%xmm0, %xmm0
+	movsd	.LC6(%rip), %xmm1
+	mulsd	%xmm1, %xmm0
+	movsd	.LC7(%rip), %xmm1
+	divsd	%xmm1, %xmm0
 	call	sin
-	mulsd	xmm6, xmm0
-	movss	xmm0, DWORD PTR -24[rbp]
-	cvtss2sd	xmm0, xmm0
-	movsd	xmm1, QWORD PTR .LC6[rip]
-	mulsd	xmm0, xmm1
-	movsd	xmm1, QWORD PTR .LC7[rip]
-	divsd	xmm0, xmm1
+	mulsd	%xmm0, %xmm6
+	movss	-24(%rbp), %xmm0
+	cvtss2sd	%xmm0, %xmm0
+	movsd	.LC6(%rip), %xmm1
+	mulsd	%xmm1, %xmm0
+	movsd	.LC7(%rip), %xmm1
+	divsd	%xmm1, %xmm0
 	call	cos
-	divsd	xmm6, xmm0
-	movapd	xmm0, xmm6
-	cvtsd2ss	xmm2, xmm0
-	movss	DWORD PTR -20[rbp], xmm2
-	cvtss2sd	xmm0, DWORD PTR -20[rbp]
-	movq	rax, xmm0
-	mov	rdx, rax
-	mov	QWORD PTR -40[rbp], rdx
-	movsd	xmm0, QWORD PTR -40[rbp]
-	movapd	xmm1, xmm0
-	mov	rdx, rax
-	lea	rcx, .LC8[rip]
+	divsd	%xmm0, %xmm6
+	movapd	%xmm6, %xmm0
+	cvtsd2ss	%xmm0, %xmm2
+	movss	%xmm2, -20(%rbp)
+	cvtss2sd	-20(%rbp), %xmm0
+	movq	%xmm0, %rax
+	movq	%rax, %rdx
+	movq	%rdx, -40(%rbp)
+	movsd	-40(%rbp), %xmm0
+	movapd	%xmm0, %xmm1
+	movq	%rax, %rdx
+	leaq	.LC8(%rip), %rcx
 	call	printf
-	mov	eax, 0
-	movaps	xmm6, XMMWORD PTR -16[rbp]
-	add	rsp, 80
-	pop	rbp
+	leaq	global_not_int(%rip), %rax
+	movl	$11, (%rax)
+	leaq	global_not_int(%rip), %rax
+	movl	(%rax), %edx
+	movl	global_int(%rip), %eax
+	movl	%edx, %r8d
+	movl	%eax, %edx
+	leaq	.LC9(%rip), %rcx
+	call	printf
+	movl	$0, %eax
+	movaps	-16(%rbp), %xmm6
+	addq	$80, %rsp
+	popq	%rbp
 	ret
 	.seh_endproc
 	.section .rdata,"dr"

@@ -1338,6 +1338,9 @@ __extension__ long long __attribute__((__cdecl__)) llrintl (long double);
 
 
 # 5 "main.c"
+int global_int = 10;
+int global_not_int;
+
 int main(void)
 {
 
@@ -1355,4 +1358,7 @@ int main(void)
 
     square=(fabs(large_base-less_base)/2)*sin(angle*3.14159265358979323846/180)/cos(angle*3.14159265358979323846/180);
     printf("Square = %7.4f", square);
+
+ global_not_int = 11;
+ printf("Test %d %d", global_int, global_not_int);
 }
