@@ -1,9 +1,11 @@
 #include <stdio.h>
+#define COUNT_APARTMENT_AC 36
+#define COUNT_APARTMENT_FLOOR 4
 
 int main(void)
 {
     // Объявление переменных.
-    int number_apartment; //count;
+    int number_apartment;
     int number_floor, number_ac;
 
     // Считывание переменных.
@@ -12,8 +14,9 @@ int main(void)
 
     // Высчитываем номер подъезда и этажа.
     number_apartment--;
-    number_ac = number_apartment/36 + 1;
-    number_floor = (number_apartment - (number_ac - 1)*36)/4 + 1;
+    number_ac = number_apartment / COUNT_APARTMENT_AC + 1;
+    number_floor = (number_apartment - (number_ac - 1) * COUNT_APARTMENT_AC)
+            / COUNT_APARTMENT_FLOOR + 1;
 
     // Вывод результатов.
     printf("Number floor: %d\n", number_floor);
