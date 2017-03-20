@@ -1,0 +1,12 @@
+            Тест1:
+    Входные данные:                 Выходные данные:
+    Input number apartment: 43          Number floor: 2
+                                        Number access: 2
+            Тест2:
+    Входные данные:                 Выходные данные:
+    Input number apartment: 90          Number floor: 5
+                                        Number access: 3
+            Тест3:
+    Входные данные:                 Выходные данные:
+    Input number apartment: 158         Number floor: 4
+                                        Number access: 5

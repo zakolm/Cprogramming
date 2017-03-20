@@ -1,0 +1,12 @@
+            Тест1:
+    Входные данные:                                     Выходные данные:
+    Input first volume and first temperature: 10 60             Valueme: 15
+    Input second volume and second temperature: 5 20            Temperature: 26.6667
+            Тест2:
+    Входные данные:                                     Выходные данные:
+    Input first volume and first temperature: 7.5 70.1              Valueme: 19.7500
+    Input second volume and second temperature: 12.25 -10           Temperature: 37.2772
+            Тест3:
+    Входные данные:                                     Выходные данные:
+    Input first volume and first temperature: 100 20            Valueme: 185
+    Input second volume and second temperature: 85 40           Temperature: 27.5676

@@ -1,0 +1,23 @@
+// Результат работы препроцессора
+  int __attribute__((__cdecl__)) printf(const char * __restrict__ _Format,...);
+  int __attribute__((__cdecl__)) scanf(const char * __restrict__ _Format,...) ;
+  extern double __attribute__((__cdecl__)) fabs (double _X);
+
+int main(void)
+{
+
+    float angle, less_base, large_base;
+    float square;
+
+
+    printf("Input large base: ");
+    scanf("%f", &large_base);
+    printf("Input less base: ");
+    scanf("%f", &less_base);
+    printf("Input angle: ");
+    scanf("%f", &angle);
+
+
+    square=(fabs(large_base-less_base)/2)*sin(angle*3.14159265358979323846/180)/cos(angle*3.14159265358979323846/180);
+    printf("Square = %7.4f", square);
+}

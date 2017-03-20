@@ -1,0 +1,15 @@
+            Тест1:
+    Входные данные:          Выходные данные:
+    Input large base: 5         Square =  5.1962
+    Input less base: 11
+    Input angle: 60
+            Тест2:
+    Входные данные:          Выходные данные:
+    Input large base: 5         Square =  2.7475
+    Input less base: 3
+    Input angle: 70
+            Тест3:
+    Входные данные:          Выходные данные:
+    Input large base: 6         Square = 34.2902
+    Input less base: 13
+    Input angle: 85
