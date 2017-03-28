@@ -1,7 +1,7 @@
         -:    0:Source:c:/mingw/include/stdio.h
         -:    0:Graph:main.gcno
         -:    0:Data:main.gcda
-        -:    0:Runs:4
+        -:    0:Runs:14
         -:    0:Programs:1
         -:    1:/*
         -:    2: * stdio.h
@@ -379,13 +379,13 @@
         -:  374:}
         -:  375:
         -:  376:__mingw_stdio_redirect__
-        8:  377:int printf (const char *__format, ...)
+       28:  377:int printf (const char *__format, ...)
         -:  378:{
         -:  379:  register int __retval;
-        8:  380:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
-        8:  381:  __retval = __mingw_vprintf( __format, __local_argv );
-        8:  382:  __builtin_va_end( __local_argv );
-        8:  383:  return __retval;
+       28:  380:  __builtin_va_list __local_argv; __builtin_va_start( __local_argv, __format );
+       28:  381:  __retval = __mingw_vprintf( __format, __local_argv );
+       28:  382:  __builtin_va_end( __local_argv );
+       28:  383:  return __retval;
         -:  384:}
         -:  385:
         -:  386:__mingw_stdio_redirect__

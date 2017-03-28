@@ -1,0 +1,44 @@
+        -:    0:Source:main.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:14
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#include <math.h>
+        -:    3:
+       14:    4:int main(void) 
+        -:    5:{     
+        -:    6:	float a, b, c, d;  
+       14:    7:    printf("Enter a, b, c: ");
+        -:    8:
+       14:    9:    setbuf(stdout,NULL);
+       14:   10:	if (scanf("%f%f%f", &a, &b, &c) == 3)
+        -:   11:	{
+        9:   12:         if (a != 0.0)
+        -:   13:         {
+        6:   14:			d = b * b - 4 * a * c;  
+        6:   15:            if (d < 0.0)             
+        -:   16:			{
+        1:   17:				printf("There are no real roots\n");
+        -:   18:			}
+        5:   19:			else if (d > 0)
+        -:   20:			{
+        6:   21:			printf("x1 = %f, x2 = %f\n", (-b - sqrt(d)) / (2 * a),
+        6:   22:										(-b + sqrt(d)) / (2 * a));
+        -:   23:			}
+        -:   24:			else
+        -:   25:			{
+        2:   26:				printf("x1 = x2 = %f\n", -b / (2 * a));
+        -:   27:			}
+        -:   28:		}
+        -:   29:		else
+        -:   30:		{
+        3:   31:			printf("Equation is not square\n");
+        -:   32:		}
+        -:   33:	}
+        -:   34:	else
+        -:   35:	{
+        5:   36:		printf("I/O error\n");
+        -:   37:	}  
+       14:   38:	return 0;
+        -:   39:} 
