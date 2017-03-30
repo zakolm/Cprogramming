@@ -19,8 +19,13 @@ int main(void)
     // Ввод данных.
     int number, temp;
     printf("Number Fibonacci: ");
-    scanf("%d", &number);
-    // Вывод данных.
-    temp = Fibonacci(number);
-    printf("Fibonacci: %d\n", temp);
+    setbuf(stdout,NULL);
+    if (scanf("%d", &number))
+    {
+        // Вывод данных.
+        temp = Fibonacci(number);
+        printf("Fibonacci: %d\n", temp);
+    }
+    else
+        printf("Error!");
 }
