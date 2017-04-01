@@ -46,9 +46,11 @@ int main(void)
                         else
                             printf("Point outside triagle");
                     }
-                    else
-                        printf("There is no such triagle!");
+					else
+						printf("Error!");
                 }
+				else
+					printf("There is no such triagle!");
             }
             else
                 printf("Error!");
