@@ -31,7 +31,7 @@ int main(void)
                 if (check_triagle(AB_x, AB_y, CA_x, CA_y))
                 {
                     printf("Input coordinates(x, y) point O: ");
-                    if (scanf("%f %f", &x_o, &y_o))
+                    if (scanf("%f %f", &x_o, &y_o) == 2)
                     {
                         int s1,s2,s3;
                         s1 = check_location(AB_x, AB_y, x_o - x_a, y_o - y_a);
