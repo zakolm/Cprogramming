@@ -1,61 +1,66 @@
 #include <stdio.h>
 #include <math.h>
+#define OK 0
+#define ERROR 1
 
-float summ(float x, float eps);
+double summ(double x, double eps);
 int fact(int x_z);
+
+int print_error(void)
+{
+    printf("Error!");
+    return ERROR;
+}
 
 int main()
 {
-    float x, eps;
+    double x, eps;
 
     printf("Input x: ");
-    if (scanf("%f", &x) && fabs(x)<1)
+    if (scanf("%lf", &x) && (fabs(x) < 3))
     {
         printf("Input eps: ");
-        if (scanf("%f", &eps))
+        if (scanf("%lf", &eps))
         {
-            float S = summ(x, eps);
+            double S = summ(x, eps);
             printf("ARCSIN(%.4f): %.6f for Taylor\n", x, S);
             printf("Absolut ARCSIN(%.4f): %.6f\n", x, asin(x));
             printf("Absulut error: %f\n", fabs(S - asin(x)));
             if (asin(x) != 0)
             {
-                float relative_error = fabs((S - asin(x))/asin(x));
-                printf("Relative error%f\n", relative_error);
+                double relative_error = fabs((S - asin(x))/asin(x));
+                printf("Relative error: %f\n", relative_error);
             }
             else
                 printf("Error!\nFunction = 0");
+
+            return OK;
           }
         else
-            printf("Error!");
+            return print_error();
     }
     else
-        printf("Error!");
+        return print_error();
 }
 
-float summ(float x, float eps)
+double summ(double x, double eps)
 {
-    int count = 3;
-    float s = 0, s_next = x;
-
-    while(fabs(s_next - s) >= eps)
+    int count = 3, count_z = 1;
+    double s = 0, s_next = x;
+    unsigned long long int fact_n, fact_c;
+    fact_n = fact_c = 1;
+    double x_pow = x;
+    while(fabs(s_next - s) > eps)
     {
+        fact_n *= (count - 2);
+        fact_c *= (count - 1);
+        for (; count_z < count; count_z++)
+            x_pow *= x;
+        //printf("[DBG] %llu %llu\n", fact_n, fact_c);
+        //printf("[DBG]%f %f\n", s_next, s);
         s = s_next;
-        s_next += (fact(count - 2) * pow(x, count))/(fact(count - 1) * count);
+        s_next += (fact_n * x_pow) / (fact_c * count);
         count += 2;
     }
     return s;
-}
-
-int fact(int x_z)
-{
-    if (x_z == 1)
-        return 1;
-    else
-    {
-        int i = (x_z % 2) + 2, number = 1;
-        for(; i <= x_z; i += 2)
-            number *= i;
-        return number;
-    }
 }

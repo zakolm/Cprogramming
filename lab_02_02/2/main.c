@@ -1,13 +1,21 @@
 #include <stdio.h>
 #include <math.h>
+#define OK 0
+#define ERROR 1
 
 int string_hello(char string , float *p, float *z)
 {
     printf("Input triangle coordinates(x, y) point %c: ", string);
-    if (scanf("%f %f", &*p, &*z) == 2)
+    if (scanf("%f %f", p, z) == 2)
         return 1;
     else
         return 0;
+}
+
+int print_error(void)
+{
+    printf("Error!");
+    return ERROR;
 }
 
 int check_triagle(float x_1, float y_1, float x_2, float y_2);
@@ -45,29 +53,31 @@ int main(void)
                             printf("Point on triagle");
                         else
                             printf("Point outside triagle");
+
+                        return OK;
                     }
 					else
-						printf("Error!");
+                        return print_error();
                 }
 				else
-					printf("There is no such triagle!");
+                    return print_error();
             }
             else
-                printf("Error!");
+                return print_error();
         }
         else
-            printf("Error!");
+            return print_error();
     }
     else
-        printf("Error!");
+        return print_error();
 }
 
 int check_triagle(float x_1, float y_1, float x_2, float y_2)
 {
     if ((x_1*y_2 - x_2*y_1) == 0)
-        return 0;
+        return OK;
     else
-        return 1;
+        return ERROR;
 }
 
 int check_location(float x_1, float y_1, float x_2, float y_2)
