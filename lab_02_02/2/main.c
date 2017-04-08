@@ -56,10 +56,10 @@ int main(void)
 
                         return OK;
                     }
-					else
+                    else
                         return print_error();
                 }
-				else
+                else
                     return print_error();
             }
             else
