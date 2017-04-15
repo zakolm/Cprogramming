@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define OK 0
 #define ERROR 1
+#define MAX_VALUE 94
 
 unsigned long long int Fibonacci(int number)
 {
@@ -16,6 +17,8 @@ unsigned long long int Fibonacci(int number)
     return temp;
 }
 
+int print_error(string str_error);
+
 int main(void)
 {
     // Ввод данных.
@@ -25,19 +28,23 @@ int main(void)
     printf("\t\t0 < number < 93\n");
     printf("Number Fibonacci: ");
     //setbuf(stdout,NULL);
-    scanf("%d", &number);
-    if (number && number < 94)
-    {
-        // Вывод данных.
-        temp = Fibonacci(number);
-        printf("Fibonacci: %llu", temp);
+    //scanf("%d", &number);
+    if (scanf("%d", &number))
+        if(number < MAX_VALUE)
+        {
+            // Вывод данных.
+            temp = Fibonacci(number);
+            printf("Fibonacci: %llu", temp);
 
-        return OK;
-    }
+            return OK;
+        }
     else
-    {
-        printf("Error!");
+        return print_error('input');
+}
 
-        return ERROR;
-    }
+int print_error(string str_error)
+{
+    printf("Error! %s", str_error);
+
+    return ERROR;
 }
