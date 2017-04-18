@@ -2,44 +2,59 @@
 #include <math.h>
 #define OK 0
 #define ERROR 1
+#define ERROR_INPUT 2
+#define ERROR_INTERVAL 3
 
 double summ(double x, double eps);
 
-int print_error(void)
+int main(void)
 {
-    printf("Error!");
-    return ERROR;
-}
-
-int main()
-{
+    int rc = OK;
     double x, eps;
 
     printf("Input x: ");
-    if (scanf("%lf", &x) && (fabs(x) < 3))
-    {
-        printf("Input eps: ");
-        if (scanf("%lf", &eps))
+    if (scanf("%lf", &x))
+        if (fabs(x) < 1)
         {
-            double S = summ(x, eps);
-            printf("ARCSIN(%.4f): %.6f for Taylor\n", x, S);
-            printf("Absolut ARCSIN(%.4f): %.6f\n", x, asin(x));
-            printf("Absulut error: %f\n", fabs(S - asin(x)));
-            if (asin(x) != 0)
-            {
-                double relative_error = fabs((S - asin(x))/asin(x));
-                printf("Relative error: %f\n", relative_error);
-            }
+            printf("Input eps: ");
+            if (scanf("%lf", &eps))
+                if (eps > 0)
+                {
+                    double S = summ(x, eps);
+                    printf("ARCSIN(%.4f): %.6f for Taylor\n", x, S);
+                    printf("Absolut ARCSIN(%.4f): %.6f\n", x, asin(x));
+                    printf("Absulut error: %f\n", fabs(S - asin(x)));
+                    if (asin(x) != 0)
+                    {
+                        double relative_error = fabs((S - asin(x))/asin(x));
+                        printf("Relative error: %f\n", relative_error);
+                    }
+                    else
+                        printf("Error!\nFunction = 0");
+                }
+                else
+                    rc = ERROR_INTERVAL;
             else
-                printf("Error!\nFunction = 0");
+                rc = ERROR_INPUT;
+       }
+        else
+            rc = ERROR_INTERVAL;
+    else
+        rc = ERROR_INPUT;
 
-            return OK;
-          }
-          else
-            return print_error();
+
+    if (rc == OK)
+        return OK;
+    else if (rc == ERROR_INPUT)
+    {
+        printf("Error input!");
+        return ERROR;
     }
     else
-        return print_error();
+    {
+        printf("Error interval!");
+        return ERROR;
+    }
 }
 
 double summ(double x, double eps)

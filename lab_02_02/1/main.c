@@ -1,50 +1,49 @@
 #include <stdio.h>
 #define OK 0
 #define ERROR 1
-#define MAX_VALUE 94
+#define MAX_VALUE 93
 
 unsigned long long int Fibonacci(int number)
 {
-    unsigned long long int temp = 0; // a
-    unsigned long long int tmp = 1; // b
+    unsigned long long int main_value = 0; // a
+    unsigned long long int side_value = 1; // b
     // Вычисление:
     for(int i = 0; i < number; i++)
     {
-        temp += tmp; // a + b = c
-        tmp = temp - tmp; // c - b = a
+        main_value += side_value; // a + b = c
+        side_value = main_value - side_value; // c - b = a
     }
 
-    return temp;
+    return main_value;
 }
 
-int print_error(string str_error);
+int print_error(int index);
 
 int main(void)
 {
     // Ввод данных.
-    int number;
-    unsigned long long int temp;
-    setbuf(stdout,NULL);
-    printf("\t\t0 < number < 93\n");
+    int number, rc = OK;
+    unsigned long long int Fib_number;
+
+    printf("\t\t0 < number < %d\n", MAX_VALUE);
     printf("Number Fibonacci: ");
-    //setbuf(stdout,NULL);
-    //scanf("%d", &number);
     if (scanf("%d", &number))
-        if(number < MAX_VALUE)
+        if(number <= MAX_VALUE && number >= 0)
         {
             // Вывод данных.
-            temp = Fibonacci(number);
-            printf("Fibonacci: %llu", temp);
-
-            return OK;
+            Fib_number = Fibonacci(number);
+            printf("Fibonacci: %llu", Fib_number);
+        }
+        else
+        {
+            printf("\nError interval!");
+            return ERROR;
         }
     else
-        return print_error('input');
-}
+    {
+        printf("\nError input!");
+        return ERROR;
+    }
 
-int print_error(string str_error)
-{
-    printf("Error! %s", str_error);
-
-    return ERROR;
+    return OK;
 }
