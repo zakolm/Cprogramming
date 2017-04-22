@@ -3,13 +3,13 @@
 #define OK 0
 #define ERROR 1
 
-void string_hello(char string , float *p, float *z, int *error)
+int string_hello(char string , float *x_point, float *y_point)
 {
     printf("Input triangle coordinates(x, y) point %c: ", string);
-    if (scanf("%f %f", p, z) == 2)
-        *error =  OK;
+    if (scanf("%f %f", x_point, y_point) == 2)
+        return OK;
     else
-        *error = ERROR;
+        return ERROR;
 }
 int error_in(char string)
 {
@@ -28,15 +28,18 @@ int main(void)
     float x_a, y_a, x_b, y_b, x_c, y_c;
     float x_o, y_o;
 
-    string_hello('A', &x_a, &y_a, &rc);
+    rc = string_hello('A', &x_a, &y_a);
     if (rc)
         return error_in('A');
-    string_hello('B', &x_b, &y_b, &rc);
+
+    rc = string_hello('B', &x_b, &y_b);
     if (rc)
         return error_in('B');
-    string_hello('C', &x_c, &y_c, &rc);
+
+    rc = string_hello('C', &x_c, &y_c);
     if (rc)
         return error_in('C');
+
     if (!(check_triagle(x_b - x_a, y_b - y_a, x_a - x_c, y_a - y_c)))
     {
         printf("Input coordinates(x, y) point O: ");
