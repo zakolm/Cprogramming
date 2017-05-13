@@ -1,6 +1,7 @@
 #include <stdio.h>
 #define OK 0
-#define ERROR 1
+#define ERRORINTERVAL -1
+#define ERRORINPUT -2
 #define MAX_VALUE 93
 
 unsigned long long int Fibonacci(int number)
@@ -37,12 +38,12 @@ int main(void)
         else
         {
             printf("\nError interval!");
-            return ERROR;
+            return ERRORINTERVAL;
         }
     else
     {
         printf("\nError input!");
-        return ERROR;
+        return ERRORINPUT;
     }
 
     return OK;
