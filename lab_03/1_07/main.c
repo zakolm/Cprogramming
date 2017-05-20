@@ -5,33 +5,34 @@
 #define ERROR -1
 #define OK 0
 
-int result(int* count);
+void result(FILE*, int*, int*);
 
 int main(void)
 {
     int rc, count = 0;
     //
-    rc = result(&count);
+    result(stdin, &count, &rc);
     if (!rc)
         printf("result is %d", count);
     //
     return rc;
 }
 
-int result(int* count)
+void result(FILE* f, int* count, int* rc)
 {
     int temp, a, b, c;
     int input_flag = 0;
     //
-    if (fscanf(stdin, "%d", &temp) != 1)
+    if (fscanf(f, "%d", &temp) != 1)
     {
-        fprintf(stdout,"ERROR INPUT!");
-        return ERROR;
+        fprintf(stderr,"ERROR INPUT!",strerror(errno));
+        *rc = ERROR;
+        return;
     }
     else
         a = temp;
     //
-    while((fscanf(stdin, "%d", &temp) == 1))
+    while((fscanf(f, "%d", &temp) == 1))
     {
         if (input_flag)
         {
@@ -45,6 +46,4 @@ int result(int* count)
             b = temp; input_flag = 1;
         }
     }
-    //
-    return OK;
 }

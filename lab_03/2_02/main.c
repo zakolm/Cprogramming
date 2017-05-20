@@ -2,16 +2,42 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#define ERROR -1
 #define OK 0
+#define ERROR_INPUT -1
 
+int usage(int*);
 void middle_znach(FILE* f, int* znach, int* count);
 void Sum_funct(FILE* f, int* sum, int middle_x);
 
-int usage(void)
+int dispartion(FILE* f, int *znach, char** argv);
+int main(int argc, char** argv)
+{
+    FILE *f;
+    int max, rc = OK;
+    f = fopen(argv[1], "r");
+
+    if (argc != 2)
+        usage(&rc);
+    if (!f)
+    {
+        fprintf(stderr, "File %s not found! %s!\n", argv[1], strerror(errno));
+        fclose(f);
+        return ERROR;
+    }
+
+    if (dispartion(f, &max, argv) == OK)
+        printf("dispartion is %d\n", max);
+    else
+        printf("There are not enough data.\n");
+    fclose(f);
+
+    return OK;
+}
+
+int usage(int* rc)
 {
     printf("example.exe <name file>\n");
-    return ERROR;
+    *rc = ERROR_INPUT;
 }
 
 int dispartion(FILE* f, int *znach, char** argv)
@@ -31,29 +57,6 @@ int dispartion(FILE* f, int *znach, char** argv)
         return OK;
     }
     return ERROR;
-}
-int main(int argc, char** argv)
-{
-    FILE *f;
-    int max;
-    f = fopen(argv[1], "r");
-
-    if (argc != 2)
-        return usage();
-    if (!f)
-    {
-        fprintf(stderr, "File %s not found! %s!\n", argv[1], strerror(errno));
-        fclose(f);
-        return ERROR;
-    }
-
-    if (dispartion(f, &max, argv) == OK)
-        printf("dispartion is %d\n", max);
-    else
-        printf("There are not enough data.\n");
-    fclose(f);
-
-    return OK;
 }
 
 int pow_funct(int base, int n)
