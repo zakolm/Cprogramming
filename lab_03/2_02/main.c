@@ -4,59 +4,118 @@
 #include <errno.h>
 #define OK 0
 #define ERROR_INPUT -1
+#define ERROR_EMPTY_FILE -3
+#define ERROR_ZERO_DIVISION -4
 
-int usage(int*);
-void middle_znach(FILE* f, int* znach, int* count);
-void Sum_funct(FILE* f, int* sum, int middle_x);
+int usage(void);
+int dispartion(FILE*, int*, char**);
+int middle_znach(FILE*, int*, int*);
+int Sum_funct(FILE*, int, int, int*);
+int pow_funct(int, int);
 
-int dispartion(FILE* f, int *znach, char** argv);
 int main(int argc, char** argv)
 {
     FILE *f;
     int max, rc = OK;
-    f = fopen(argv[1], "r");
 
     if (argc != 2)
-        usage(&rc);
+	{
+        usage();
+		return rc;
+	}
+	f = fopen(argv[1], "r");
     if (!f)
     {
         fprintf(stderr, "File %s not found! %s!\n", argv[1], strerror(errno));
-        fclose(f);
-        return ERROR;
+        rc = ERROR_INPUT;
     }
-
-    if (dispartion(f, &max, argv) == OK)
+	if (!rc)
+		rc = dispartion(f, &max, argv);
+    if (!rc)
         printf("dispartion is %d\n", max);
-    else
-        printf("There are not enough data.\n");
+    else if (rc != ERROR_INPUT)
+	{
+		printf("%d", rc);
+		if (rc == ERROR_EMPTY_FILE)
+			printf("There are not enough data.\n");
+		else
+			printf("Error zero division.\n");
+	}
     fclose(f);
 
-    return OK;
+    return rc;
 }
 
-int usage(int* rc)
+int usage(void)
 {
     printf("example.exe <name file>\n");
-    *rc = ERROR_INPUT;
 }
 
 int dispartion(FILE* f, int *znach, char** argv)
 {
-    int sum = 0, count, middle_x;
-    FILE* file = fopen(argv[1], "r");
+    int count, middle_x, rc;
+	rc = middle_znach(f, &middle_x, &count);
+    if (rc)
+	{
+		if (rc == ERROR_EMPTY_FILE)
+			return rc;
+		else
+			return rc;
+	}
+	rewind(f);
+	rc = Sum_funct(f, middle_x, count, znach);
+    if (rc)
+	{
+		if (rc == ERROR_EMPTY_FILE)
+			return rc;
+		else
+			return rc;
+	}
+    return rc;
+}
 
-    if (fscanf(f, "%d", znach) == 1)
+int middle_znach(FILE* f, int* znach, int* count)
+{
+    int sum = 0, x;
+	if (fscanf(f, "%d", &sum) != 1)
+		return ERROR_EMPTY_FILE;
+	*count = 1;
+    while (fscanf(f, "%d", &x) == 1)
     {
-        middle_znach(file, &middle_x, &count);
-        fclose(file);
-        FILE* file = fopen(argv[1], "r");
-        Sum_funct(file, &sum, middle_x);
-        fclose(file);
-        fclose(f);
-        *znach = sum/count;
-        return OK;
+        sum += x;
+        *count += 1;
     }
-    return ERROR;
+	if (!(*count))
+	{
+		printf("%d", *count);
+		return ERROR_ZERO_DIVISION;
+	}
+    *znach = sum / *count;
+	
+	return OK;
+}
+
+int Sum_funct(FILE* f, int middle_x, int count, int* znach)
+{
+    int num, count_check;
+	if (fscanf(f, "%d", &num) != 1)
+		return ERROR_EMPTY_FILE;
+	count_check = 1; 
+	int sum = pow_funct((num - middle_x), 2);
+	
+    while (fscanf(f, "%d", &num) == 1)
+	{
+		count_check++;
+        sum += pow_funct((num - middle_x), 2);
+	}
+	if (count_check == count)
+	{
+		if (count)
+			*znach = sum/count;
+		else
+			return ERROR_ZERO_DIVISION;
+	}
+	return OK;
 }
 
 int pow_funct(int base, int n)
@@ -64,27 +123,5 @@ int pow_funct(int base, int n)
     int result = 1;
     for (int i = 0; i < n; ++i)
         result *= base;
-    //printf("[DBG] %d\n", result);
     return result;
-}
-
-void Sum_funct(FILE* f, int* sum, int middle_x)
-{
-    int num;
-    *sum = 0;
-    while (fscanf(f, "%d", &num) == 1)
-        *sum += pow_funct((num - middle_x), 2);
-}
-
-void middle_znach(FILE* f, int* znach, int* count)
-{
-    int sum = 0, x;
-    *count = 0;
-    while (fscanf(f, "%d", &x) == 1)
-    {
-        //printf("[dbg]%d\n", x);
-        sum += x;
-        *count += 1;
-    }
-    *znach = sum / *count;
 }
