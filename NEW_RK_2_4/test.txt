@@ -1,0 +1,98 @@
+        -:    0:Source:main.c
+        -:    0:Graph:main.gcno
+        -:    0:Data:main.gcda
+        -:    0:Runs:14
+        -:    0:Programs:1
+        -:    1:#include <stdio.h>
+        -:    2:#define MAX 100
+        -:    3:#define OK 0
+        -:    4:#define ERROR_FOUND_FILE -1
+        -:    5:#define ERROR_LEN_ARRAY -2
+        -:    6:#define YES 1
+        -:    7:#define NO 2
+        -:    8:
+        -:    9:void usage(void);
+        -:   10:int input_array(FILE*, int*, int*);
+        -:   11:int process(int*, int);
+        -:   12:
+       14:   13:int main(int argc, char** argv)
+        -:   14:{
+       14:   15:	int rc = OK;
+       14:   16:	if (argc != 2)
+        1:   17:		usage();
+        -:   18:	else
+        -:   19:	{
+        -:   20:		FILE* f;
+       13:   21:		f = fopen(argv[1], "r");
+       13:   22:		if (!f)
+        -:   23:		{
+        6:   24:			printf("File '%s' not found!\n", argv[1]);
+        6:   25:			rc = ERROR_FOUND_FILE;
+        -:   26:		}
+       13:   27:		if (!rc)
+        -:   28:		{
+        -:   29:			int len;
+        -:   30:			int array[MAX];
+        7:   31:			if(!input_array(f, array, &len))
+        -:   32:			{
+        5:   33:				printf("\n");
+        5:   34:				if (process(array, len) == YES)
+        4:   35:					printf("yes");
+        -:   36:				else
+        1:   37:					printf("no");
+        -:   38:			}
+        -:   39:			else
+        -:   40:			{
+        2:   41:				printf("Error in file!");
+        -:   42:			}
+        -:   43:		}
+        -:   44:	}
+       14:   45:	return rc;
+        -:   46:}
+        -:   47:
+        1:   48:void usage(void)
+        -:   49:{
+        1:   50:	printf("example.exe <name file>\n");
+        1:   51:}
+        -:   52:
+        7:   53:int input_array(FILE* f, int* pa, int* len)
+        -:   54:{
+        7:   55:	fscanf(f, "%d\n", len);
+        7:   56:	if (*len > MAX || *len <= 0)
+        1:   57:		return ERROR_LEN_ARRAY;
+        6:   58:	int i, new_len = 0;
+        -:   59:	
+        6:   60:	i = 0;
+       62:   61:	for (; (i < *len) && 
+       50:   62:		fscanf(f, "%d", (pa+i)) == 1; ++i)
+       24:   63:		new_len++;
+        6:   64:	if(!new_len)
+        1:   65:		return ERROR_LEN_ARRAY;
+        -:   66:	
+        5:   67:	*len = new_len;
+        5:   68:	printf("%d\n", *len);
+        5:   69:	i = 0;
+       29:   70:	for (; (i < *len); ++i)
+       24:   71:		printf("%d ", *(pa+i));
+        5:   72:	return OK;
+        -:   73:}
+        -:   74:
+        5:   75:int process(int* pa, int len)
+        5:   76:{
+        5:   77:	int new_array[len];
+        5:   78:	int i = 0;
+       29:   79:	for (; i < len; ++i)
+       24:   80:		new_array[i] = 0;
+        5:   81:	int* pb = new_array;
+        5:   82:	i = 0; *pb += 1;
+       33:   83:	while(*(pb+i) < 2 && i < len)
+        -:   84:	{
+       23:   85:		i = *(pa+i);
+       23:   86:		*(pb+i) += 1;
+        -:   87:	}
+        5:   88:	i = 0;
+       28:   89:	for (; i < len; ++i)
+       24:   90:		if (*(pb+i) == 0)
+        1:   91:			return NO;
+        4:   92:	return YES;
+        -:   93:}
