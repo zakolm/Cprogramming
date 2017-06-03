@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#define MAXLENGTH 100
+#define MAXLENGTH 5
 #define OK 0
 #define ERROR_INPUT_FILE -1
 #define ERROR_FOUND_FILE -2
@@ -50,10 +50,9 @@ void input(FILE*f, int* pa, int* rc, long long int* sum)
 {
     long long int squre = 1;
     int i = 0;
-    //
     for (; (fscanf(f, "%d", pa) == 1); ++pa, ++i)
     {
-
+		//printf("[DBG]%d\n", *pa);
         if (i < MAXLENGTH)
         {
             squre *= *pa;
@@ -65,6 +64,7 @@ void input(FILE*f, int* pa, int* rc, long long int* sum)
         {
             printf("More than 100 items\n");
             *rc = ERROR_ELEMENTS;
+			break;
         }
     }
     if (!i)
