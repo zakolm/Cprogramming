@@ -9,7 +9,8 @@
 #define ERROR_ELEMENTS -3
 
 void usage(void);
-void input(FILE*, int*, int*, long long int*);
+void input(FILE*, int**, int*, long long int*);
+void array_print(int* pa, int* pb);
 
 int main(int argc, char** argv)
 {
@@ -32,10 +33,15 @@ int main(int argc, char** argv)
         }
         //
         long long int res = 0;
-        input(f, a, &rc, &res);
-        fclose(f);
-        if (!rc)
-            printf("result is %lld\n", res);
+		int* pa = a;
+        input(f, &pa, &rc, &res);
+		//printf("[dbg]%d", pa);
+		//array_print
+        //fclose(f);
+		//printf("[dbg]%d",a);
+		array_print(a, pa);
+        //if (!rc)
+        //    printf("result is %lld\n", res);
         //
     }
     return rc;
@@ -46,18 +52,18 @@ void usage(void)
     printf("example.exe <name file>\n");
 }
 
-void input(FILE*f, int* pa, int* rc, long long int* sum)
+void input(FILE*f, int** pa, int* rc, long long int* sum)
 {
     long long int squre = 1;
     int i = 0;
-    for (; (fscanf(f, "%d", pa) == 1); ++pa, ++i)
+    for (; (fscanf(f, "%d", *pa) == 1); ++*pa, ++i)
     {
 		//printf("[DBG]%d\n", *pa);
         if (i < MAXLENGTH)
         {
-            squre *= *pa;
+            squre *= **pa;
             *sum += squre;
-            if (*(pa) < 0)
+            if (**(pa) < 0)
                 break;
         }
         else
@@ -67,6 +73,14 @@ void input(FILE*f, int* pa, int* rc, long long int* sum)
 			break;
         }
     }
+	//printf("%d\n", *pa);
     if (!i)
         *rc = ERROR_ELEMENTS;
+}
+
+void array_print(int* pa, int* pb)
+{
+	printf("\n");
+	for (; pa < pb; ++pa)
+		printf("%d ", *pa);
 }
