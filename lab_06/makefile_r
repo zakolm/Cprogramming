@@ -1,14 +1,12 @@
-FLAGS = DEBUG
 CC := gcc
-ifeq ($(FLAGS),DEBUG)
-	OPTS = -g3
+OPTS = -g0
 CFLAGS := -std=c99 -Wall -Werror -pedantic
 
-main.exe : call_test.o unit_tests.o result_ex.o
-	$(CC) $^ -o $@
-
+main.exe : main.o work_array.o result_ex.o
+	$(CC) $^ -o $@ 
+	
 %.o : %.c *.h
 	$(CC) $(CFLAGS) $(OPTS) -c $<
-    
+	
 clean :
 	rm *.o *.exe
