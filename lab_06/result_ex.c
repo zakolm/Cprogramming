@@ -7,5 +7,7 @@ void result(int* pa, int* pb, long int* sum)
 	{
 		squre *= *pa;
 		*sum += squre;
+		if (*(pa) < 0)
+                break;
 	}
 }

@@ -10,12 +10,7 @@ void input(FILE*f, int** pa, int* rc)
     int i = 0;
     for (; (fscanf(f, "%d", *pa) == 1) && (i <= MAXLENGTH); ++*pa, ++i)
     {
-        if (i < MAXLENGTH)
-        {
-            if (**(pa) < 0)
-                break;
-        }
-        else
+        if (*rc == MAXLENGTH)
         {
             *rc = MORE_ERROR_ELEMENTS;
         }
