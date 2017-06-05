@@ -60,6 +60,8 @@ int main(void)
 			int i = 0;
 			len = del_negative_elem(a, len);
 			printf("\nArray:\n");
+			if (!len)
+				printf("Empty array!");
 			for (; i < len; ++i)
 				printf("%d ", a[i]);
 			printf("\n");
