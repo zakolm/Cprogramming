@@ -2,15 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#define MAXLENGTH 5
+#define MAXLENGTH 100
 #define OK 0
 #define ERROR_INPUT_FILE -1
 #define ERROR_FOUND_FILE -2
-#define ERROR_ELEMENTS -3
+#define MORE_ERROR_ELEMENTS -3
+#define ZERO_ERROR_ELEMENTS -4
 
 void usage(void);
-void input(FILE*, int**, int*, long long int*);
-void array_print(int* pa, int* pb);
+void input(FILE*, int**, int*);
+void result(int*, int*, long long int*);
+void array_print(int*, int*);
 
 int main(int argc, char** argv)
 {
@@ -32,17 +34,26 @@ int main(int argc, char** argv)
             rc = ERROR_FOUND_FILE;
         }
         //
-        long long int res = 0;
 		int* pa = a;
-        input(f, &pa, &rc, &res);
-		//printf("[dbg]%d", pa);
-		//array_print
-        //fclose(f);
-		//printf("[dbg]%d",a);
+        input(f, &pa, &rc);
+        fclose(f);
+		printf("\n");
+		switch(rc)
+		{
+			case OK:
+			{
+				long long int res = 0;
+				result(a, pa, &res);
+				printf("result is %lld\n", res);
+				break;
+			}
+			case MORE_ERROR_ELEMENTS:
+				printf("More than 100 items!\n");
+				break;
+			default:
+				printf("Empty array!\n");
+		}
 		array_print(a, pa);
-        //if (!rc)
-        //    printf("result is %lld\n", res);
-        //
     }
     return rc;
 }
@@ -52,35 +63,38 @@ void usage(void)
     printf("example.exe <name file>\n");
 }
 
-void input(FILE*f, int** pa, int* rc, long long int* sum)
+void input(FILE*f, int** pa, int* rc)
 {
-    long long int squre = 1;
     int i = 0;
-    for (; (fscanf(f, "%d", *pa) == 1); ++*pa, ++i)
+    for (; (fscanf(f, "%d", *pa) == 1) && (i <= MAXLENGTH); ++*pa, ++i)
     {
-		//printf("[DBG]%d\n", *pa);
         if (i < MAXLENGTH)
         {
-            squre *= **pa;
-            *sum += squre;
             if (**(pa) < 0)
                 break;
         }
         else
         {
-            printf("More than 100 items\n");
-            *rc = ERROR_ELEMENTS;
-			break;
+            *rc = MORE_ERROR_ELEMENTS;
         }
     }
-	//printf("%d\n", *pa);
     if (!i)
-        *rc = ERROR_ELEMENTS;
+        *rc = ZERO_ERROR_ELEMENTS;
+}
+
+void result(int* pa, int* pb, long long int* sum)
+{
+	long long int squre = 1;
+	for (; pa < pb; ++pa)
+	{
+		squre *= *pa;
+		*sum += squre;
+	}
 }
 
 void array_print(int* pa, int* pb)
 {
-	printf("\n");
+	printf("ARRAY:\n");
 	for (; pa < pb; ++pa)
 		printf("%d ", *pa);
 }
