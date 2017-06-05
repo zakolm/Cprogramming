@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#define MAXLENGTH 100
+#define MAXLENGTH 5
 #define OK 0
 #define ERROR_INPUT_FILE -1
 #define ERROR_FOUND_FILE -2
@@ -12,7 +12,7 @@
 void usage(void);
 void input(FILE*, int**, int*);
 void result(int*, int*, long long int*);
-void array_print(int*, int*);
+void array_print(int const*, int const*);
 
 int main(int argc, char** argv)
 {
@@ -92,9 +92,11 @@ void result(int* pa, int* pb, long long int* sum)
 	}
 }
 
-void array_print(int* pa, int* pb)
+void array_print(int const* pa, int const* pb)
 {
+	
 	printf("ARRAY:\n");
 	for (; pa < pb; ++pa)
 		printf("%d ", *pa);
+	printf("\n");
 }
