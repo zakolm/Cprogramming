@@ -24,8 +24,6 @@ double integral(double a, double b, double eps, method_t meth, func_t func) {
     }
     while (fabs((cur - prev) / cur) > eps);
 
-    //printf("[DBG]%d\n", n);
-
     return cur;
 }
 
@@ -48,6 +46,7 @@ double trapezium(double a, double b, int n, func_t func) {
     return s * h;
 }
 
+
 // Search the point of intersection.
 void find_point(double lht_point, double rht_point, const double eps, func_t eq, double* point) {
 	assert(lht_point < rht_point);
@@ -63,9 +62,4 @@ void find_point(double lht_point, double rht_point, const double eps, func_t eq,
 		}
 	}
 	*point = (rht_point + lht_point)/2;
-}
-
-void twice_points_min_max(double* min, double* max, const double* point_first, const double* point_second) {
-	*min = (*point_first < *point_second) ? *point_first : *point_second;
-	*max = (*point_first > *point_second) ? *point_first : *point_second;
 }
