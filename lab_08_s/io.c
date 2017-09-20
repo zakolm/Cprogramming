@@ -18,11 +18,9 @@ void write_array(FILE* f, int* count_n, int* count_m, int (*pa)[MAXM] )
 		} else {
 			count_i++;
 		}
-		//printf("%d\n", (*(*pa+count_el)));
 	}
 	*count_n = count_i;
 	*count_m = count_j;
-	//printf("%d %d\n", count_i, count_j);
 }
 
 int max_in_array(const int count, const int *pa) {
@@ -33,7 +31,7 @@ int max_in_array(const int count, const int *pa) {
 	}
 	return max;
 }
-/*
+
 void swap(const int count, int* pa, int* sa) {
 
 	for(int i = 0; i < count; i++){
@@ -42,28 +40,25 @@ void swap(const int count, int* pa, int* sa) {
 	    *(sa+i)=tmp_item;
 	}
 }
+/*
+void sort(const int count_n, const int count_m, int array) {
+	for (int i = 0; i < count_m; ++i) {
+		if (max_in_array(count_n, int () )
+	}
+}
 */
-
-int main(){//int argc, char** argv) {
+int main(int argc, char** argv) {
 	FILE* f;
-	//int rc = OK;
+	int rc = OK;
 
-	//if ( argc != 2 ) {
-	//	printf("ERROR INPUT");
-	//	return ERRORINPUT;
-	//}
+	if ( argc != 2 ) {
+		printf("ERROR INPUT");
+		return ERRORINPUT;
+	}
 
-	f = fopen("test.txt", "r");
+	f = fopen(argv[1], "r");
 	int count_n, count_m;
-	int array[MAXN][MAXM];// = {{1, 2}, {3, 4}};
-	//int (*pa)[MAXM] = array;
-	//printf("%d\n", **pa);//pa++;
-	//printf("%d", (*(*pa+2)));
-	//int array1[] = {1, 2, 3, 4, 5};
+	int array[MAXN][MAXM];
 	write_array(f, &count_n, &count_m, array);
-	//printf("%d\n", count_n);
-	//printf("%d\n", max_in_array(count_n, array1));
-	//int (*pa)[MAXM] = array;
-	//printf("%d\n", (*(*pa)));
 	return OK;
 }
