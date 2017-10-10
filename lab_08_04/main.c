@@ -153,26 +153,26 @@ int main(int argc, char** argv)
 		fclose(file_write);
 	} else if ( !strcmp(argv[1], "o") )
 	{
-		//FILE *file_write = fopen(argv[3], "w");
-		//double det = 0; int flag = 1;
+		FILE *file_write = fopen(argv[3], "w");
+		double det = 0; int flag = 1;
 		if ( matrix->rows == matrix->columns )
 		{
-			FILE *file_write = fopen(argv[3], "w");
+			//FILE *file_write = fopen(argv[3], "w");
 			//flag = 0;
 			double slot_ex_numbers[matrix->rows];
-			double det = determinant(matrix, slot_ex_numbers, 0);
+			det = determinant(matrix, slot_ex_numbers, 0);
 			//printf("det: %f", det);
 			fprintf(file_write, "%f", det);
-			fclose(file_write);
+			//fclose(file_write);
 		}
-		//if ( !flag )
-		//{
-		//	fprintf(file_write, "%f", det);
-		//} else
+		if ( flag )
+		{
+			fprintf(file_write, "%s", "NULL");
+		}// else
 		//{
 		//	fprintf(file_write, "%s", "NULL");
 		//}
-		//fclose(file_write);
+		fclose(file_write);
 	} else
 	{
 		printf("%s\n", strerror(EIO));
