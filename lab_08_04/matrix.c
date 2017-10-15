@@ -4,14 +4,14 @@
 
 #include "matrix.h"
 
-matrix_s* create_matrix(int row, int col)
+matrix_s *create_matrix(int row, int col)
 {
 	matrix_s *matrix;
 	matrix = (matrix_s*) malloc(sizeof(matrix_s));
-	if ( !matrix )
+	if (!matrix)
 	{
-        	return NULL;
-    	}
+		return NULL;
+	}
 	matrix->columns = col;
 	matrix->rows = row;
 	matrix->data = (double**) calloc(row, sizeof(double*));
@@ -31,7 +31,7 @@ matrix_s* create_matrix(int row, int col)
 		size++;
 	}
 	
-	if ( size != row)
+	if (size != row)
 	{
 		for (int i = 0; i < size; ++i)
 		{
@@ -45,10 +45,10 @@ matrix_s* create_matrix(int row, int col)
 	return matrix;
 }
 
-matrix_s* create_matrix_from_file(FILE* file)
+matrix_s *create_matrix_from_file(FILE *file)
 {
 	int row = 0, col = 0;
-	if (fscanf(file,"%d %d",&row, &col) != 2)
+	if (fscanf(file ,"%d %d" ,&row, &col) != 2)
 	{
 		return NULL;
 	}
@@ -59,13 +59,13 @@ matrix_s* create_matrix_from_file(FILE* file)
 		return NULL;
 	}
 	
-	matrix_s* matrix = create_matrix(row, col);
+	matrix_s *matrix = create_matrix(row, col);
 	if (!matrix)
 	{
-        	return NULL;
+		return NULL;
 	}
 	
-	int size_matrix = matrix->rows*matrix->columns;
+	int size_matrix = matrix->rows * matrix->columns;
 	int size_check = 0;
 	for (row = 0; matrix->rows; ++row)
 	{
@@ -94,7 +94,7 @@ matrix_s* create_matrix_from_file(FILE* file)
 
 void free_matrix(matrix_s *matrix)
 {
-	for ( int i = 0; i < matrix->rows; ++i )
+	for (int i = 0; i < matrix->rows; ++i)
 	{
 		free(matrix->data[i]);
 	}
