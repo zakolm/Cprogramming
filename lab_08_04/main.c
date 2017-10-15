@@ -24,7 +24,8 @@ double determinant(Matrix* matrix, double* slot_ex_numbers, int row)
             {
             	//printf("%f\n", matrix->data[row][elm_column]);
             	return matrix->data[row][elm_column];
-            } else
+            }
+	    else
             {
             	slot_ex_numbers[row] = elm_column;
             	determinant_result = determinant_result + sign_ex_det * matrix->data[row][elm_column] * determinant(matrix, slot_ex_numbers, row + 1);
@@ -130,7 +131,8 @@ int main(int argc, char** argv)
 				new_matrix = addition_matrix(matrix, matrix_b);
 				//print_matrix(new_matrix);
 			}
-		} else
+		}
+		else
 		{
 			new_matrix = multiply_matrix(matrix, matrix_b);
 			//print_matrix(new_matrix);
@@ -152,7 +154,8 @@ int main(int argc, char** argv)
 		}
 		//fwrite(new_matrix->data, sizeof(double), new_matrix->columns, file_write);
 		fclose(file_write);
-	} else if ( !strcmp(argv[1], "o") )
+	}
+	else if ( !strcmp(argv[1], "o") )
 	{
 		FILE *file_write = fopen(argv[3], "w");
 		double det = 0; int flag = 1;
@@ -174,13 +177,14 @@ int main(int argc, char** argv)
 		//	fprintf(file_write, "%s", "NULL");
 		//}
 		fclose(file_write);
-	} else
+	}
+	 else
 	{
-		printf("%s\n", strerror(EIO));
+		//printf("%s\n", strerror(EIO));
 		printf("Run program this way: ");
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		printf("When action is \"0\" or \"a\" or \"m\"\n");
-		return EIO;
+		return -1;
 	}
 
 	free_matrix(matrix);
