@@ -4,15 +4,15 @@
 #include "matrix.h"
 #define OK 0
 
-int check_elem_in_column(double* slot_ex_numbers, int elm_column, int row)
+int check_elem_in_column(double *slot_ex_numbers, int elm_column, int row)
 {
-    for(int i = 0; i < row; i++)
-        if(elm_column == slot_ex_numbers[i])
+    for (int i = 0; i < row; i++)
+        if (elm_column == slot_ex_numbers[i])
         	return 0;
     return 1;
 }
 
-double determinant(Matrix* matrix, double* slot_ex_numbers, int row)
+double determinant(Matrix *matrix, double *slot_ex_numbers, int row)
 {
     double determinant_result = 0;
     short sign_ex_det = 1;
@@ -169,7 +169,7 @@ int main(int argc, char** argv)
 			fprintf(file_write, "%f", det);
 			//fclose(file_write);
 		}
-		if ( flag )
+		if (flag)
 		{
 			fprintf(file_write, "%s", "NULL");
 		}// else
@@ -178,7 +178,7 @@ int main(int argc, char** argv)
 		//}
 		fclose(file_write);
 	}
-	 else
+	else
 	{
 		//printf("%s\n", strerror(EIO));
 		printf("Run program this way: ");
