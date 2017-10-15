@@ -69,6 +69,7 @@ matrix_s* create_matrix_from_file(FILE* file)
 			double scan_item;
 			if ( fscanf(file, "%lf", &scan_item) == 1 )
 			{
+				size_check++;
 				matrix->data[row][col] = scan_item;
 			}
 			else
@@ -80,7 +81,7 @@ matrix_s* create_matrix_from_file(FILE* file)
 				}
 				return matrix;
 			}
-			size_check++;
+			//size_check++;
 		}
 	}
 	return matrix;
