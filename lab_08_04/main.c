@@ -22,7 +22,6 @@ double determinant(matrix_s *matrix, double *slot_ex_numbers, int row)
         {
             if (row == matrix->columns - 1)
             {
-            	//printf("%f\n", matrix->data[row][elm_column]);
             	return matrix->data[row][elm_column];
             }
 	    else
@@ -129,7 +128,7 @@ int main(int argc, char **argv)
 			return -1;
 		}
 		fclose(file1);
-		
+
 		if (!strcmp(argv[1], "a"))
 		{
 			if (matrix->rows == matrix_b->rows && matrix->columns == matrix_b->columns)

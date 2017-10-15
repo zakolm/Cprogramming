@@ -50,11 +50,11 @@ matrix_s* create_matrix_from_file(FILE* file)
 	fscanf(file,"%d",&row);
 	fscanf(file,"%d",&col);
 
-	if (!(row & col) || (row < 0 || col < 0))
+	if (!(row && col) || (row < 0 || col < 0))
 	{
 		return NULL;
 	}
-
+	
 	matrix_s* matrix = create_matrix(row, col);
 	if (!matrix)
 	{
