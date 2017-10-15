@@ -154,6 +154,10 @@ int main(int argc, char **argv)
 			return -1;
 		}
 		FILE *file_write = fopen(argv[4], "w");
+		fprintf(file_write, "%d", new_matrix->rows);
+		fprintf(file_write, "%c", '\n');
+		fprintf(file_write, "%d", new_matrix->columns);
+		fprintf(file_write, "%c", '\n');
 		for (int i = 0; i < new_matrix->rows; ++i)
 		{
 			for (int j = 0; j < new_matrix->columns; ++j)
