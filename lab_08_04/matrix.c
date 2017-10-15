@@ -48,7 +48,7 @@ matrix_s *create_matrix(int row, int col)
 matrix_s *create_matrix_from_file(FILE *file)
 {
 	int row = 0, col = 0;
-	if (fscanf(file ,"%d %d" ,&row, &col) != 2)
+	if (fscanf(file, "%d %d", &row, &col) != 2)
 	{
 		return NULL;
 	}
