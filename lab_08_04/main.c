@@ -80,10 +80,6 @@ void print_matrix(const matrix_s *matrix)
 
 int main(int argc, char **argv)
 {
-//	int argc = 5;
-//	char *argv[] = {".", "0" ,"test.txt", "tst.txt", "res.txt"};
-
-	printf("%d\n", ((argc != 5 || !strcmp(argv[1], "o")) && (argc != 4 || strcmp(argv[1], "o"))));
 	if ((argc != 5 || !strcmp(argv[1], "o")) && (argc != 4 || strcmp(argv[1], "o")))
 	{
 		printf("%s\n", strerror(EIO));
@@ -178,7 +174,6 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		//printf("%s\n", strerror(EIO));
 		printf("Run program this way: ");
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		printf("When action is \"0\" or \"a\" or \"m\"\n");
