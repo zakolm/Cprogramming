@@ -148,6 +148,7 @@ int main(int argc, char** argv)
 				fprintf(file_write, "%f", new_matrix->data[i][j]);
 				fprintf(file_write, "%c", ' ');
 			}
+			fprintf(file_write, "%c", '\n');
 		}
 		//fwrite(new_matrix->data, sizeof(double), new_matrix->columns, file_write);
 		fclose(file_write);
