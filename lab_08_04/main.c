@@ -51,10 +51,10 @@ matrix_s *addition_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 
 matrix_s *multiply_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 {
-	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
-	for (int i = 0; i < matrix_a->rows ; ++i)
+	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_b->columns);
+	for (int i = 0; i < matrix_a->rows; ++i)
 	{
-		for (int j = 0; j < matrix_a->columns; ++j)
+		for (int j = 0; j < matrix_b->columns; ++j)
 		{
 			new_matrix->data[i][j] = 0;
 	        for (int k = 0; k < matrix_b->rows; ++k)
@@ -140,7 +140,8 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			new_matrix = multiply_matrix(matrix, matrix_b);
+			if (matrix->columns == matrix_b->rows)
+				new_matrix = multiply_matrix(matrix, matrix_b);
 			//print_matrix(new_matrix);
 		}
 		free_matrix(matrix_b);
