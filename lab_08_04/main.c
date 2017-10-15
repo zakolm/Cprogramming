@@ -25,8 +25,8 @@ double determinant(matrix_s *matrix, double *slot_ex_numbers, int row)
             	//printf("%f\n", matrix->data[row][elm_column]);
             	return matrix->data[row][elm_column];
             }
-	    	else
-			{
+	    else
+	    {
             	slot_ex_numbers[row] = elm_column;
             	determinant_result = determinant_result + sign_ex_det * matrix->data[row][elm_column] * determinant(matrix, slot_ex_numbers, row + 1);
             	sign_ex_det *= -1;
@@ -88,7 +88,6 @@ int main(int argc, char **argv)
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		return EIO;
 	}
-	int rc = OK;
 	FILE *file = fopen(argv[2], "r");
 	if (!file)
 	{
@@ -96,6 +95,7 @@ int main(int argc, char **argv)
 		return errno;
 	}
 
+	int rc = OK;
 	matrix_s *matrix = create_matrix_from_file(file);
 	if (!matrix)
 	{
@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 			return errno;
 			//break;
 		}
-		printf("check\n");
+		//printf("check\n");
 		matrix_s *matrix_b = NULL, *new_matrix = NULL;
 		matrix_b = create_matrix_from_file(file1);
 		if (!matrix_b)
@@ -128,6 +128,7 @@ int main(int argc, char **argv)
 			free_matrix(matrix);
 			return -1;
 		}
+		fclose(file1);
 		
 		if (!strcmp(argv[1], "a"))
 		{
@@ -148,9 +149,7 @@ int main(int argc, char **argv)
 		{
 			printf("%s\n", strerror(ENOMEM));
 			fclose(file);
-			fclose(file1);
 			free_matrix(matrix);
-			free_matrix(matrix_b);
 			return -1;
 		}
 		FILE *file_write = fopen(argv[4], "w");
@@ -161,7 +160,8 @@ int main(int argc, char **argv)
 				fprintf(file_write, "%f", new_matrix->data[i][j]);
 				fprintf(file_write, "%c", ' ');
 			}
-			fprintf(file_write, "%c", '\n');
+			if (i != new_matrix->rows-1)
+				fprintf(file_write, "%c", '\n');
 		}
 		free_matrix(new_matrix);
 		fclose(file_write);
