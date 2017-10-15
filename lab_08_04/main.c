@@ -49,7 +49,7 @@ matrix_s *addition_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 	return new_matrix;
 }
 
-matrix_s *multiply_matrix(matrix_s* matrix_a, matrix_s *matrix_b)
+matrix_s *multiply_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 {
 	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
 	for (int i = 0; i < matrix_a->rows ; ++i)
@@ -71,14 +71,14 @@ void print_matrix(const matrix_s *matrix)
 	for (int i = 0; i < matrix->rows; ++i)
 	{
 		for (int j = 0; j < matrix->columns; ++j)
-			{
-				printf("%f ", matrix->data[i][j]);
-			}
+		{
+			printf("%f ", matrix->data[i][j]);
+		}
 		printf("\n");
 	}
 }
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
 //	int argc = 5;
 //	char *argv[] = {".", "0" ,"test.txt", "tst.txt", "res.txt"};
@@ -91,25 +91,25 @@ int main(int argc, char** argv)
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		return EIO;
 	}
-	FILE* file = fopen(argv[2], "r");
+	FILE *file = fopen(argv[2], "r");
 	if (!file)
 	{
 			printf("%s", strerror(errno));
 			return errno;
 	}
 
-	matrix_s* matrix = create_matrix_from_file(file);
+	matrix_s *matrix = create_matrix_from_file(file);
 	if (!matrix)
 	{
-			printf("%s\n", strerror(ENOMEM));
-			return -1;
+		printf("%s\n", strerror(ENOMEM));
+		return -1;
 	}
 
 	//print_matrix(matrix);
 	//printf("\n\n");
 	if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
 	{
-		FILE* file1 = fopen(argv[3], "r");
+		FILE *file1 = fopen(argv[3], "r");
 		if (!file1)
 		{
 			printf("%s", strerror(errno));
@@ -140,7 +140,7 @@ int main(int argc, char** argv)
 			printf("%s\n", strerror(ENOMEM));
 			return -1;
 		}
-		FILE* file_write = fopen(argv[4], "w");
+		FILE *file_write = fopen(argv[4], "w");
 		for (int i = 0; i < new_matrix->rows; ++i)
 		{
 			for (int j = 0; j < new_matrix->columns; ++j)
@@ -155,7 +155,7 @@ int main(int argc, char** argv)
 	}
 	else if (!strcmp(argv[1], "o"))
 	{
-		FILE* file_write = fopen(argv[3], "w");
+		FILE *file_write = fopen(argv[3], "w");
 		double det = 0; int flag = 1;
 		if (matrix->rows == matrix->columns)
 		{
