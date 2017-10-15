@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <errno.h>
 #include <string.h>
+
 #include "matrix.h"
+
 #define OK 0
 
 int check_elem_in_column(double *slot_ex_numbers, int elm_column, int row)

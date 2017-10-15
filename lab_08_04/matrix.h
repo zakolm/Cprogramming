@@ -3,11 +3,13 @@
 
 #include <stdio.h>
 
-typedef struct matrix_s {
+struct matrix_s {
     int rows;
     int columns;
     double **data;
-} matrix_s;
+};
+
+typedef struct matrix_s matrix_s;
 
 matrix_s *create_matrix_from_file(FILE *file);
 matrix_s *create_matrix(int row, int col);

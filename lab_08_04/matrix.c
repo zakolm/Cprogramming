@@ -1,7 +1,8 @@
-#include "matrix.h"
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
+#include "matrix.h"
 
 matrix_s* create_matrix(int row, int col)
 {
@@ -46,9 +47,12 @@ matrix_s* create_matrix(int row, int col)
 
 matrix_s* create_matrix_from_file(FILE* file)
 {
-	int row, col;
-	fscanf(file,"%d",&row);
-	fscanf(file,"%d",&col);
+	int row = 0, col = 0;
+	if (fscanf(file,"%d %d",&row, &col) != 2)
+	{
+		return NULL;
+	}
+	//fscanf(file,"%d",&col);
 
 	if (!(row && col) || (row < 0 || col < 0))
 	{
