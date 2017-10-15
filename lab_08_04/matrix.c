@@ -74,7 +74,7 @@ matrix_s* create_matrix_from_file(FILE* file)
 			}
 			else
 			{
-				if (size_check != (row+col))
+				if (size_check != (matrix->rows * matrix->columns))
 				{
 					free_matrix(matrix);
 					return NULL;
