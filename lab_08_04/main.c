@@ -117,7 +117,7 @@ int main(int argc, char **argv)
 	//printf("\n\n");
 	if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
 	{
-		FILE *file1 = fopen(argv[3], "r");
+		FILE * file1 = fopen(argv[3], "r");
 		if (!file1)
 		{
 			printf("No such file or directory");
@@ -160,7 +160,7 @@ int main(int argc, char **argv)
 			free_matrix(matrix);
 			return -1;
 		}
-		FILE *file_write = fopen(argv[4], "w");
+		FILE * file_write = fopen(argv[4], "w");
 		fprintf(file_write, "%d", new_matrix->rows);
 		fprintf(file_write, "%c", '\n');
 		fprintf(file_write, "%d", new_matrix->columns);
@@ -180,7 +180,7 @@ int main(int argc, char **argv)
 	}
 	else if (!strcmp(argv[1], "o"))
 	{
-		FILE *file_write = fopen(argv[3], "w");
+		FILE * file_write = fopen(argv[3], "w");
 		int flag = 1;
 		if (matrix->rows == matrix->columns)
 		{
