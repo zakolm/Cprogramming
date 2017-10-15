@@ -38,6 +38,10 @@ double determinant(matrix_s *matrix, double *slot_ex_numbers, int row)
 matrix_s *addition_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 {
 	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
+	if (!new_matrix)
+	{
+		return NULL;
+	}
 	for (int i = 0; i < matrix_a->rows ; ++i)
 	{
 		for (int j = 0; j < matrix_a->columns; ++j)
@@ -51,6 +55,10 @@ matrix_s *addition_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 matrix_s *multiply_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 {
 	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_b->columns);
+	if (!new_matrix)
+	{
+		return NULL;
+	}
 	for (int i = 0; i < matrix_a->rows; ++i)
 	{
 		for (int j = 0; j < matrix_b->columns; ++j)
