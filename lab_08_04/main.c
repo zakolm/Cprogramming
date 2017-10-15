@@ -173,15 +173,15 @@ int main(int argc, char **argv)
 	}
 	else if (!strcmp(argv[1], "o"))
 	{
-		FILE *file_write = fopen(argv[3], "w");
-		double det = 0;
+		//FILE *file_write = fopen(argv[3], "w");
 		if (matrix->rows == matrix->columns)
 		{
+			FILE *file_write = fopen(argv[3], "w");
 			double slot_ex_numbers[matrix->rows];
-			det = determinant(matrix, slot_ex_numbers, 0);
+			double det = determinant(matrix, slot_ex_numbers, 0);
 			fprintf(file_write, "%f", det);
+			fclose(file_write);
 		}
-		fclose(file_write);
 	}
 	else
 	{
