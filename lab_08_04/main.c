@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		return -1;
 	}
-	FILE *file = fopen(argv[2], "r");
+	FILE * file = fopen(argv[2], "r");
 	if (!file)
 	{
 		printf("No such file or directory");
@@ -172,7 +172,7 @@ int main(int argc, char **argv)
 				fprintf(file_write, "%f", new_matrix->data[i][j]);
 				fprintf(file_write, "%c", ' ');
 			}
-			if (i != new_matrix->rows-1)
+			if (i != new_matrix->rows - 1)
 				fprintf(file_write, "%c", '\n');
 		}
 		free_matrix(new_matrix);
