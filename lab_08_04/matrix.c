@@ -19,15 +19,30 @@ matrix_s* create_matrix(int row, int col)
 		free(matrix);
 		return NULL;
 	}
+	int size = 0;
 	for (int i = 0; i < row; ++i)
 	{
 		matrix->data[i] = (double*) calloc(col, sizeof(double));
 		if (!(matrix->data[i]))
 		{
-			free(matrix->data);
-			free(matrix);
-			return NULL;
+			break;
+			//free(matrix->data);
+			//free(matrix);
+			//return NULL;
 		}
+		size++;
+	}
+	
+	//printf("%d %d\n", size, row);
+	if ( size != row)
+	{
+		for (int i = 0; i < size; ++i)
+		{
+			free(matrix->data[i]);
+		}
+		free(matrix->data);
+		free(matrix);
+		return NULL;
 	}
 
 	return matrix;
@@ -47,7 +62,7 @@ matrix_s* create_matrix_from_file(FILE* file)
 	matrix_s* matrix = create_matrix(row, col);
 	if (!matrix)
 	{
-        return NULL;
+        	return NULL;
 	}
 	
 	for ( row = 0; matrix->rows; ++row )
