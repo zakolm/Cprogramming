@@ -63,6 +63,7 @@ matrix_s *multiply_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 	        }
 	    }
 	}
+	
 	return new_matrix;
 }
 
@@ -87,17 +88,19 @@ int main(int argc, char **argv)
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		return EIO;
 	}
+	int rc = OK;
 	FILE *file = fopen(argv[2], "r");
 	if (!file)
 	{
-			printf("%s", strerror(errno));
-			return errno;
+		printf("%s", strerror(errno));
+		return errno;
 	}
 
 	matrix_s *matrix = create_matrix_from_file(file);
 	if (!matrix)
 	{
 		printf("%s\n", strerror(ENOMEM));
+		fclose(file);
 		return -1;
 	}
 
@@ -109,15 +112,23 @@ int main(int argc, char **argv)
 		if (!file1)
 		{
 			printf("%s", strerror(errno));
+			fclose(file);
+			free_matrix(matrix);
 			return errno;
+			//break;
 		}
+		printf("check\n");
 		matrix_s *matrix_b = NULL, *new_matrix = NULL;
 		matrix_b = create_matrix_from_file(file1);
 		if (!matrix_b)
 		{
 			printf("%s\n", strerror(ENOMEM));
+			fclose(file);
+			fclose(file1);
+			free_matrix(matrix);
 			return -1;
 		}
+		
 		if (!strcmp(argv[1], "a"))
 		{
 			if (matrix->rows == matrix_b->rows && matrix->columns == matrix_b->columns)
@@ -131,9 +142,15 @@ int main(int argc, char **argv)
 			new_matrix = multiply_matrix(matrix, matrix_b);
 			//print_matrix(new_matrix);
 		}
+		free_matrix(matrix_b);
+
 		if (!new_matrix)
 		{
 			printf("%s\n", strerror(ENOMEM));
+			fclose(file);
+			fclose(file1);
+			free_matrix(matrix);
+			free_matrix(matrix_b);
 			return -1;
 		}
 		FILE *file_write = fopen(argv[4], "w");
@@ -146,30 +163,19 @@ int main(int argc, char **argv)
 			}
 			fprintf(file_write, "%c", '\n');
 		}
-		//fwrite(new_matrix->data, sizeof(double), new_matrix->columns, file_write);
+		free_matrix(new_matrix);
 		fclose(file_write);
 	}
 	else if (!strcmp(argv[1], "o"))
 	{
 		FILE *file_write = fopen(argv[3], "w");
-		double det = 0;// int flag = 1;
+		double det = 0;
 		if (matrix->rows == matrix->columns)
 		{
-			//FILE *file_write = fopen(argv[3], "w");
-			//flag = 0;
 			double slot_ex_numbers[matrix->rows];
 			det = determinant(matrix, slot_ex_numbers, 0);
-			//printf("det: %f", det);
 			fprintf(file_write, "%f", det);
-			//fclose(file_write);
 		}
-		//if (flag)
-		//{
-		//	fprintf(file_write, "%s", "NULL");
-		//}// else
-		//{
-		//	fprintf(file_write, "%s", "NULL");
-		//}
 		fclose(file_write);
 	}
 	else
@@ -177,11 +183,12 @@ int main(int argc, char **argv)
 		printf("Run program this way: ");
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		printf("When action is \"0\" or \"a\" or \"m\"\n");
-		return -1;
+		rc = -1;
+	//	return -1;
 	}
 
 	free_matrix(matrix);
 	fclose(file);
 
-	return OK;
+	return rc;
 }
