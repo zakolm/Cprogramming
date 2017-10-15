@@ -16,17 +16,17 @@ double determinant(Matrix *matrix, double *slot_ex_numbers, int row)
 {
     double determinant_result = 0;
     short sign_ex_det = 1;
-    for( int elm_column = 0; elm_column < matrix->columns; ++elm_column )
+    for (int elm_column = 0; elm_column < matrix->columns; ++elm_column)
     {
         if (check_elem_in_column(slot_ex_numbers, elm_column, row))
         {
-            if(row == matrix->columns - 1)
+            if (row == matrix->columns - 1)
             {
             	//printf("%f\n", matrix->data[row][elm_column]);
             	return matrix->data[row][elm_column];
             }
-	    else
-            {
+	    	else
+			{
             	slot_ex_numbers[row] = elm_column;
             	determinant_result = determinant_result + sign_ex_det * matrix->data[row][elm_column] * determinant(matrix, slot_ex_numbers, row + 1);
             	sign_ex_det *= -1;
@@ -36,12 +36,12 @@ double determinant(Matrix *matrix, double *slot_ex_numbers, int row)
     return determinant_result;
 }
 
-Matrix* addition_matrix(Matrix* matrix_a, Matrix* matrix_b)
+Matrix *addition_matrix(Matrix *matrix_a, Matrix *matrix_b)
 {
-	Matrix* new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
-	for( int i = 0; i < matrix_a->rows ; ++i )
+	Matrix *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
+	for (int i = 0; i < matrix_a->rows ; ++i)
 	{
-		for( int j = 0; j < matrix_a->columns; ++j )
+		for (int j = 0; j < matrix_a->columns; ++j)
 		{
 			new_matrix->data[i][j] = matrix_a->data[i][j] + matrix_b->data[i][j];
 		}
@@ -49,15 +49,15 @@ Matrix* addition_matrix(Matrix* matrix_a, Matrix* matrix_b)
 	return new_matrix;
 }
 
-Matrix* multiply_matrix(Matrix* matrix_a, Matrix* matrix_b)
+Matrix *multiply_matrix(Matrix* matrix_a, Matrix* matrix_b)
 {
-	Matrix* new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
-	for( int i = 0; i < matrix_a->rows ; ++i )
+	Matrix *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
+	for (int i = 0; i < matrix_a->rows ; ++i)
 	{
-		for( int j = 0; j < matrix_a->columns; ++j )
+		for (int j = 0; j < matrix_a->columns; ++j)
 		{
 			new_matrix->data[i][j] = 0;
-	        for( int k = 0; k < matrix_b->rows; ++k )
+	        for (int k = 0; k < matrix_b->rows; ++k)
 	        {
 	        	new_matrix->data[i][j] += matrix_a->data[i][k] * matrix_b->data[k][j];
 	        }
@@ -66,67 +66,65 @@ Matrix* multiply_matrix(Matrix* matrix_a, Matrix* matrix_b)
 	return new_matrix;
 }
 
-void print_matrix(const Matrix* matrix)
+void print_matrix(const Matrix *matrix)
 {
-        for ( int i = 0; i < matrix->rows; ++i )
-        {
-                for ( int j = 0; j < matrix->columns; ++j )
-                {
-                        printf("%f ", matrix->data[i][j]);
-                }
-                printf("\n");
-        }
+	for (int i = 0; i < matrix->rows; ++i)
+	{
+			for (int j = 0; j < matrix->columns; ++j)
+			{
+				printf("%f ", matrix->data[i][j]);
+			}
+		printf("\n");
+	}
 }
 
-int main(int argc, char** argv)
+int main (int argc, char** argv)
 {
 //	int argc = 5;
 //	char *argv[] = {".", "0" ,"test.txt", "tst.txt", "res.txt"};
 
 //	printf("%d\n", ( argc != 5 && argc != 4 ));
-	if ( argc != 5 && argc != 4 )
+	if (argc != 5 && argc != 4)
 	{
-                printf("%s\n", strerror(EIO));
-                printf("Run program this way: ");
-                printf("./example.exe action <name file1> [name file2] <name_res file>\n");
-                return EIO;
-        }
-	FILE *file = fopen(argv[2], "r");
-	if( !file )
+		printf("%s\n", strerror(EIO));
+		printf("Run program this way: ");
+		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
+		return EIO;
+	}
+	FILE* file = fopen(argv[2], "r");
+	if (!file)
 	{
 			printf("%s", strerror(errno));
 			return errno;
 	}
 
-	Matrix* matrix;
-	matrix = create_matrix_from_file(file);
-	if ( !matrix )
+	Matrix* matrix = create_matrix_from_file(file);
+	if (!matrix)
 	{
 			printf("%s\n", strerror(ENOMEM));
-			return ENOMEM;
+			return -1;
 	}
 
 	//print_matrix(matrix);
 	//printf("\n\n");
-	if ( !strcmp(argv[1], "a") || !strcmp(argv[1], "m") )
+	if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
 	{
-		FILE *file1 = fopen(argv[3], "r");
-		if( !file1 )
+		FILE* file1 = fopen(argv[3], "r");
+		if (!file1)
 		{
 			printf("%s", strerror(errno));
 			return errno;
 		}
 		Matrix *matrix_b = NULL, *new_matrix = NULL;
 		matrix_b = create_matrix_from_file(file1);
-		if ( !matrix_b )
+		if (!matrix_b)
 		{
 			printf("%s\n", strerror(ENOMEM));
-			return ENOMEM;
+			return -1;
 		}
-		if ( !strcmp(argv[1], "a") )
+		if (!strcmp(argv[1], "a"))
 		{
-
-			if ( matrix->rows == matrix_b->rows && matrix->columns == matrix_b->columns )
+			if (matrix->rows == matrix_b->rows && matrix->columns == matrix_b->columns)
 			{
 				new_matrix = addition_matrix(matrix, matrix_b);
 				//print_matrix(new_matrix);
@@ -137,15 +135,15 @@ int main(int argc, char** argv)
 			new_matrix = multiply_matrix(matrix, matrix_b);
 			//print_matrix(new_matrix);
 		}
-		if ( !new_matrix )
+		if (!new_matrix)
 		{
 			printf("%s\n", strerror(ENOMEM));
-			return ENOMEM;
+			return -1;
 		}
-		FILE *file_write = fopen(argv[4], "w");
-		for ( int i = 0; i < new_matrix->rows; ++i )
+		FILE* file_write = fopen(argv[4], "w");
+		for (int i = 0; i < new_matrix->rows; ++i)
 		{
-			for ( int j = 0; j < new_matrix->columns; ++j )
+			for (int j = 0; j < new_matrix->columns; ++j)
 			{
 				fprintf(file_write, "%f", new_matrix->data[i][j]);
 				fprintf(file_write, "%c", ' ');
@@ -155,11 +153,11 @@ int main(int argc, char** argv)
 		//fwrite(new_matrix->data, sizeof(double), new_matrix->columns, file_write);
 		fclose(file_write);
 	}
-	else if ( !strcmp(argv[1], "o") )
+	else if (!strcmp(argv[1], "o"))
 	{
-		FILE *file_write = fopen(argv[3], "w");
+		FILE* file_write = fopen(argv[3], "w");
 		double det = 0; int flag = 1;
-		if ( matrix->rows == matrix->columns )
+		if (matrix->rows == matrix->columns)
 		{
 			//FILE *file_write = fopen(argv[3], "w");
 			//flag = 0;
