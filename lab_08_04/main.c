@@ -83,8 +83,8 @@ int main(int argc, char **argv)
 //	int argc = 5;
 //	char *argv[] = {".", "0" ,"test.txt", "tst.txt", "res.txt"};
 
-//	printf("%d\n", ( argc != 5 && argc != 4 ));
-	if (argc != 5 && argc != 4)
+	printf("%d\n", ((argc != 5 || !strcmp(argv[1], "o")) && (argc != 4 || strcmp(argv[1], "o"))));
+	if ((argc != 5 || !strcmp(argv[1], "o")) && (argc != 4 || strcmp(argv[1], "o")))
 	{
 		printf("%s\n", strerror(EIO));
 		printf("Run program this way: ");
@@ -156,7 +156,7 @@ int main(int argc, char **argv)
 	else if (!strcmp(argv[1], "o"))
 	{
 		FILE *file_write = fopen(argv[3], "w");
-		double det = 0; int flag = 1;
+		double det = 0;// int flag = 1;
 		if (matrix->rows == matrix->columns)
 		{
 			//FILE *file_write = fopen(argv[3], "w");
@@ -167,10 +167,10 @@ int main(int argc, char **argv)
 			fprintf(file_write, "%f", det);
 			//fclose(file_write);
 		}
-		if (flag)
-		{
-			fprintf(file_write, "%s", "NULL");
-		}// else
+		//if (flag)
+		//{
+		//	fprintf(file_write, "%s", "NULL");
+		//}// else
 		//{
 		//	fprintf(file_write, "%s", "NULL");
 		//}
