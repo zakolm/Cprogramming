@@ -122,9 +122,7 @@ int main(int argc, char **argv)
 			fclose(file);
 			free_matrix(matrix);
 			return errno;
-			//break;
 		}
-		//printf("check\n");
 		matrix_s *matrix_b = NULL, *new_matrix = NULL;
 		matrix_b = create_matrix_from_file(file1);
 		if (!matrix_b)
@@ -170,7 +168,8 @@ int main(int argc, char **argv)
 			for (int j = 0; j < new_matrix->columns; ++j)
 			{
 				fprintf(file_write, "%f", new_matrix->data[i][j]);
-				fprintf(file_write, "%c", ' ');
+				if (j != new_matrix->columns-1)
+					fprintf(file_write, "%c", ' ');
 			}
 			if (i != new_matrix->rows-1)
 				fprintf(file_write, "%c", '\n');
