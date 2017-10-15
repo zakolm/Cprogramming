@@ -26,14 +26,10 @@ matrix_s* create_matrix(int row, int col)
 		if (!(matrix->data[i]))
 		{
 			break;
-			//free(matrix->data);
-			//free(matrix);
-			//return NULL;
 		}
 		size++;
 	}
 	
-	//printf("%d %d\n", size, row);
 	if ( size != row)
 	{
 		for (int i = 0; i < size; ++i)
@@ -65,9 +61,10 @@ matrix_s* create_matrix_from_file(FILE* file)
         	return NULL;
 	}
 	
-	for ( row = 0; matrix->rows; ++row )
+	int size_check = 0;
+	for (row = 0; matrix->rows; ++row)
 	{
-		for ( col = 0; col < matrix->columns; ++col )
+		for (col = 0; col < matrix->columns; ++col)
 		{
 			double scan_item;
 			if ( fscanf(file, "%lf", &scan_item) == 1 )
@@ -76,11 +73,16 @@ matrix_s* create_matrix_from_file(FILE* file)
 			}
 			else
 			{
+				if (size_check != (row+col))
+				{
+					free_matrix(matrix);
+					return NULL;
+				}
 				return matrix;
 			}
+			size_check++;
 		}
 	}
-	
 	return matrix;
 }
 
