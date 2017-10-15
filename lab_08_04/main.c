@@ -12,7 +12,7 @@ int check_elem_in_column(double *slot_ex_numbers, int elm_column, int row)
     return 1;
 }
 
-double determinant(Matrix *matrix, double *slot_ex_numbers, int row)
+double determinant(matrix_s *matrix, double *slot_ex_numbers, int row)
 {
     double determinant_result = 0;
     short sign_ex_det = 1;
@@ -36,9 +36,9 @@ double determinant(Matrix *matrix, double *slot_ex_numbers, int row)
     return determinant_result;
 }
 
-Matrix *addition_matrix(Matrix *matrix_a, Matrix *matrix_b)
+matrix_s *addition_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 {
-	Matrix *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
+	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
 	for (int i = 0; i < matrix_a->rows ; ++i)
 	{
 		for (int j = 0; j < matrix_a->columns; ++j)
@@ -49,9 +49,9 @@ Matrix *addition_matrix(Matrix *matrix_a, Matrix *matrix_b)
 	return new_matrix;
 }
 
-Matrix *multiply_matrix(Matrix* matrix_a, Matrix* matrix_b)
+matrix_s *multiply_matrix(matrix_s* matrix_a, matrix_s *matrix_b)
 {
-	Matrix *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
+	matrix_s *new_matrix = create_matrix(matrix_a->rows, matrix_a->columns);
 	for (int i = 0; i < matrix_a->rows ; ++i)
 	{
 		for (int j = 0; j < matrix_a->columns; ++j)
@@ -66,11 +66,11 @@ Matrix *multiply_matrix(Matrix* matrix_a, Matrix* matrix_b)
 	return new_matrix;
 }
 
-void print_matrix(const Matrix *matrix)
+void print_matrix(const matrix_s *matrix)
 {
 	for (int i = 0; i < matrix->rows; ++i)
 	{
-			for (int j = 0; j < matrix->columns; ++j)
+		for (int j = 0; j < matrix->columns; ++j)
 			{
 				printf("%f ", matrix->data[i][j]);
 			}
@@ -78,7 +78,7 @@ void print_matrix(const Matrix *matrix)
 	}
 }
 
-int main (int argc, char** argv)
+int main(int argc, char** argv)
 {
 //	int argc = 5;
 //	char *argv[] = {".", "0" ,"test.txt", "tst.txt", "res.txt"};
@@ -98,7 +98,7 @@ int main (int argc, char** argv)
 			return errno;
 	}
 
-	Matrix* matrix = create_matrix_from_file(file);
+	matrix_s* matrix = create_matrix_from_file(file);
 	if (!matrix)
 	{
 			printf("%s\n", strerror(ENOMEM));
@@ -115,7 +115,7 @@ int main (int argc, char** argv)
 			printf("%s", strerror(errno));
 			return errno;
 		}
-		Matrix *matrix_b = NULL, *new_matrix = NULL;
+		matrix_s *matrix_b = NULL, *new_matrix = NULL;
 		matrix_b = create_matrix_from_file(file1);
 		if (!matrix_b)
 		{

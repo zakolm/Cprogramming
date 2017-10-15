@@ -3,18 +3,18 @@
 
 #include <stdio.h>
 
-typedef struct Matrix {
+typedef struct matrix_s {
     int rows;
     int columns;
     double **data;
-} Matrix;
+} matrix_s;
 
-Matrix* create_matrix_from_file(FILE* file);
-Matrix* create_matrix(int row, int col);
-void free_matrix(Matrix* matrix);
-double get_elem(Matrix* matrix, int row, int col);
-void set_elem(Matrix* matrix, int row, int col, double val);
-int get_rows(Matrix* matrix);
-int get_cols(Matrix* matrix);
+matrix_s *create_matrix_from_file(FILE *file);
+matrix_s *create_matrix(int row, int col);
+void free_matrix(matrix_s *matrix);
+double get_elem(matrix_s *matrix, int row, int col);
+void set_elem(matrix_s *matrix, int row, int col, double val);
+int get_rows(matrix_s *matrix);
+int get_cols(matrix_s *matrix);
 
 #endif //__MATRIX__H__
