@@ -168,8 +168,7 @@ int main(int argc, char **argv)
 			for (int j = 0; j < new_matrix->columns; ++j)
 			{
 				fprintf(file_write, "%f", new_matrix->data[i][j]);
-				if (j != new_matrix->columns-1)
-					fprintf(file_write, "%c", ' ');
+				fprintf(file_write, "%c", ' ');
 			}
 			if (i != new_matrix->rows-1)
 				fprintf(file_write, "%c", '\n');
@@ -179,13 +178,20 @@ int main(int argc, char **argv)
 	}
 	else if (!strcmp(argv[1], "o"))
 	{
-		//FILE *file_write = fopen(argv[3], "w");
+		FILE *file_write = fopen(argv[3], "w");
+		int flag = 1;
 		if (matrix->rows == matrix->columns)
 		{
-			FILE *file_write = fopen(argv[3], "w");
+			flag = 0;
+			//FILE *file_write = fopen(argv[3], "w");
 			double slot_ex_numbers[matrix->rows];
 			double det = determinant(matrix, slot_ex_numbers, 0);
 			fprintf(file_write, "%f", det);
+			fclose(file_write);
+		}
+		if (flag)
+		{
+			fprintf(file_write, "%s", "NULL");
 			fclose(file_write);
 		}
 	}
@@ -195,7 +201,6 @@ int main(int argc, char **argv)
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
 		printf("When action is \"0\" or \"a\" or \"m\"\n");
 		rc = -1;
-	//	return -1;
 	}
 
 	free_matrix(matrix);
