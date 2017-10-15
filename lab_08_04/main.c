@@ -191,7 +191,7 @@ int main(int argc, char **argv)
 		}
 		if (flag)
 		{
-			fprintf(file_write, "%s", "NULL");
+			//fprintf(file_write, "%s", "NULL");
 			fclose(file_write);
 		}
 	}
