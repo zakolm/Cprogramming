@@ -26,8 +26,8 @@ double determinant(matrix_s *matrix, double *slot_ex_numbers, int row)
             {
             	return matrix->data[row][elm_column];
             }
-	    else
-	    {
+			else
+	    	{
             	slot_ex_numbers[row] = elm_column;
             	determinant_result = determinant_result + sign_ex_det * matrix->data[row][elm_column] * determinant(matrix, slot_ex_numbers, row + 1);
             	sign_ex_det *= -1;
@@ -92,23 +92,23 @@ int main(int argc, char **argv)
 {
 	if ((argc != 5 || !strcmp(argv[1], "o")) && (argc != 4 || strcmp(argv[1], "o")))
 	{
-		printf("%s\n", strerror(EIO));
+		printf("Input/output error\n");
 		printf("Run program this way: ");
 		printf("./example.exe action <name file1> [name file2] <name_res file>\n");
-		return EIO;
+		return -1;
 	}
 	FILE *file = fopen(argv[2], "r");
 	if (!file)
 	{
-		printf("%s", strerror(errno));
-		return errno;
+		printf("No such file or directory");
+		return -1;
 	}
 
 	int rc = OK;
 	matrix_s *matrix = create_matrix_from_file(file);
 	if (!matrix)
 	{
-		printf("%s\n", strerror(ENOMEM));
+		printf("Cannot allocate memory\n");
 		fclose(file);
 		return -1;
 	}
@@ -120,16 +120,16 @@ int main(int argc, char **argv)
 		FILE *file1 = fopen(argv[3], "r");
 		if (!file1)
 		{
-			printf("%s", strerror(errno));
+			printf("No such file or directory");
 			fclose(file);
 			free_matrix(matrix);
-			return errno;
+			return -1;
 		}
 		matrix_s *matrix_b = NULL, *new_matrix = NULL;
 		matrix_b = create_matrix_from_file(file1);
 		if (!matrix_b)
 		{
-			printf("%s\n", strerror(ENOMEM));
+			printf("Cannot allocate memory\n");
 			fclose(file);
 			fclose(file1);
 			free_matrix(matrix);
@@ -155,7 +155,7 @@ int main(int argc, char **argv)
 
 		if (!new_matrix)
 		{
-			printf("%s\n", strerror(ENOMEM));
+			printf("Cannot allocate memory\n");
 			fclose(file);
 			free_matrix(matrix);
 			return -1;

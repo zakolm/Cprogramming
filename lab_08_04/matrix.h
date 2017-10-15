@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-struct matrix_s{
+struct matrix_s {
     int rows;
     int columns;
     double **data;
