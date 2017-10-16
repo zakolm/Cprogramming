@@ -121,7 +121,7 @@ void scan_tests(void)
     }
 
     //result
-    printf("%s: %s\n", __func__, (ok_count == 7) ? "FAILED" : "OK");
+    printf("%s: %s\n", "scan_tests", (ok_count == 7) ? "FAILED" : "OK");
 }
 
 void determinant_tests(void)
@@ -158,7 +158,7 @@ void determinant_tests(void)
     }
 
     //result
-    printf("%s: %s\n", __func__, (ok_count == 2) ? "FAILED" : "OK");
+    printf("%s: %s\n", "determinant_tests", (ok_count == 2) ? "FAILED" : "OK");
 }
 
 /*
