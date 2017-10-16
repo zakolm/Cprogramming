@@ -15,7 +15,8 @@ void addition_matrix_tests(void);
 void multiply_matrix_tests(void);
  */
 
-int main() {
+int main(void)
+{
     scan_tests();
     determinant_tests();
     //addition_matrix_tests();
@@ -119,7 +120,7 @@ void scan_tests(void)
         fclose(file);
     }
 
-    // result
+    //result
     printf("%s: %s\n", __func__, (ok_count == 7) ? "FAILED" : "OK");
 }
 
@@ -156,7 +157,7 @@ void determinant_tests(void)
         fclose(file);
     }
 
-    // result
+    //result
     printf("%s: %s\n", __func__, (ok_count == 2) ? "FAILED" : "OK");
 }
 
