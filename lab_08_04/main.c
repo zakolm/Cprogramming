@@ -27,90 +27,98 @@ int main(int argc, char **argv)
 	{
 		print_error(ERROR_ALLOCATE_MEMORY);
 		fclose(file);
-		return ERROR_ALLOCATE_MEMORY;
-	}
-
-	//print_matrix(matrix);
-	if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
-	{
-		FILE * file1 = fopen(argv[3], "r");
-		if (!file1)
-		{
-			print_error(ERROR_FILE);
-			fclose(file);
-			free_matrix(matrix);
-			return ERROR_FILE;
-		}
-		matrix_s *matrix_b = NULL, *new_matrix = NULL;
-		matrix_b = create_matrix_from_file(file1);
-		if (!matrix_b)
-		{
-			print_error(ERROR_ALLOCATE_MEMORY);
-			fclose(file);
-			fclose(file1);
-			free_matrix(matrix);
-			return ERROR_ALLOCATE_MEMORY;
-		}
-		fclose(file1);
-
-		if (!strcmp(argv[1], "a"))
-		{
-			new_matrix = addition_matrix(matrix, matrix_b);
-			//print_matrix(new_matrix);
-		}
-		else
-		{
-			new_matrix = multiply_matrix(matrix, matrix_b);
-			//print_matrix(new_matrix);
-		}
-		free_matrix(matrix_b);
-
-		if (!new_matrix)
-		{
-			print_error(ERROR_ALLOCATE_MEMORY);
-			fclose(file);
-			free_matrix(matrix);
-			return ERROR_ALLOCATE_MEMORY;
-		}
-		FILE * file_write = fopen(argv[4], "w");
-		print_to_file(file_write, new_matrix);
-		free_matrix(new_matrix);
-		fclose(file_write);
-	}
-	else if (!strcmp(argv[1], "o"))
-	{
-		double det;
-		int flag = determinant(matrix, &det);
-		if (!flag)
-		{
-			FILE * file_write = fopen(argv[3], "w");
-			fprintf(file_write, "%f", det);
-			fclose(file_write);
-		}
-		else
-		{
-			rc = ERROR_DETERMINANT;
-		}
+		//return ERROR_ALLOCATE_MEMORY;
 	}
 	else
 	{
-		print_error(ERROR_INPUT);
-		printf("When action is \"0\" or \"a\" or \"m\"\n");
-		rc = ERROR_INPUT;
+		//print_matrix(matrix);
+		if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
+		{
+			FILE * file1 = fopen(argv[3], "r");
+			if (!file1)
+			{
+				print_error(ERROR_FILE);
+				fclose(file);
+				free_matrix(matrix);
+				//return ERROR_FILE;
+			}
+			else
+			{
+				matrix_s *matrix_b = NULL, *new_matrix = NULL;
+				matrix_b = create_matrix_from_file(file1);
+				if (!matrix_b)
+				{
+					print_error(ERROR_ALLOCATE_MEMORY);
+					fclose(file);
+					fclose(file1);
+					free_matrix(matrix);
+					//return ERROR_ALLOCATE_MEMORY;
+				}
+				else
+				{
+					fclose(file1);
+
+					if (!strcmp(argv[1], "a"))
+					{
+						new_matrix = addition_matrix(matrix, matrix_b);
+						//print_matrix(new_matrix);
+					}
+					else
+					{
+						new_matrix = multiply_matrix(matrix, matrix_b);
+						//print_matrix(new_matrix);
+					}
+					free_matrix(matrix_b);
+
+					if (new_matrix != NULL)
+					{
+						FILE * file_write = fopen(argv[4], "w");
+						print_to_file(file_write, new_matrix);
+						free_matrix(new_matrix);
+						fclose(file_write);
+					}
+					else
+					{
+						print_error(ERROR_ALLOCATE_MEMORY);
+					}
+				}
+			}
+		}
+		else if (!strcmp(argv[1], "o"))
+		{
+			double det;
+			int flag = determinant(matrix, &det);
+			if (!flag)
+			{
+				FILE * file_write = fopen(argv[3], "w");
+				fprintf(file_write, "%f", det);
+				fclose(file_write);
+			}
+			else
+			{
+				rc = ERROR_DETERMINANT;
+			}
+		}
+		else
+		{
+			print_error(ERROR_INPUT);
+			printf("When action is \"0\" or \"a\" or \"m\"\n");
+			rc = ERROR_INPUT;
+		}
+
+		free_matrix(matrix);
 	}
-
-	free_matrix(matrix);
+	
 	fclose(file);
-
 	return rc;
 }
 
 void print_to_file(FILE *file_write, const matrix_s *matrix)
 {
-	fprintf(file_write, "%d", matrix->rows);
-	fprintf(file_write, "%c", ' ');
-	fprintf(file_write, "%d", matrix->columns);
-	fprintf(file_write, "%c", '\n');
+	fprintf(file_write, "%d %d\n", matrix->rows, matrix->columns);
+	//fprintf(file_write, "%c", ' ');
+	//fprintf(file_write, "%d", matrix->columns);
+	//fprintf(file_write, "%c", '\n');
 	for (int i = 0; i < matrix->rows; ++i)
 	{
 		for (int j = 0; j < matrix->columns; ++j)

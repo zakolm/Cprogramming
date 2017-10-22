@@ -38,7 +38,14 @@ matrix_s *create_matrix_from_file(FILE *file)
 			}
 			else
 			{
-				return matrix;
+				if (size_check != size_matrix)
+				{
+					return NULL;
+				}
+				else
+				{
+					return matrix;
+				}
 			}
 		}
 	}
@@ -74,12 +81,15 @@ matrix_s *create_matrix(int row, int col)
 
 	if (size != row)
 	{
+		free_matrix(matrix);
+		/*
 		for (int i = 0; i < size; ++i)
 		{
 			free(matrix->data[i]);
 		}
 		free(matrix->data);
 		free(matrix);
+		*/
 		return NULL;
 	}
 
@@ -97,7 +107,7 @@ void free_matrix(matrix_s *matrix)
 }
 
 
-static int check_elem_in_column(double *slot_ex_numbers, int elm_column, int row)
+static int check_elem_in_column(double *slot_ex_numbers, double elm_column, int row)
 {
 	for (int i = 0; i < row; i++)
 		if (elm_column == slot_ex_numbers[i])
