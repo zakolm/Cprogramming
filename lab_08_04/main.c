@@ -25,10 +25,8 @@ int main(int argc, char **argv)
 	matrix_s *matrix = create_matrix_from_file(file);
 	if (!matrix)
 	{
-		print_error(ERROR_ALLOCATE_MEMORY);
-		//fclose(file);
+		//print_error(ERROR_ALLOCATE_MEMORY);
 		rc = ERROR_ALLOCATE_MEMORY;
-		//return ERROR_ALLOCATE_MEMORY;
 	}
 	else
 	{
@@ -38,7 +36,7 @@ int main(int argc, char **argv)
 			FILE * file1 = fopen(argv[3], "r");
 			if (!file1)
 			{
-				print_error(ERROR_FILE);
+				//print_error(ERROR_FILE);
 				//fclose(file);
 				//free_matrix(matrix);
 				rc = ERROR_FILE;
@@ -50,7 +48,8 @@ int main(int argc, char **argv)
 				matrix_b = create_matrix_from_file(file1);
 				if (!matrix_b)
 				{
-					print_error(ERROR_ALLOCATE_MEMORY);
+					//print_error(ERROR_ALLOCATE_MEMORY);
+					rc = ERROR_ALLOCATE_MEMORY;
 					//fclose(file);
 					//fclose(file1);
 					//free_matrix(matrix);
@@ -74,13 +73,22 @@ int main(int argc, char **argv)
 					if (new_matrix != NULL)
 					{
 						FILE * file_write = fopen(argv[4], "w");
-						print_to_file(file_write, new_matrix);
-						free_matrix(new_matrix);
-						fclose(file_write);
+						if (!file_write)
+						{
+							//print_error(ERROR_FILE);
+							rc = ERROR_FILE;
+						}
+						else
+						{
+							print_to_file(file_write, new_matrix);
+							free_matrix(new_matrix);
+							fclose(file_write);
+						}
 					}
 					else
 					{
-						print_error(ERROR_ALLOCATE_MEMORY);
+						//print_error(ERROR_ALLOCATE_MEMORY);
+						rc = ERROR_ALLOCATE_MEMORY;
 					}
 					free_matrix(matrix_b);
 				}
@@ -104,7 +112,7 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			print_error(ERROR_INPUT);
+			//print_error(ERROR_INPUT);
 			printf("When action is \"0\" or \"a\" or \"m\"\n");
 			rc = ERROR_INPUT;
 		}
@@ -113,6 +121,7 @@ int main(int argc, char **argv)
 	}
 	
 	fclose(file);
+	print_error(rc);
 	return rc;
 }
 
