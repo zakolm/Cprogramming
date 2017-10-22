@@ -4,3 +4,6 @@ test:
     - testing-docker
   script:
     - testing
+  artifacts:
+    paths: [report.txt.enc]
+    when: always
