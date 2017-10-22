@@ -26,7 +26,8 @@ int main(int argc, char **argv)
 	if (!matrix)
 	{
 		print_error(ERROR_ALLOCATE_MEMORY);
-		fclose(file);
+		//fclose(file);
+		rc = ERROR_ALLOCATE_MEMORY;
 		//return ERROR_ALLOCATE_MEMORY;
 	}
 	else
@@ -38,8 +39,9 @@ int main(int argc, char **argv)
 			if (!file1)
 			{
 				print_error(ERROR_FILE);
-				fclose(file);
-				free_matrix(matrix);
+				//fclose(file);
+				//free_matrix(matrix);
+				rc = ERROR_FILE;
 				//return ERROR_FILE;
 			}
 			else
@@ -49,15 +51,14 @@ int main(int argc, char **argv)
 				if (!matrix_b)
 				{
 					print_error(ERROR_ALLOCATE_MEMORY);
-					fclose(file);
-					fclose(file1);
-					free_matrix(matrix);
+					//fclose(file);
+					//fclose(file1);
+					//free_matrix(matrix);
 					//return ERROR_ALLOCATE_MEMORY;
 				}
 				else
 				{
-					fclose(file1);
-
+					//fclose(file1);
 					if (!strcmp(argv[1], "a"))
 					{
 						new_matrix = addition_matrix(matrix, matrix_b);
@@ -82,6 +83,7 @@ int main(int argc, char **argv)
 						print_error(ERROR_ALLOCATE_MEMORY);
 					}
 				}
+				fclose(file1);
 			}
 		}
 		else if (!strcmp(argv[1], "o"))
