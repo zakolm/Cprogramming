@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 						new_matrix = multiply_matrix(matrix, matrix_b);
 						//print_matrix(new_matrix);
 					}
-					free_matrix(matrix_b);
+					//free_matrix(matrix_b);
 
 					if (new_matrix != NULL)
 					{
@@ -82,6 +82,7 @@ int main(int argc, char **argv)
 					{
 						print_error(ERROR_ALLOCATE_MEMORY);
 					}
+					free_matrix(matrix_b);
 				}
 				fclose(file1);
 			}
