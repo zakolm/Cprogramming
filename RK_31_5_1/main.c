@@ -77,7 +77,8 @@ int main(int argc, char **argv)
 			if (fscanf(file, "%d", &scan_item) == 1)
 			{
 				if (size_check < size_matrix)
-					//matrix->data[row][col] = scan_item;
+				//Почему-то не работает...:( Segm falt
+				//matrix->data[i][j] = scan_item;
 				size_check++;
 			}
 			else
