@@ -81,15 +81,15 @@ matrix_s *create_matrix(int row, int col)
 
 	if (size != row)
 	{
-		free_matrix(matrix);
-		/*
+		//free_matrix(matrix);
+		
 		for (int i = 0; i < size; ++i)
 		{
 			free(matrix->data[i]);
 		}
 		free(matrix->data);
 		free(matrix);
-		*/
+		
 		return NULL;
 	}
 
