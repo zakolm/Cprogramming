@@ -112,10 +112,10 @@ static matrix_s *matrix_det(int count, int exclude_row, int exclude_column, cons
 	int ki = 0, kj = 0;
 	for (int i = 0; i < count-1; ++i)
 	{
-		if (i == exclude_column) ki = 1;
+		if (i == exclude_row) ki = 1;
 		for (int j = 0; j < count-1; ++j)
 		{
-			if (j == exclude_row) kj = 1;
+			if (j == exclude_column) kj = 1;
 			new_matrix->data[i][j] = matrix->data[i+ki][j+kj];
 		}
 	}
@@ -125,10 +125,10 @@ static double determinant_value(int count, const matrix_s *matrix)
 {
 	int sign = 1, new_count = count - 1;
 	double det = 0;
-	/*if (count == 1)
+	if (count == 1)
 	{
 		return matrix->data[0][0];
-	}*/
+	}
 	if (count == 2)
 	{
 		return ((matrix->data[0][0] * matrix->data[1][1]) - (matrix->data[1][0] * matrix->data[0][1]));
@@ -137,8 +137,8 @@ static double determinant_value(int count, const matrix_s *matrix)
 	{
 		for (int i = 0; i < count; ++i)
 		{
-			matrix_s *new_matrix = matrix_det(count, 0, i, matrix);
-			det = det + sign * matrix->data[0][i] * determinant_value(new_count, new_matrix);
+			matrix_s *new_matrix = matrix_det(count, i, 0, matrix);
+			det = det + sign * matrix->data[i][0] * determinant_value(new_count, new_matrix);
 			sign = -sign;
 			free_matrix(new_matrix);
 		}
