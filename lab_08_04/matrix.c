@@ -81,14 +81,14 @@ matrix_s *create_matrix(int row, int col)
 
 	if (size != row)
 	{
-		//free_matrix(matrix);
+		free_matrix(matrix);
 		
-		for (int i = 0; i < size; ++i)
+		/*for (int i = 0; i < size; ++i)
 		{
 			free(matrix->data[i]);
 		}
 		free(matrix->data);
-		free(matrix);
+		free(matrix);*/
 		
 		return NULL;
 	}
@@ -106,49 +106,55 @@ void free_matrix(matrix_s *matrix)
 	free(matrix);
 }
 
-
-static int check_elem_in_column(double *slot_ex_numbers, double elm_column, int row)
+static matrix_s *matrix_det(int count, int exclude_row, int exclude_column, const matrix_s *matrix)
 {
-	for (int i = 0; i < row; i++)
-		if (elm_column == slot_ex_numbers[i])
-			return 0;
-	return 1;
-}
-
-static double determinant_value(matrix_s *matrix, double *slot_ex_numbers, int row)
-{
-	double determinant_result = 0;
-	short sign_ex_det = 1;
-	for (int elm_column = 0; elm_column < matrix->columns; ++elm_column)
+	matrix_s *new_matrix = create_matrix(count-1, count-1);
+	int ki = 0, kj = 0;
+	for (int i = 0; i < count-1; ++i)
 	{
-		if (check_elem_in_column(slot_ex_numbers, elm_column, row))
+		if (i == exclude_column) ki = 1;
+		for (int j = 0; j < count-1; ++j)
 		{
-			if (row == matrix->columns - 1)
-			{
-				return matrix->data[row][elm_column];
-			}
-			else
-			{
-				slot_ex_numbers[row] = elm_column;
-				determinant_result = determinant_result + sign_ex_det * matrix->data[row][elm_column] * determinant_value(matrix, slot_ex_numbers, row + 1);
-				sign_ex_det *= -1;
-			}
+			if (j == exclude_row) kj = 1;
+			new_matrix->data[i][j] = matrix->data[i+ki][j+kj];
 		}
 	}
-	return determinant_result;
+	return new_matrix;
+}
+static double determinant_value(int count, const matrix_s *matrix)
+{
+	int sign = 1, new_count = count - 1;
+	double det = 0;
+	/*if (count == 1)
+	{
+		return matrix->data[0][0];
+	}*/
+	if (count == 2)
+	{
+		return ((matrix->data[0][0] * matrix->data[1][1]) - (matrix->data[1][0] * matrix->data[0][1]));
+	}
+	if (count > 2)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			matrix_s *new_matrix = matrix_det(count, 0, i, matrix);
+			det = det + sign * matrix->data[0][i] * determinant_value(new_count, new_matrix);
+			sign = -sign;
+			free_matrix(new_matrix);
+		}
+	}
+	return det;
 }
 
-int determinant(matrix_s *matrix, double *det)
+int determinant(const matrix_s *matrix, double *det)
 {
 	if (!(matrix->rows == matrix->columns))
 	{
 		return -1;
 	}
-	double slot_ex_numbers[matrix->rows];
-	*det = determinant_value(matrix, slot_ex_numbers, 0);
+	*det = determinant_value(matrix->rows, matrix);
 	return 0;
 }
-
 matrix_s *addition_matrix(matrix_s *matrix_a, matrix_s *matrix_b)
 {
 	if (!((matrix_a->rows == matrix_b->rows) && (matrix_a->columns == matrix_b->columns)))
