@@ -109,14 +109,20 @@ void free_matrix(matrix_s *matrix)
 
 static matrix_s *matrix_det(int count, int exclude_row, int exclude_column, const matrix_s *matrix)
 {
-	matrix_s *new_matrix = create_matrix(count-1, count-1);
+	matrix_s *new_matrix = create_matrix(count - 1, count - 1);
 	int ki = 0, kj = 0;
-	for (int i = 0; i < count-1; ++i)
+	for (int i = 0; i < count - 1; ++i)
 	{
-		if (i == exclude_row) ki = 1;
-		for (int j = 0; j < count-1; ++j)
+		if (i == exclude_row)
 		{
-			if (j == exclude_column) kj = 1;
+			ki = 1;
+		}
+		for (int j = 0; j < count - 1; ++j)
+		{
+			if (j == exclude_column)
+			{
+				kj = 1;
+			}
 			new_matrix->data[i][j] = matrix->data[i+ki][j+kj];
 		}
 	}
