@@ -20,7 +20,7 @@ void swap(void *a, void *b, int size)
 }
 
 
-int compare_int_and_ch (const void *first_item, const void *second_item)
+int compare_int_and_ch(const void *first_item, const void *second_item)
 {
 	return (*(char*)second_item - *(char*)first_item);
 }

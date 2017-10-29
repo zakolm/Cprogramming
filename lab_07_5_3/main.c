@@ -28,15 +28,36 @@ int create_array_int(int **pa, int count)
 	*pa = (int*)calloc(count, sizeof(int*));
 	if (*pa == NULL)
 	{
-		printf("lol\n");
 		return -1;
 	}
 	return 0;
 }
 
-int main(int argc, char** argv)
+int filter(FILE * file, int *pa, int *pb, int **pc)
 {
-	if (argc != 3 && !(argc == 4 && !strcmp(argv[3],"o")))
+	fseek(file, 0, SEEK_SET);
+	int minus = (pb - pa) - 1;
+	int item = 0;
+	for (; pa < pb; pa++)
+	{
+		fscanf(file, "%d", &item);
+		if (item < 0)
+		{
+			minus = (pb-pa);
+		}
+	}
+	
+	if (create_array_int(pc, minus))
+	{
+		return 0;
+	}
+	
+	return minus;
+}
+
+int main(int argc, char **argv)
+{
+	if (argc != 3 && !(argc == 4 && !strcmp(argv[3],"-")))
 	{
 		printf("example.exe <name file> <name file> [f]\n");
 		return ERROR_INPUT;
@@ -44,24 +65,39 @@ int main(int argc, char** argv)
 	FILE * file_in = fopen(argv[1], "r");
 	if (!file_in)
 	{
+		printf("file\n");
 		return ERROR_EMPTY_FILE;
 	}
 	
 	int rc = OK;
 	int count = 0;
 	int flag_filter = (argc < 4) ? 0 : 1;
-	rc = int_count_scan(file_in, &count, flag_filter);
-
-	if (!rc)
+	rc = int_count_scan(file_in, &count);//, flag_filter);
+	
+	if (!rc && count)
 	{
 		int *pa = NULL;
-		printf("%d\n", count);
 		if (!create_array_int(&pa, count))
 		{
 			int *pb = pa + count;
 			scan_array(file_in, pa, pb);
 			
 			print_list(count, pa);
+			
+			if (flag_filter)
+			{
+				int *pc = NULL;
+				count = filter(file_in, pa, pb, &pc);
+				free(pa);
+				if (!count)
+				{
+					fclose(file_in);
+					return -1;
+				}
+				pa = pc;
+				pb = pa + count;
+				scan_array(file_in, pa, pb);
+			}
 			
 			BubbleSort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
 			
@@ -83,7 +119,7 @@ int main(int argc, char** argv)
 	}
 
 	fclose(file_in);
-	return rc;
+	return OK;
 }
 
 /*

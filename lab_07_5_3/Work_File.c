@@ -1,7 +1,7 @@
 #include "CONSTANT.h"
 #include "Work_File.h"
 
-int int_count_scan(FILE * file, int *count, int filter)
+int int_count_scan(FILE * file, int *count)//, int filter)
 {
 	int item = 0;
 
@@ -10,27 +10,27 @@ int int_count_scan(FILE * file, int *count, int filter)
 		return ERROR_EMPTY_FILE;
 	}
 	*count = 1;
-	int minus = 0;
-	if ( item < 0 && filter )
-	{
-		minus = *count;
-	}
+	//int minus = 0;
+	//if ( item < 0 && filter )
+	//{
+	//	minus = *count;
+	//}
 	 while ( fscanf(file, "%d", &item) == 1 )
 	 {
 		 *count += 1;
-		 if ( item < 0 && filter )
-		 {
-			 minus = *count;
-		 }
+		 //if ( item < 0 && filter )
+		 //{
+		//	 minus = *count;
+		 //}
 	 }
-	 if ( minus )
-	 {
-		 *count = minus;
-	 }
-	 else
-	 {
-		 (*count)--;
-	 }
+	 //if ( minus )
+	 //{
+	//	 *count = minus;
+	 //}
+	 //else
+	 //{
+	//	 (*count)--;
+	 //}
 
 	return OK;
 }
