@@ -40,6 +40,7 @@ matrix_s *create_matrix_from_file(FILE *file)
 			{
 				if (size_check != size_matrix)
 				{
+					free_matrix(matrix);
 					return NULL;
 				}
 				else
