@@ -105,7 +105,7 @@ int main(int argc, char **argv)
 	free_matrix(matrix);	
 	fclose(file);
 	print_error(rc);
-	return rc;
+	return -1;
 }
 
 void print_to_file(FILE *file_write, const matrix_s *matrix)

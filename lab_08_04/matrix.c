@@ -123,7 +123,7 @@ static matrix_s *matrix_det(int count, int exclude_row, int exclude_column, cons
 			{
 				kj = 1;
 			}
-			new_matrix->data[i][j] = matrix->data[i+ki][j+kj];
+			new_matrix->data[i][j] = matrix->data[i + ki][j + kj];
 		}
 	}
 	return new_matrix;
