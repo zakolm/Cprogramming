@@ -97,9 +97,10 @@ int main(int argc, char **argv)
 				pa = pc;
 				pb = pa + count;
 				scan_array(file_in, pa, pb);
+				printf("\n%d\n", count);
 			}
 			
-			BubbleSort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
+			bubble_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
 			
 			printf("\n");
 			print_list(count, pa);
