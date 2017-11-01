@@ -55,7 +55,7 @@ void bubble_sort(void *basic, int count, int size, int(*comp)(const void*, const
 			{
 				//printf("abc%f\n", temp);
 				//printf("[dbg]%d\n", size);
-				swap(temp,(pc + size), size);
+				swap(temp, (pc + size), size);
 			}
 		}
 	}
