@@ -10,27 +10,22 @@ int int_count_scan(FILE * file, int *count)//, int filter)
 		return ERROR_EMPTY_FILE;
 	}
 	*count = 1;
-	//int minus = 0;
-	//if ( item < 0 && filter )
-	//{
-	//	minus = *count;
-	//}
-	 while ( fscanf(file, "%d", &item) == 1 )
+	 while (1)
 	 {
-		 *count += 1;
-		 //if ( item < 0 && filter )
-		 //{
-		//	 minus = *count;
-		 //}
+		 int zn = fscanf(file, "%d", &item);
+		 if (zn == 0)
+		 {
+			 return -2;
+		 }
+		 else if (zn == 1)
+		 {
+			*count += 1;
+		 }
+		 else
+		 {
+			 break;
+		 }
 	 }
-	 //if ( minus )
-	 //{
-	//	 *count = minus;
-	 //}
-	 //else
-	 //{
-	//	 (*count)--;
-	 //}
 
 	return OK;
 }

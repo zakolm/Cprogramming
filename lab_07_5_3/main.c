@@ -28,12 +28,12 @@ int create_array_int(int **pa, int count)
     *pa = (int*)calloc(count, sizeof(int*));
     if (*pa == NULL)
     {
-        return -1;
+        return ERROR_MEMORY;
     }
     return 0;
 }
 
-int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)//FILE * file, int *pa, int *pb, int **pc)
+int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     int count = (pe_src - pb_src) - 1;
     for (; pb_src < pe_src; pb_src++)
@@ -71,10 +71,17 @@ int main(int argc, char **argv)
     int count = 0;
     int flag_filter = (argc < 4) ? 0 : 1;
     rc = int_count_scan(file_in, &count);
-    
+	printf("%d %d\n", rc, count);
+	if (rc < 0)
+	{
+		printf("check\n");
+		fclose(file_in);
+		return -1;
+	}
     if (!rc && count)
     {
         int x = 0;
+		printf("aa\n");
         while ( x == 0)
         {
             x++;
