@@ -40,7 +40,7 @@ int compare_double(const void *first_item, const void *second_item)
   */
 }
 
-void bubble_sort(void *basic, int count, int size, int(*comp)(const void*, const void*))
+void my_sort(void *basic, int count, int size, int(*comp)(const void*, const void*))
 {
 	char *a = basic;
 	char *pa = (char*)basic;

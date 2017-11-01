@@ -35,22 +35,22 @@ int create_array_int(int **pa, int count)
 
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)//FILE * file, int *pa, int *pb, int **pc)
 {
-    int minus = (pe_src - pb_src) - 1;
+    int count = (pe_src - pb_src) - 1;
     for (; pb_src < pe_src; pb_src++)
     {
         if (*pb_src < 0)
         {
-            minus = (pe_src - pb_src);
+            count = (pe_src - pb_src);
         }
     }
     
-    if (create_array_int(pb_dst, minus))
+    if (create_array_int(pb_dst, count))
     {
         return -1;
     }
-    *pe_dst = *pb_dst + minus;
+    *pe_dst = *pb_dst + count;
     
-    return minus;
+    return count;
 }
 
 int main(int argc, char **argv)
@@ -103,7 +103,7 @@ int main(int argc, char **argv)
                     printf("\n%d\n", count);
                 }
                 
-                bubble_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
+                my_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
                 
                 printf("\n");
                 print_list(count, pa);
