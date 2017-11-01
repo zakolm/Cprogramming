@@ -7,51 +7,13 @@
 #include "MyMath.h"
 #include "Work_File.h"
 
-void print_list(int count, int *pa)
-{
-    for (int i = 0; i < count; ++i)
-    {
-        printf("%d ", *(pa+i));
-    }
-}
+void print_list(int count, int *pa);
 
-void write_to_file(FILE * file, int *pa, int *pb)
-{
-    for (; pa < pb; pa++)
-    {
-        fprintf(file, "%d ", *pa);
-    }
-}
+void write_to_file(FILE * file, int *pa, int *pb);
 
-int create_array_int(int **pa, int count)
-{
-    *pa = (int*)calloc(count, sizeof(int*));
-    if (*pa == NULL)
-    {
-        return ERROR_MEMORY;
-    }
-    return 0;
-}
+int create_array_int(int **pa, int count);
 
-int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
-{
-    int count = (pe_src - pb_src) - 1;
-    for (; pb_src < pe_src; pb_src++)
-    {
-        if (*pb_src < 0)
-        {
-            count = (pe_src - pb_src);
-        }
-    }
-    
-    if (create_array_int(pb_dst, count))
-    {
-        return -1;
-    }
-    *pe_dst = *pb_dst + count;
-    
-    return count;
-}
+int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst);
 
 int main(int argc, char **argv)
 {
@@ -71,17 +33,17 @@ int main(int argc, char **argv)
     int count = 0;
     int flag_filter = (argc < 4) ? 0 : 1;
     rc = int_count_scan(file_in, &count);
-	printf("%d %d\n", rc, count);
-	if (rc < 0)
-	{
-		printf("check\n");
-		fclose(file_in);
-		return -1;
-	}
+    printf("%d %d\n", rc, count);
+    if (rc < 0)
+    {
+        printf("check\n");
+        fclose(file_in);
+        return -1;
+    }
     if (!rc && count)
     {
         int x = 0;
-		printf("aa\n");
+        printf("aa\n");
         while ( x == 0)
         {
             x++;
@@ -132,4 +94,54 @@ int main(int argc, char **argv)
 
     fclose(file_in);
     return OK;
+}
+
+void print_list(int count, int *pa)
+{
+    for (int i = 0; i < count; ++i)
+    {
+        printf("%d ", *(pa+i));
+    }
+}
+
+void write_to_file(FILE * file, int *pa, int *pb)
+{
+    for (; pa < pb; pa++)
+    {
+        fprintf(file, "%d", *pa);
+        if ((pa - pb) != 1)
+        {
+            fprintf(file, " ");
+        }
+    }
+}
+
+int create_array_int(int **pa, int count)
+{
+    *pa = (int*)calloc(count, sizeof(int*));
+    if (*pa == NULL)
+    {
+        return ERROR_MEMORY;
+    }
+    return 0;
+}
+
+int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
+{
+    int count = (pe_src - pb_src) - 1;
+    for (; pb_src < pe_src; pb_src++)
+    {
+        if (*pb_src < 0)
+        {
+            count = (pe_src - pb_src);
+        }
+    }
+    
+    if (create_array_int(pb_dst, count))
+    {
+        return -1;
+    }
+    *pe_dst = *pb_dst + count;
+    
+    return count;
 }
