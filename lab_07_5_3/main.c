@@ -46,7 +46,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)//FILE 
     
     if (create_array_int(pb_dst, minus))
     {
-        return 0;
+        return -1;
     }
     *pe_dst = *pb_dst + minus;
     
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
                     int *pd = NULL;
                     count = key(pa, pb, &pc, &pd);
                     free(pa);
-                    if (!count)
+                    if (count == -1)
                     {
                         rc = ERROR_MEMORY;
                         break;
