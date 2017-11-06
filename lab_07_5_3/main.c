@@ -72,5 +72,5 @@ int main(int argc, char **argv)
     }
 
     fclose(file_in);
-    return OK;
+    return rc;
 }
