@@ -30,15 +30,16 @@ matrix_s *create_matrix_from_file(FILE *file)
 	
 	int size_matrix = matrix->rows * matrix->columns;
 	int size_check = 0;
+	int rc = 1;
 	for (row = 0; row < matrix->rows; ++row)
 	{
 		for (col = 0; col < matrix->columns; ++col)
-		{
-			
+		{	
 			if (size_check < size_matrix)
 			{
 				size_check++;
-				if ((fscanf(file, "%lf", &((*matrix).data[row][col])) == 0))
+				rc = fscanf(file, "%lf", &((*matrix).data[row][col]));
+				if (rc == 0 || rc == -1)
 				{
 					free_matrix(matrix);
 					return NULL;
