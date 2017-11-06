@@ -27,7 +27,6 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         }
     }
     count -= count_new;
-    printf("\n%d\n", count);
     if (count <= 0 || create_array_int(pb_dst, count))
     {
         return -1;
@@ -68,7 +67,7 @@ int compare_int_and_ch(const void *first_item, const void *second_item)
 
 int compare_double(const void *first_item, const void *second_item)
 {
-    return (*(double*)first_item > *(double*)second_item) ? 1 : (*(double*)first_item < *(double*)second_item) ? -1 : 0;
+    return (*(double*)first_item < *(double*)second_item) ? 1 : (*(double*)first_item < *(double*)second_item) ? 0 : -1;
 }
 
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))

@@ -11,11 +11,12 @@ int int_count_scan(FILE *file, int *size)
 		(*size)++;
 	}
 	
-	if (rc == -1)
+	if (rc == -1 && (*size))
 	{
 		return OK;
 	}
 
+	*size = 0;
 	return ERROR_EMPTY_FILE;
 }
 
