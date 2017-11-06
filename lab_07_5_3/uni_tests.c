@@ -5,6 +5,8 @@
 #include "MyMath.h"
 #include "WorkFile.h"
 
+#define name __func__
+
 void check_key(void);
 void check_sort(void);
 
@@ -35,7 +37,10 @@ void check_key(void)
 	int ok_count = 0;
 	// test1
 	{
-		int res[] = {1, 2, 3, 4, 5, 5, 6, 6, 7, 7};
+		int res[] =
+		{
+			1, 2, 3, 4, 5, 5, 6, 6, 7, 7
+		};
 		int count_res = 10;
 		FILE * file = fopen("in_1.txt", "r");
 		if (!file)
@@ -150,7 +155,10 @@ void check_key(void)
 	}
 	// test4
 	{
-		int res[] = {-3, 0, 1, 2, 4};
+		int res[] =
+		{
+			-3, 0, 1, 2, 4
+		};
 		int count_res = 5;
 		FILE * file = fopen("in_5.txt", "r");
 		if (!file)
@@ -200,7 +208,7 @@ void check_key(void)
 		}
 	}
 	
-	printf("%s: %s\n", __func__, (ok_count == 4) ? "OK" : "FEILED");
+	printf("%s: %s\n", name, (ok_count == 4) ? "OK" : "FEILED");
 }
 
 void check_sort(void)
@@ -208,7 +216,10 @@ void check_sort(void)
 	int ok_count = 0;
 	// test1
 	{
-		int res[] = {1, 2, 3, 4, 5, 5, 6, 6, 7, 7};
+		int res[] =
+		{
+			1, 2, 3, 4, 5, 5, 6, 6, 7, 7
+		};
 		int count_res = 10;
 		FILE * file = fopen("in_1.txt", "r");
 		if (!file)
@@ -246,7 +257,10 @@ void check_sort(void)
 	}
 	// test2
 	{
-		int res[] = {-1};
+		int res[] =
+		{
+			-1
+		};
 		int count_res = 1;
 		FILE * file = fopen("in_2.txt", "r");
 		if (!file)
@@ -330,7 +344,10 @@ void check_sort(void)
 	}
 	// test5
 	{
-		int res[] = {-5, -3, 0, 1, 2, 4, 6};
+		int res[] =
+		{
+			-5, -3, 0, 1, 2, 4, 6
+		};
 		int count_res = 7;
 		FILE * file = fopen("in_5.txt", "r");
 		if (!file)
@@ -368,7 +385,10 @@ void check_sort(void)
 	}
 	// test6
 	{
-		int res[] = {1};
+		int res[] =
+		{
+			1
+		};
 		int count_res = 1;
 		FILE * file = fopen("in_7.txt", "r");
 		if (!file)
@@ -406,7 +426,10 @@ void check_sort(void)
 	}
 	// test7
 	{
-		int res[] = {1, 2, 3, 4, 5, 6};
+		int res[] =
+		{
+			1, 2, 3, 4, 5, 6
+		};
 		int count_res = 6;
 		FILE * file = fopen("in_8.txt", "r");
 		if (!file)
@@ -444,7 +467,10 @@ void check_sort(void)
 	}
 	// test8
 	{
-		int res[] = {-1, 0, 1, 2, 3, 4, 5};
+		int res[] =
+		{
+			-1, 0, 1, 2, 3, 4, 5
+		};
 		int count_res = 7;
 		FILE * file = fopen("in_9.txt", "r");
 		if (!file)
@@ -495,7 +521,10 @@ void check_sort(void)
 	}
 	// test10
 	{
-		double res[] = {0.12, 0.24, 0.29, 0.38, 0.58, 0.68, 0.77, 0.83, 0.85, 0.90};
+		double res[] =
+		{
+			0.12, 0.24, 0.29, 0.38, 0.58, 0.68, 0.77, 0.83, 0.85, 0.90
+		};
 		int count = 10;
 		double *pa = calloc(count, sizeof(double));
 		if (!pa)
@@ -516,5 +545,5 @@ void check_sort(void)
 		}
 	}
 	
-	printf("%s: %s\n", __func__, (ok_count == 10) ? "OK" : "FAILED");
+	printf("%s: %s\n", name, (ok_count == 10) ? "OK" : "FAILED");
 }
