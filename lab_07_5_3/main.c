@@ -55,9 +55,11 @@ int main(int argc, char **argv)
         }
 		count = pb - pa;
         printf("\n\n%d\n\n", count);
-		count = 0;
-		if ((pb - pa))
+		if (count && count != 1)
+		{
 			mysort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
+		}
+		count = 0;
         
         printf("\n");
         print_list(pb-pa, pa);
