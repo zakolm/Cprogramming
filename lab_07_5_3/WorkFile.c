@@ -19,10 +19,10 @@ int int_count_scan(FILE *file, int *size)
 	return ERROR_EMPTY_FILE;
 }
 
-void scan_array(FILE * file, int *pa, int *pb)
+void scan_array(FILE *file, int *pa, int *pb)
 {
     int item;
-    fseek(file, 0, SEEK_SET);
+    fseek(file, 0, seek_set);
     while (pa < pb && fscanf(file, "%d", &item) == 1)
     {
         *pa = item;
@@ -34,11 +34,11 @@ void print_list(int count, int *pa)
 {
     for (int i = 0; i < count; ++i)
     {
-        printf("%d ", *(pa+i));
+        printf("%d ", *(pa + i));
     }
 }
 
-void write_to_file(FILE * file, int *pa, int *pb)
+void write_to_file(FILE *file, int *pa, int *pb)
 {
     for (; pa < pb; pa++)
     {
