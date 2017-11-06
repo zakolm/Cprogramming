@@ -16,7 +16,7 @@ int create_array_int(int **pa, int count)
 
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
-    int count = (pe_src - pb_src) - 1;
+    int count = pe_src - pb_src;
     const int *pa = pb_src;
     for (; pa < pe_src; pa++)
     {
