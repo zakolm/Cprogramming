@@ -22,4 +22,8 @@ void print_error(int code)
     {
         printf("Cannot allocate memory\n");
     }
+    else if (code == ERROR_DETERMINANT)
+    {
+        printf("Cannot find determinant\n");
+    }
 }
