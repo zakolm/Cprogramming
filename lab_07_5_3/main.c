@@ -54,7 +54,7 @@ int main(int argc, char **argv)
             pb = pd;
         }
         
-        my_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
+        mysort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
         
         printf("\n");
         print_list(pb-pa, pa);

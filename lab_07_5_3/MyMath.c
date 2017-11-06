@@ -82,7 +82,7 @@ int compare_double(const void *first_item, const void *second_item)
   */
 }
 
-void my_sort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
+void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
     char *a = basic;
     char *pa = (char*)basic;
