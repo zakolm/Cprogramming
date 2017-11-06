@@ -118,10 +118,10 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
 	}
 	char *pa = (char*)basic;
 	char *pb = (char*)basic + count * size;
-	int flag = 0;
-	do
-	{
-		flag = 0;
+	//int flag = 0;
+	//do
+	//{
+		//flag = 0;
 		for (; pa < pb - size; pa += size)
 		{
 			char *pc = pa + size;
@@ -130,9 +130,9 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
 				if (comp(pa, pc) < 0)
 				{
 					swap(pa, pc, size);
-					flag = 1;
+					//flag = 1;
 				}
 			}
 		}
-	} while(flag == 0);
+	//} while(flag == 0);
 }
