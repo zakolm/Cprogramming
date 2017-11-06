@@ -1,33 +1,35 @@
 #include "constant.h"
 #include "WorkFile.h"
 
-int int_count_scan(FILE * file, int *count)
+int int_count_scan(FILE *file, int *size)
 {
-    int item = 0;
+	//int size = 0;
+	int item;
+	//int rc = 1;
+	int rc = fscanf(file, "%d", &item);
+	printf("rc = %d\n", *size);
+	while (rc == 1)
+	{
+		rc = fscanf(file, "%d", &item);
+		(*size)++;
+	}
+/*
+	while (rc == 1)
+	{
+		printf("rc = %d\n", rc);
+		rc = (fscanf(file, "%d", &item));
+		*count += 1;
+		//size++;
+		*count += 1;
+	}
+	*/
+	printf("rc = %d\n", *size);
+	if (rc == -1)
+	{
+		return OK;
+	}
 
-    if ( fscanf(file, "%d", &item) != 1 )
-    {
-        return ERROR_EMPTY_FILE;
-    }
-    *count = 1;
-     while (1)
-     {
-         int zn = fscanf(file, "%d", &item);
-         if (zn == 0)
-         {
-             return -2;
-         }
-         else if (zn == 1)
-         {
-            *count += 1;
-         }
-         else
-         {
-             break;
-         }
-     }
-
-    return OK;
+	return ERROR_EMPTY_FILE;
 }
 
 void scan_array(FILE * file, int *pa, int *pb)
