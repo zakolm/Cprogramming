@@ -102,6 +102,7 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
 					if (comp(temp, pc + size) < 0)
 					{
 						swap(temp, (pc + size), size);
+						flag = 1;
 					}
 				}
 			}
