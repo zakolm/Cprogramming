@@ -84,6 +84,8 @@ int compare_double(const void *first_item, const void *second_item)
 
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
+	if (count <= 1)
+		return;
     char *a = basic;
     char *pa = (char*)basic;
     char *pb = (char*)basic + count * size;
