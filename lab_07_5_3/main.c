@@ -53,7 +53,9 @@ int main(int argc, char **argv)
             pa = pc;
             pb = pd;
         }
-        
+		count = pb - pa;
+        printf("\n\n%d\n\n", count);
+		count = 0;
         mysort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
         
         printf("\n");
