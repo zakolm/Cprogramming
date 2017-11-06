@@ -52,7 +52,6 @@ int main(int argc, char **argv)
             }
             pa = pc;
             pb = pd;
-            scan_array(file_in, pa, pb);
         }
         
         my_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);

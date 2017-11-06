@@ -8,6 +8,6 @@ int compare_int_and_ch(const void *first_item, const void *second_item);
 int compare_double(const void *first_item, const void *second_item);
 void my_sort(void *basic, int count, int size, int(*comp)(const void*, const void*));
 void print_list(int count, int *pa);
-void write_to_file(FILE * file, int *pa, int *pb);
+void write_to_file(FILE *file, int *pa, int *pb);
 
 #endif //__MyMath__H__

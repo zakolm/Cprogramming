@@ -31,6 +31,13 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         return -1;
     }
     *pe_dst = *pb_dst + count;
+
+    int *pc = *pb_dst;
+    pa = pb_src;
+    for (; pc < *pe_dst; ++pc, ++pa)
+    {
+      *pc = *pa;
+    }
     
     return 0;//count;
 }
