@@ -33,63 +33,52 @@ int main(int argc, char **argv)
     int count = 0;
     int flag_filter = (argc < 4) ? 0 : 1;
     rc = int_count_scan(file_in, &count);
-    printf("%d %d\n", rc, count);
-    if (rc < 0)
+
+    while (!rc && count)
     {
-        printf("check\n");
-        fclose(file_in);
-        return -1;
-    }
-    if (!rc && count)
-    {
-        int x = 0;
-        printf("aa\n");
-        while ( x == 0)
+        x++;
+        int *pa = NULL;
+        if (create_array_int(&pa, count))
         {
-            x++;
-            int *pa = NULL;
-            if (!create_array_int(&pa, count))
-            {
-                int *pb = pa + count;
-                scan_array(file_in, pa, pb);
-                
-                print_list(count, pa);
-                
-                if (flag_filter)
-                {
-                    int *pc = NULL;
-                    int *pd = NULL;
-                    int sup_flag = key(pa, pb, &pc, &pd);
-                    free(pa);
-                    if (sup_flag == -1)
-                    {
-                        rc = ERROR_MEMORY;
-                        break;
-                    }
-                    pa = pc;
-                    pb = pd;
-                    scan_array(file_in, pa, pb);
-                    printf("\n%d\n", count);
-                }
-                
-                my_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
-                
-                printf("\n");
-                print_list(pb-pa, pa);
-                
-                FILE * file_out = fopen(argv[2], "w");
-                if (file_out != NULL)
-                {
-                    write_to_file(file_out, pa, pb);
-                    fclose(file_out);
-                }
-                else
-                {
-                    rc = ERROR_EMPTY_FILE;
-                }
-                free(pa);
-            }
+            rc = ERROR_MEMORY;
+            break;
         }
+        int *pb = pa + count;
+        count = 0; //  для выхода из цикла
+        scan_array(file_in, pa, pb);
+        
+        print_list(pb-pa, pa);
+        
+        if (flag_filter)
+        {
+            int *pc = NULL;
+            int *pd = NULL;
+            int sup_flag = key(pa, pb, &pc, &pd);
+            free(pa);
+            if (sup_flag == -1)
+            {
+                rc = ERROR_MEMORY;
+                break;
+            }
+            pa = pc;
+            pb = pd;
+            scan_array(file_in, pa, pb);
+        }
+        
+        my_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
+        
+        printf("\n");
+        print_list(pb-pa, pa);
+        
+        FILE * file_out = fopen(argv[2], "w");
+        if (!file_out)
+        {
+            rc = ERROR_EMPTY_FILE;
+            break;
+        }
+        write_to_file(file_out, pa, pb);
+        fclose(file_out);
+        free(pa);
     }
 
     fclose(file_in);
