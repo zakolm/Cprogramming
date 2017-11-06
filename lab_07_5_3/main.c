@@ -36,7 +36,7 @@ int main(int argc, char **argv)
         int *pb = pa + count;
         scan_array(file_in, pa, pb);
         
-        print_list(pb-pa, pa);
+        print_list(pb - pa, pa);
         
         if (flag_filter)
         {
@@ -55,11 +55,11 @@ int main(int argc, char **argv)
 		//count = pb - pa;
         //printf("\n\n%d\n\n", count);
 		
-		mysort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
+		mysort(pa, pb - pa, sizeof(*pa), compare_int_and_ch);
 		count = 0; //  для выхода из цикла
         
         printf("\n");
-        print_list(pb-pa, pa);
+        print_list(pb - pa, pa);
         
         FILE * file_out = fopen(argv[2], "w");
         if (!file_out)
