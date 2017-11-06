@@ -3,7 +3,7 @@
 #include <errno.h>
 #include <string.h>
 
-#include "CONSTANT.h"
+#include "constant.h"
 #include "MyMath.h"
 #include "Work_File.h"
 
@@ -59,9 +59,9 @@ int main(int argc, char **argv)
                 {
                     int *pc = NULL;
                     int *pd = NULL;
-                    count = key(pa, pb, &pc, &pd);
+                    int sup_flag = key(pa, pb, &pc, &pd);
                     free(pa);
-                    if (count == -1)
+                    if (sup_flag == -1)
                     {
                         rc = ERROR_MEMORY;
                         break;
@@ -75,7 +75,7 @@ int main(int argc, char **argv)
                 my_sort(pa, pb-pa, sizeof(*pa), compare_int_and_ch);
                 
                 printf("\n");
-                print_list(count, pa);
+                print_list(pb-pa, pa);
                 
                 FILE * file_out = fopen(argv[2], "w");
                 if (file_out != NULL)
@@ -129,19 +129,20 @@ int create_array_int(int **pa, int count)
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 {
     int count = (pe_src - pb_src) - 1;
-    for (; pb_src < pe_src; pb_src++)
+    const int *pa = pb_src;
+    for (; pa < pe_src; pa++)
     {
-        if (*pb_src < 0)
+        if (*pa < 0)
         {
-            count = (pe_src - pb_src);
+            count = (pe_src - pa);
         }
     }
     
-    if (create_array_int(pb_dst, count))
+    if (!count || create_array_int(pb_dst, count))
     {
         return -1;
     }
     *pe_dst = *pb_dst + count;
     
-    return count;
+    return 0;//count;
 }

@@ -1,4 +1,4 @@
-#include "CONSTANT.h"
+#include "constant.h"
 #include "Work_File.h"
 
 int int_count_scan(FILE * file, int *count)

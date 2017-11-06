@@ -1,5 +1,5 @@
 #include "MyMath.h"
-#include "CONSTANT.h"
+#include "constant.h"
 
 
 void swap(void *a, void *b, int size)
