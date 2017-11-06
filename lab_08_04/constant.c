@@ -1,12 +1,11 @@
-#ifndef __CONSTANT__H__
-#define __CONSTANT__H__
+#include <stdio.h>
 
-#define OK 0
-#define ERROR_INPUT -1
-#define ERROR_FILE -2
-#define ERROR_ALLOCATE_MEMORY -3
-#define ERROR_DETERMINANT -4
+#include "constant.h"
 
+/*
+* 
+* code - 
+*/
 void print_error(int code)
 {
     if (code == ERROR_INPUT)
@@ -24,5 +23,3 @@ void print_error(int code)
         printf("Cannot allocate memory\n");
     }
 }
-
-#endif //__CONSTANT__H__

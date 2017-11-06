@@ -2,7 +2,7 @@
 #include <math.h>
 
 #include "matrix.h"
-#include "CONSTANT.h"
+#include "constant.h"
 
 #define EPS 1E-5
 
