@@ -116,23 +116,56 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
 	{
 		return;
 	}
-	char *pa = (char*)basic;
 	char *pb = (char*)basic + count * size;
-	//int flag = 0;
-	//do
-	//{
-		//flag = 0;
-		for (; pa < pb - size; pa += size)
+	int flag = 0;
+	int len = count;
+	do
+	{
+		flag = 0;
+		//for (; pa < pb - size; pa += size)
+		//{
+		//char *pc = pa + size;
+		for (char *pa = (char*)basic; pa < pb - size; pa += size)
 		{
-			char *pc = pa + size;
-			for (; pc < pb; pc += size)
+			if (comp(pa, pa + size) < 0)
 			{
-				if (comp(pa, pc) < 0)
-				{
-					swap(pa, pc, size);
-					//flag = 1;
-				}
+				swap(pa, pa + size, size);
+				flag = 1;
 			}
 		}
-	//} while(flag == 0);
+		//}
+	len--;
+	} while(flag && len > 1);
 }
+
+/*
+ void modif_bubble(int *m, int n) // Модифицированный пузырек
+
+{
+
+int i=n,t; // Длина неотсортированной части массива
+
+int f;
+
+do {
+
+f=0; //Предположим, что массив является отсортированным
+
+for (int k=0;k<i-1;k++)
+
+if (m[k]>m[k+1])
+
+{
+
+t=m[k]; m[k]=m[k+1]; m[k+1]=t; // Обмен
+
+f=1; // Массив был неотсортированным
+
+}
+
+i--;
+
+} while (f && i>1);
+
+}
+*/
