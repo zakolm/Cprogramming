@@ -81,7 +81,7 @@ int compare_double(const void *first_item, const void *second_item)
   }
   */
 }
-/*
+
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
     char *a = basic;
@@ -100,7 +100,7 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
         }
     }
 }
-*/
+/*
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
 	if (count == 1)
@@ -127,3 +127,4 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
 		}
 	} while(flag == 0);
 }
+*/
