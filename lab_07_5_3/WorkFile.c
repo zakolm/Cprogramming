@@ -1,5 +1,5 @@
 #include "constant.h"
-#include "Work_File.h"
+#include "WorkFile.h"
 
 int int_count_scan(FILE * file, int *count)
 {
@@ -38,5 +38,25 @@ void scan_array(FILE * file, int *pa, int *pb)
     {
         *pa = item;
         pa++;
+    }
+}
+
+void print_list(int count, int *pa)
+{
+    for (int i = 0; i < count; ++i)
+    {
+        printf("%d ", *(pa+i));
+    }
+}
+
+void write_to_file(FILE * file, int *pa, int *pb)
+{
+    for (; pa < pb; pa++)
+    {
+        fprintf(file, "%d", *pa);
+        if ((pa - pb) != 1)
+        {
+            fprintf(file, " ");
+        }
     }
 }

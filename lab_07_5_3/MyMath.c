@@ -1,6 +1,39 @@
-#include "MyMath.h"
-#include "constant.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+#include "constant.h"
+#include "MyMath.h"
+
+int create_array_int(int **pa, int count)
+{
+    *pa = (int*)calloc(count, sizeof(int*));
+    if (*pa == NULL)
+    {
+        return ERROR_MEMORY;
+    }
+    return 0;
+}
+
+int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
+{
+    int count = (pe_src - pb_src) - 1;
+    const int *pa = pb_src;
+    for (; pa < pe_src; pa++)
+    {
+        if (*pa < 0)
+        {
+            count = (pe_src - pa);
+        }
+    }
+    
+    if (!count || create_array_int(pb_dst, count))
+    {
+        return -1;
+    }
+    *pe_dst = *pb_dst + count;
+    
+    return 0;//count;
+}
 
 void swap(void *a, void *b, int size)
 {
