@@ -8,7 +8,7 @@
 */
 void print_error(int code)
 {
-    if (code == ERROR_INPUT)
+    if (code == ERROR_PARAM)
     {
         printf("Input/output error\n");
         printf("Run program this way: ");

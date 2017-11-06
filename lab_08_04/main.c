@@ -9,8 +9,8 @@ int main(int argc, char **argv)
 {
 	if ((argc != 5 || (strcmp(argv[1], "a") && strcmp(argv[1], "m"))) && (argc != 4 || !strcmp(argv[1], "a") || !strcmp(argv[1], "m")))
 	{
-		print_error(ERROR_INPUT);
-		return ERROR_INPUT;
+		print_error(ERROR_PARAM);
+		return ERROR_PARAM;
 	}
 	FILE * file = fopen(argv[2], "r");
 	if (!file)
