@@ -38,7 +38,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
     pa = pb_src;
     for (; pc < *pe_dst; ++pc, ++pa)
     {
-      *pc = *pa;
+		*pc = *pa;
     }
     
     return OK;//count;
@@ -84,7 +84,7 @@ int compare_double(const void *first_item, const void *second_item)
 
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
-	if (count <= 1)
+	if (count == 1 || !count)
 	{
 		return;
 	}
@@ -107,7 +107,7 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
 				}
 			}
 		}
-	} while(flag == 0);
+	} while (flag == 0);
 }
 /*
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
