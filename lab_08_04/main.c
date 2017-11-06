@@ -7,7 +7,7 @@
 
 int main(int argc, char **argv)
 {
-	if ((argc != 5 || (strcmp(argv[1], "a") && strcmp(argv[1], "m"))) && (argc != 4 || !strcmp(argv[1], "a") || !strcmp(argv[1], "m")))//((argc != 5 || !strcmp(argv[1], "o")) && (argc != 4 || strcmp(argv[1], "o")))
+	if ((argc != 5 || (strcmp(argv[1], "a") && strcmp(argv[1], "m"))) && (argc != 4 || !strcmp(argv[1], "a") || !strcmp(argv[1], "m")))
 	{
 		print_error(ERROR_INPUT);
 		return ERROR_INPUT;
@@ -73,7 +73,7 @@ int main(int argc, char **argv)
 			free_matrix(new_matrix);
 			fclose(file_write);
 		}
-		else //if (!strcmp(argv[1], "o"))
+		else
 		{
 			double det;
 			int flag = determinant(matrix, &det);
@@ -93,13 +93,6 @@ int main(int argc, char **argv)
 				rc = ERROR_DETERMINANT;
 			}
 		}
-		/*
-		else
-		{
-			printf("When action is \"0\" or \"a\" or \"m\"\n");
-			rc = ERROR_INPUT;
-		}
-		*/
 	}
 
 	free_matrix(matrix);	
