@@ -11,7 +11,7 @@ int create_array_int(int **pa, int count)
     {
         return ERROR_MEMORY;
     }
-    return 0;
+    return OK;
 }
 
 int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
@@ -88,5 +88,5 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
             }
         }
         len--;
-    } while(flag && len > 1);
+    } while (flag && len > 1);
 }
