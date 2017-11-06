@@ -85,22 +85,29 @@ int compare_double(const void *first_item, const void *second_item)
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
 	if (count <= 1)
+	{
 		return;
+	}
     char *a = basic;
     char *pa = (char*)basic;
     char *pb = (char*)basic + count * size;
-    for (; pa < pb; pa += size)
-    {
-        char *pc = (char*)basic;
-        for (; pc < pb - size - ((pa - a) / size); pc += size)
-        {
-            char *temp = pc;
-            if (comp(temp, pc + size) < 0)
-            {
-                swap(temp, (pc + size), size);
-            }
-        }
-    }
+	int flag = 1;
+	do
+	{
+		flag = 0;
+		for (; pa < pb; pa += size)
+		{
+			char *pc = (char*)basic;
+			for (; pc < pb - size - ((pa - a) / size); pc += size)
+			{
+				char *temp = pc;
+				if (comp(temp, pc + size) < 0)
+				{
+					swap(temp, (pc + size), size);
+				}
+			}
+		}
+	} while(flag == 0);
 }
 /*
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
