@@ -46,15 +46,11 @@ int main(int argc, char **argv)
             int *pd = NULL;
             int sup_flag = key(pa, pb, &pc, &pd);
             free(pa);
-            if (sup_flag)// || !(pd - pc))
+            if (sup_flag)
             {
                 rc = ERROR_MEMORY;
                 break;
             }
-            //if (sup_flag == -2)
-            //{
-            //    break;
-            //}
             pa = pc;
             pb = pd;
         }

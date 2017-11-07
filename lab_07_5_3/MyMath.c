@@ -27,10 +27,10 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         }
     }
     count -= count_new;
-	if (count <= 0)
-	{
-		return -2;
-	}
+    if (count <= 0)
+    {
+        return -2;
+    }
     if (create_array_int(pb_dst, count))
     {
         return -1;
@@ -76,6 +76,8 @@ int compare_double(const void *first_item, const void *second_item)
 
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
 {
+    if (count == 1)
+        return;
     char *pb = (char*)basic + count * size;
     int flag = 0;
     int len = count;
