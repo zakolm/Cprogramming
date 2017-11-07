@@ -22,7 +22,7 @@ int int_count_scan(FILE *file, int *size)
 
 void scan_array(FILE *file, int *pa, int *pb)
 {
-    int item;
+    int item = 0;
     fseek(file, 0, seek_set);
     while (pa < pb && fscanf(file, "%d", &item) == 1)
     {
