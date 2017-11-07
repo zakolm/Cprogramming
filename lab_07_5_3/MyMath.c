@@ -66,12 +66,12 @@ void swap(void *a, void *b, int size)
 
 int compare_int_and_ch(const void *first_item, const void *second_item)
 {
-    return (*(char*)second_item - *(char*)first_item);
+    return (*(char*)first_item - *(char*)second_item);//(*(char*)second_item - *(char*)first_item);
 }
 
 int compare_double(const void *first_item, const void *second_item)
 {
-    return (*(double*)first_item < *(double*)second_item) ? 1 : (*(double*)first_item < *(double*)second_item) ? 0 : -1;
+    return (*(double*)first_item < *(double*)second_item) ? -1 : (*(double*)first_item > *(double*)second_item) ? 1 : 0;
 }
 
 void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, const void*))
@@ -86,7 +86,7 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
         flag = 0;
         for (char *pa = (char*)basic; pa < pb - size; pa += size)
         {
-            if (comp(pa, pa + size) < 0)
+            if (comp(pa, pa + size) > 0)
             {
                 swap(pa, pa + size, size);
                 flag = 1;

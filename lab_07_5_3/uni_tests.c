@@ -97,7 +97,7 @@ void check_key(void)
         FILE * file = fopen("in_2.txt", "r");
         if (!file)
         {
-            printf("Error\n");
+            printf("Error1\n");
         }
         else
         {
@@ -114,20 +114,22 @@ void check_key(void)
                     int *pd = NULL;
                     int sup_flag = key(pa, pb, &pc, &pd);
                     count = pd - pc;
-                    if (sup_flag == -1 && !count && count == count_res)
+					printf("%d\n", count);
+                    if (sup_flag && !count && count == count_res)
                     {
                         ok_count++;
                     }
+					printf("check\n");
                     free(pa);
                 }
                 else
                 {
-                    printf("Error\n");
+                    printf("Error2\n");
                 }
             }
             else
             {
-                printf("Error\n");
+                printf("Error3\n");
             }
             fclose(file);
         }
@@ -212,7 +214,8 @@ void check_key(void)
         }
     }
     
-    printf("%s: %s\n", name, (ok_count == 4) ? "OK" : "FEILED");
+	printf("%d\n", ok_count);
+    printf("%s: %s\n", name, (ok_count == 4) ? "OK" : "FAILED");
 }
 
 void check_sort(void)
@@ -550,6 +553,11 @@ void check_sort(void)
             *pa = 0.38; *(pa + 1) = 0.24; *(pa + 2) = 0.68; *(pa + 3) = 0.90; *(pa + 4) = 0.85;
             *(pa + 5) = 0.83;*(pa + 6) = 0.58; *(pa + 7) = 0.77; *(pa + 8) = 0.12; *(pa + 9) = 0.29;
             mysort(pa, pb - pa, sizeof(*pa), compare_double);
+			for (int i = 0; i < count; ++i)
+			{
+				printf("%f ", *(pa+i));
+			}
+			printf("\n");
             if (list_check(count, sizeof(double), pa, res))
             {
                 ok_count++;
