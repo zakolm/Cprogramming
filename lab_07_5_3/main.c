@@ -11,14 +11,12 @@ int main(int argc, char **argv)
     if (argc != 3 && argc != 4)
     {
         printf("example.exe <name file> <name file> [f]\n");
-        //printf("%d\n", ERROR_INPUT);
         return ERROR_INPUT;
     }
     FILE * file_in = fopen(argv[1], "r");
     if (!file_in)
     {
         printf("file\n");
-        //printf("%d\n", ERROR_EMPTY_FILE);
         return ERROR_EMPTY_FILE;
     }
     
@@ -56,7 +54,7 @@ int main(int argc, char **argv)
         }
         
         mysort(pa, pb - pa, sizeof(*pa), compare_int_and_ch);
-        count = 0; //  для выхода из цикла
+        count = 0; //  для выхода из цикла.  
         
         printf("\n");
         print_list(pb - pa, pa);
@@ -74,6 +72,5 @@ int main(int argc, char **argv)
     }
 
     fclose(file_in);
-    printf("\n%d\n", rc);
     return rc;
 }
