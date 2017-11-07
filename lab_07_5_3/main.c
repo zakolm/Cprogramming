@@ -8,7 +8,7 @@
 
 int main(int argc, char **argv)
 {
-    if (argc != 3 && argc != 4)
+    if (argc != 3 && argc != 4 && strcmp(argv[3], "f") != 0)
     {
         printf("example.exe <name file> <name file> [f]\n");
         return ERROR_INPUT;
