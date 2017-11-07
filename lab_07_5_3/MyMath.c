@@ -27,7 +27,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
         }
     }
     count -= count_new;
-    if (count <= 0 || create_array_int(pb_dst, count))
+    if (create_array_int(pb_dst, count))//(count <= 0 || create_array_int(pb_dst, count))
     {
         return -1;
     }
