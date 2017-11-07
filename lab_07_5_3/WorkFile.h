@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+#define seek_set SEEK_SET
+
 int int_count_scan(FILE *f, int *count);
 void scan_array(FILE *f, int *pa, int *pb);
 void print_list(int count, int *pa);

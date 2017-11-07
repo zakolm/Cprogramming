@@ -11,12 +11,14 @@ int main(int argc, char **argv)
     if (argc != 3 && argc != 4)
     {
         printf("example.exe <name file> <name file> [f]\n");
+		printf("%d\n", ERROR_INPUT);
         return ERROR_INPUT;
     }
     FILE * file_in = fopen(argv[1], "r");
     if (!file_in)
     {
         printf("file\n");
+		printf("%d\n", ERROR_EMPTY_FILE);
         return ERROR_EMPTY_FILE;
     }
     
@@ -46,17 +48,15 @@ int main(int argc, char **argv)
             free(pa);
             if (sup_flag == -1 || !(pd - pc))
             {
-                rc = ERROR_MEMORY;
+                //rc = ERROR_MEMORY;
                 break;
             }
             pa = pc;
             pb = pd;
         }
-		//count = pb - pa;
-        //printf("\n\n%d\n\n", count);
-		
-		mysort(pa, pb - pa, sizeof(*pa), compare_int_and_ch);
-		count = 0; //  для выхода из цикла
+        
+        mysort(pa, pb - pa, sizeof(*pa), compare_int_and_ch);
+        count = 0; //  для выхода из цикла
         
         printf("\n");
         print_list(pb - pa, pa);
@@ -74,5 +74,6 @@ int main(int argc, char **argv)
     }
 
     fclose(file_in);
+	printf("\n%d\n", rc);
     return rc;
 }

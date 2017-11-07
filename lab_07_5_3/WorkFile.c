@@ -3,21 +3,21 @@
 
 int int_count_scan(FILE *file, int *size)
 {
-	int item = 0;
-	int rc = fscanf(file, "%d", &item);
-	while (rc == 1)
-	{
-		rc = fscanf(file, "%d", &item);
-		(*size)++;
-	}
-	
-	if (rc == -1 && (*size))
-	{
-		return OK;
-	}
+    int item = 0;
+    int rc = fscanf(file, "%d", &item);
+    while (rc == 1)
+    {
+        rc = fscanf(file, "%d", &item);
+        (*size)++;
+    }
+    
+    if (rc == -1 && (*size))
+    {
+        return OK;
+    }
 
-	*size = 0;
-	return ERROR_EMPTY_FILE;
+    *size = 0;
+    return ERROR_EMPTY_FILE;
 }
 
 void scan_array(FILE *file, int *pa, int *pb)
