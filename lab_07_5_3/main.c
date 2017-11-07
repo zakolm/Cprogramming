@@ -51,7 +51,7 @@ int main(int argc, char **argv)
                 rc = ERROR_MEMORY;
                 break;
             }
-            if ((pd - pc))
+            if (sup_flag == -2)
             {
                 break;
             }
