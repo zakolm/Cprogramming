@@ -553,11 +553,6 @@ void check_sort(void)
             *pa = 0.38; *(pa + 1) = 0.24; *(pa + 2) = 0.68; *(pa + 3) = 0.90; *(pa + 4) = 0.85;
             *(pa + 5) = 0.83;*(pa + 6) = 0.58; *(pa + 7) = 0.77; *(pa + 8) = 0.12; *(pa + 9) = 0.29;
             mysort(pa, pb - pa, sizeof(*pa), compare_double);
-			for (int i = 0; i < count; ++i)
-			{
-				printf("%f ", *(pa+i));
-			}
-			printf("\n");
             if (list_check(count, sizeof(double), pa, res))
             {
                 ok_count++;
