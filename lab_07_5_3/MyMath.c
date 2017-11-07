@@ -69,7 +69,7 @@ int key(const int *pb_src, const int *pe_src, int **pb_dst, int **pe_dst)
 * b - указатель на второй элемент.
 * size - размер типа элементов.
 */
-void swap(void *a, void *b, size_t size)
+void swap(void *a, void *b, int size)
 {
     char *f = a;
     char *g = b;
