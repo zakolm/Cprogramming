@@ -51,10 +51,10 @@ int main(int argc, char **argv)
                 rc = ERROR_MEMORY;
                 break;
             }
-            //else if ((pd - pc))
-            //{
-            //    break;
-            //}
+            if ((pd - pc))
+            {
+                break;
+            }
             pa = pc;
             pb = pd;
         }
