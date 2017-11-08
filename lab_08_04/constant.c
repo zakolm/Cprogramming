@@ -26,4 +26,8 @@ void print_error(int code)
     {
         printf("Cannot find determinant\n");
     }
+	else if (code != OK)
+	{
+		printf("Unknown error\n");
+	}
 }

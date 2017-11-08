@@ -26,10 +26,6 @@ int main(int argc, char **argv)
 		rc = ERROR_ALLOCATE_MEMORY;
 	}
 
-	//int count = 0;
-	//while (rc == OK && !count)
-	//{
-	//count++;
 	if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
 	{
 		FILE * file1 = fopen(argv[3], "r");
@@ -93,10 +89,9 @@ int main(int argc, char **argv)
 			rc = ERROR_DETERMINANT;
 		}
 	}
-	//}
 
 	stop:
-	free_matrix(matrix);	
+	free_matrix(matrix);
 	fclose(file);
 	print_error(rc);
 	return rc;
