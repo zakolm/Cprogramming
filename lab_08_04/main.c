@@ -24,6 +24,7 @@ int main(int argc, char **argv)
 	if (!matrix)
 	{
 		rc = ERROR_ALLOCATE_MEMORY;
+		goto stop0;
 	}
 
 	if (!strcmp(argv[1], "a") || !strcmp(argv[1], "m"))
@@ -92,6 +93,7 @@ int main(int argc, char **argv)
 
 	stop:
 		free_matrix(matrix);
+	stop0:
 		fclose(file);
 		print_error(rc);
 	return rc;
