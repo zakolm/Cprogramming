@@ -95,6 +95,6 @@ int main(int argc, char **argv)
 		free_matrix(matrix);
 	stop0:
 		fclose(file);
-		print_error(rc);
+	print_error(rc);
 	return rc;
 }
