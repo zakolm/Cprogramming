@@ -5,6 +5,8 @@
 #include "matrix.h"
 #include "constant.h"
 
+#define STOP stop:
+
 int main(int argc, char **argv)
 {
 	if ((argc != 5 || (strcmp(argv[1], "a") && strcmp(argv[1], "m"))) && (argc != 4 || !strcmp(argv[1], "a") || !strcmp(argv[1], "m")))
@@ -90,7 +92,7 @@ int main(int argc, char **argv)
 		}
 	}
 
-	stop:
+	STOP//stop:
 	free_matrix(matrix);
 	fclose(file);
 	print_error(rc);
