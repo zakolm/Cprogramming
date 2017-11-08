@@ -69,7 +69,10 @@ matrix_s *create_matrix(int row, int col)
 	}
 	matrix->columns = col;
 	matrix->rows = row;
+	matrix->data = malloc(row * sizeof(double*) + row * col * sizeof(double));
+	/*
 	matrix->data = (double**) calloc(row, sizeof(double*));
+	*/
 	if (!(matrix->data))
 	{
 		free(matrix);
@@ -78,11 +81,12 @@ matrix_s *create_matrix(int row, int col)
 	int size = 0;
 	for (int i = 0; i < row; ++i)
 	{
-		matrix->data[i] = (double*) calloc(col, sizeof(double));
+		matrix->data[i] = (double*)((char*)matrix->data + row * sizeof(double*) + i * col * sizeof(double));
+		/*matrix->data[i] = (double*) calloc(col, sizeof(double));
 		if (!(matrix->data[i]))
 		{
 			break;
-		}
+		}*/
 		size++;
 	}
 
@@ -91,7 +95,7 @@ matrix_s *create_matrix(int row, int col)
 		free_matrix(matrix);
 		return NULL;
 	}
-
+	
 	return matrix;
 }
 
@@ -101,10 +105,12 @@ matrix_s *create_matrix(int row, int col)
 */
 void free_matrix(matrix_s *matrix)
 {
+	/*
 	for (int i = 0; i < matrix->rows; ++i)
 	{
 		free(matrix->data[i]);
 	}
+	*/
 	free(matrix->data);
 	free(matrix);
 }
