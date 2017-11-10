@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 #include "matrix.h"
 #include "constant.h"
@@ -162,7 +163,7 @@ void determinant_tests(void)
 }
 
 /*
-int matrix_cmp(int rows, int columns , const double (*data_a)[], const double (*data_b)[])
+int matrix_cmp(int rows, int columns , const double data_a[][], double **data_b)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -177,22 +178,26 @@ int matrix_cmp(int rows, int columns , const double (*data_a)[], const double (*
     return 0;
 }
 
+
 void addition_matrix_tests(void)
 {
     int ok_count = 0;
 
     // 1 test
     {
-        double data[3][3] = {3.0, 4.0, 6.0,
-                            8.0, 10.0, 12.0,
-                            14.0, 16.0, 18.0};
+        double data[3][3] = 
+				{
+					{3.0, 4.0, 6.0},
+					{8.0, 10.0, 12.0},
+					{14.0, 16.0, 18.0}
+				};
         //double (*res)[3];
         //res = data;
         FILE * file = fopen("test.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         matrix_s *new_matrix = addition_matrix(matrix, matrix);
         //double (*res)[3] = new_matrix->data;
-        if (data[0][0])//!matrix_cmp(res, new_matrix->data))
+        if (!matrix_cmp(3, 3, data, new_matrix->data))//!memcmp(data, new_matrix->data, sizeof(double)))//data[0][0])//!matrix_cmp(res, new_matrix->data))
         {
             ok_count++;
         }
@@ -218,11 +223,11 @@ void addition_matrix_tests(void)
         fclose(file1);
         fclose(file2);
     }
-
+*/
     // result
-    printf("%s: %s\n", __func__, (ok_count == 2) ? "FAILED" : "OK");
-}
-
+    //printf("%s: %s\n", __func__, (ok_count == 1) ? "OK" : "FAILED");
+//}
+/*
 void multiply_matrix_tests(void)
 {
 

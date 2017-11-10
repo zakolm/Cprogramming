@@ -28,26 +28,16 @@ matrix_s *create_matrix_from_file(FILE *file)
 		return NULL;
 	}
 	
-	int size_matrix = matrix->rows * matrix->columns;
-	int size_check = 0;
 	int rc = 1;
 	for (row = 0; row < matrix->rows; ++row)
 	{
 		for (col = 0; col < matrix->columns; ++col)
-		{	
-			if (size_check < size_matrix)
+		{
+			rc = fscanf(file, "%lf", &((*matrix).data[row][col]));
+			if (rc == 0 || rc == -1)
 			{
-				size_check++;
-				rc = fscanf(file, "%lf", &((*matrix).data[row][col]));
-				if (rc == 0 || rc == -1)
-				{
-					free_matrix(matrix);
-					return NULL;
-				}
-			}
-			else
-			{
-				break;
+				free_matrix(matrix);
+				return NULL;
 			}
 		}
 	}
@@ -78,22 +68,15 @@ matrix_s *create_matrix(int row, int col)
 		free(matrix);
 		return NULL;
 	}
-	int size = 0;
 	for (int i = 0; i < row; ++i)
 	{
 		matrix->data[i] = (double*)((char*)matrix->data + row * sizeof(double*) + i * col * sizeof(double));
 		/*matrix->data[i] = (double*) calloc(col, sizeof(double));
 		if (!(matrix->data[i]))
 		{
-			break;
+			free_matrix(matrix);
+			return NULL;
 		}*/
-		size++;
-	}
-
-	if (size != row)
-	{
-		free_matrix(matrix);
-		return NULL;
 	}
 	
 	return matrix;
