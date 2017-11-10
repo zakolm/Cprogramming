@@ -8,6 +8,7 @@
 */
 int int_count_scan(FILE *file, int *count)
 {
+    *count = 0;
     int item = 0;
     int rc = fscanf(file, "%d", &item);
     while (rc == 1)
@@ -32,11 +33,11 @@ int int_count_scan(FILE *file, int *count)
 */
 void scan_array(FILE *file, int *pa, int *pb)
 {
-    int item = 0;
+    //int item = 0;
     fseek(file, 0, seek_set);
-    while (pa < pb && fscanf(file, "%d", &item) == 1)
+    while (pa < pb && fscanf(file, "%d", pa) == 1)
     {
-        *pa = item;
+        //*pa = item;
         pa++;
     }
 }
@@ -45,7 +46,7 @@ void scan_array(FILE *file, int *pa, int *pb)
 * pa - указатель на начало массива, который будет напечатан.  
 * pb - указатель на конец массива, который будет напечатан.  
 */
-void print_list(int count, int *pa)
+void print_list(int count, const int *pa)
 {
     for (int i = 0; i < count; ++i)
     {
@@ -58,7 +59,7 @@ void print_list(int count, int *pa)
 * pa - указатель на начало массива, который будет напечатан.  
 * pa - указатель на конец массива, который будет напечатан.
 */
-void write_to_file(FILE *file, int *pa, int *pb)
+void write_to_file(FILE *file, const int *pa, const int *pb)
 {
     for (; pa < pb; pa++)
     {
