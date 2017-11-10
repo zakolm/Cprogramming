@@ -11,7 +11,8 @@ int int_count_scan(FILE *file, int *count)
     *count = 0;
     int item = 0;
     int rc = fscanf(file, "%d", &item);
-    (*count)++;
+    if (rc == 1)
+    	(*count)++;
     while ((rc = fscanf(file, "%d", &item)) == 1)
     {
         (*count)++;
