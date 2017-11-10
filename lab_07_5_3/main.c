@@ -25,13 +25,13 @@ int main(int argc, char **argv)
     int flag_filter = (argc < 4) ? 0 : 1;
     rc = int_count_scan(file_in, &count);
 
-    while (!rc && count)
+    if (!rc && count)
     {
         int *pa = NULL;
         if (create_array_int(&pa, count))
         {
             rc = ERROR_MEMORY;
-            break;
+            goto stop_1;//break;
         }
         int *pb = pa + count;
         scan_array(file_in, pa, pb);
@@ -47,14 +47,13 @@ int main(int argc, char **argv)
             if (sup_flag)
             {
                 rc = ERROR_MEMORY;
-                break;
+                goto stop_1;//break;
             }
             pa = pc;
             pb = pd;
         }
         
         mysort(pa, pb - pa, sizeof(*pa), compare_int_and_ch);
-        count = 0; //  для выхода из цикла.  
         
         printf("\n");
         print_list(pb - pa, pa);
@@ -63,14 +62,15 @@ int main(int argc, char **argv)
         if (!file_out)
         {
             rc = ERROR_EMPTY_FILE;
-            free(pa);
-            break;
+            goto stop_2;//break;
         }
         write_to_file(file_out, pa, pb);
         fclose(file_out);
-        free(pa);
+        stop_2:
+            free(pa);
     }
 
-    fclose(file_in);
+    stop_1:
+        fclose(file_in);
     return rc;
 }
