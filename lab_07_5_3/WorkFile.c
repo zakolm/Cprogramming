@@ -11,9 +11,9 @@ int int_count_scan(FILE *file, int *count)
     *count = 0;
     int item = 0;
     int rc = fscanf(file, "%d", &item);
-    while (rc == 1)
+    (*count)++;
+    while ((rc = fscanf(file, "%d", &item)) == 1)
     {
-        rc = fscanf(file, "%d", &item);
         (*count)++;
     }
     
@@ -33,11 +33,9 @@ int int_count_scan(FILE *file, int *count)
 */
 void scan_array(FILE *file, int *pa, int *pb)
 {
-    //int item = 0;
     fseek(file, 0, seek_set);
     while (pa < pb && fscanf(file, "%d", pa) == 1)
     {
-        //*pa = item;
         pa++;
     }
 }
@@ -48,9 +46,9 @@ void scan_array(FILE *file, int *pa, int *pb)
 */
 void print_list(int count, const int *pa)
 {
-    for (int i = 0; i < count; ++i)
+    for (int i = 0; i < count; ++i, ++pa)
     {
-        printf("%d ", *(pa + i));
+        printf("%d ", *pa);
     }
 }
 /*
