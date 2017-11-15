@@ -126,19 +126,29 @@ void mysort(void *basic, size_t count, size_t size, int (*comp)(const void*, con
     if (count == 1)
         return;
     char *pb = (char*)basic + count * size;
-    int flag = 0;
-    int len = count;
-    do
+    char *bar = pb;
+    char *tmp = pb;
+    //int flag = 0;
+    //int len = count;
+    for (char *pa = (char*)basic; pa < pb; pa += size)
     {
-        flag = 0;
-        for (char *pa = (char*)basic; pa < pb - size; pa += size)
+        //flag = 0;
+        for (char *pc = (char*)basic; pc < pb - size; pc += size)
         {
-            if (comp(pa, pa + size) > 0)
-            {
-                swap(pa, pa + size, size);
-                flag = 1;
-            }
+	    if (pc < bar)
+	    {
+                if (comp(pa, pa + size) > 0)
+                {
+                    swap(pa, pa + size, size);
+                    //flag = 1;
+		    tmp = pc;
+                }
+	    }
+	    else
+	    {
+		    bar = tmp;
+	    }
         }
-        len--;
-    } while (flag && len > 1);
+        //len--;
+    }// while (flag && len > 1);
 }
