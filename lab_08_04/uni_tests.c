@@ -185,9 +185,9 @@ void addition_matrix_tests(void)
     {
         double data[3][3] = 
             {
-            {3.0, 4.0, 6.0},
-            {8.0, 10.0, 12.0},
-            {14.0, 16.0, 18.0}
+            { 3.0, 4.0, 6.0 },
+            { 8.0, 10.0, 12.0 },
+            { 14.0, 16.0, 18.0 }
             };
         FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
