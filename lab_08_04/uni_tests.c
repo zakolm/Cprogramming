@@ -6,22 +6,19 @@
 #include "constant.h"
 
 #define EPS 1E-5
+#define func __func__
 
 void scan_tests(void);
-
 void determinant_tests(void);
-
 void addition_matrix_tests(void);
-/*
 void multiply_matrix_tests(void);
- */
 
 int main(void)
 {
     scan_tests();
     determinant_tests();
-    //addition_matrix_tests();
-    //multiply_matrix_tests();
+    addition_matrix_tests();
+    multiply_matrix_tests();
 
     return OK;
 }
@@ -33,7 +30,7 @@ void scan_tests(void)
     // 1 test
     {
         int res_row = 3, res_col = 3;
-        FILE * file = fopen("test.txt", "r");
+        FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if ((res_row == matrix->rows) && (res_col == matrix->columns))
         {
@@ -46,7 +43,7 @@ void scan_tests(void)
     // 2 test
     {
         int res_row = 3, res_col = 2;
-        FILE * file = fopen("test2.txt", "r");
+        FILE * file = fopen("in_2.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if ((res_row == matrix->rows) && (res_col == matrix->columns))
         {
@@ -58,7 +55,7 @@ void scan_tests(void)
 
     // 3 test
     {
-        FILE * file = fopen("test3.txt", "r");
+        FILE * file = fopen("in_3.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
@@ -67,19 +64,22 @@ void scan_tests(void)
         fclose(file);
     }
 
-    /*
-    // 4 test ?? неверный размер как должен быть считан
+    // 4 test
     {
-        FILE * file = fopen("test4.txt", "r");
+        int res_row = 3, res_col = 3;
+        FILE * file = fopen("in_4.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
+        if ((res_row == matrix->rows) && (res_col == matrix->columns))
+        {
+            ok_count++;
+        }
         free_matrix(matrix);
         fclose(file);
     }
-    */
 
     // 5 test
     {
-        FILE * file = fopen("test5.txt", "r");
+        FILE * file = fopen("in_5.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
@@ -90,7 +90,7 @@ void scan_tests(void)
 
     // 6 test
     {
-        FILE * file = fopen("test8.txt", "r");
+        FILE * file = fopen("in_8.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
@@ -101,7 +101,7 @@ void scan_tests(void)
 
     // 7 test
     {
-        FILE * file = fopen("test9.txt", "r");
+        FILE * file = fopen("in_9.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
@@ -112,7 +112,7 @@ void scan_tests(void)
 
     // 8 test
     {
-        FILE * file = fopen("test10.txt", "r");
+        FILE * file = fopen("in_20.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
@@ -122,7 +122,7 @@ void scan_tests(void)
     }
 
     //result
-    printf("%s: %s\n", "scan_tests", (ok_count == 7) ? "FAILED" : "OK");
+    printf("%s: %s\n", func, (ok_count == 8) ? "OK" : "FAILED");
 }
 
 void determinant_tests(void)
@@ -132,7 +132,7 @@ void determinant_tests(void)
     // 1 test
     {
         double res = 1.5;
-        FILE * file = fopen("test.txt", "r");
+        FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         double det;
         int flag = determinant(matrix, &det);
@@ -146,7 +146,7 @@ void determinant_tests(void)
 
     // 2 test
     {
-        FILE * file = fopen("test2.txt", "r");
+        FILE * file = fopen("in_2.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         double det;
         int flag = determinant(matrix, &det);
@@ -159,11 +159,10 @@ void determinant_tests(void)
     }
 
     //result
-    printf("%s: %s\n", "determinant_tests", (ok_count == 2) ? "FAILED" : "OK");
+    printf("%s: %s\n", func, (ok_count == 2) ? "FAILED" : "OK");
 }
 
-/*
-int matrix_cmp(int rows, int columns , const double data_a[][], double **data_b)
+int matrix_cmp(int rows, int columns , double data_a[rows][columns], double **data_b)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -178,7 +177,6 @@ int matrix_cmp(int rows, int columns , const double data_a[][], double **data_b)
     return 0;
 }
 
-
 void addition_matrix_tests(void)
 {
     int ok_count = 0;
@@ -186,18 +184,16 @@ void addition_matrix_tests(void)
     // 1 test
     {
         double data[3][3] = 
-				{
-					{3.0, 4.0, 6.0},
-					{8.0, 10.0, 12.0},
-					{14.0, 16.0, 18.0}
-				};
-        //double (*res)[3];
-        //res = data;
-        FILE * file = fopen("test.txt", "r");
+                {
+                    {3.0, 4.0, 6.0},
+                    {8.0, 10.0, 12.0},
+                    {14.0, 16.0, 18.0}
+                };
+        FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
+
         matrix_s *new_matrix = addition_matrix(matrix, matrix);
-        //double (*res)[3] = new_matrix->data;
-        if (!matrix_cmp(3, 3, data, new_matrix->data))//!memcmp(data, new_matrix->data, sizeof(double)))//data[0][0])//!matrix_cmp(res, new_matrix->data))
+        if (!matrix_cmp(new_matrix->rows, new_matrix->columns, data, new_matrix->data))
         {
             ok_count++;
         }
@@ -208,8 +204,33 @@ void addition_matrix_tests(void)
 
     // 2 test
     {
-        FILE * file1 = fopen("test.txt", "r");
-        FILE * file2 = fopen("test2.txt", "r");
+        double data[3][3] = 
+                {
+                    {2.5, 4.0, 6.0},
+                    {8.0, 10.0, 12.0},
+                    {14.0, 16.0, 18.0},
+                };
+
+        FILE * file = fopen("in_1.txt", "r");
+        FILE * file1 = fopen("in_4.txt", "r");
+        matrix_s *matrix = create_matrix_from_file(file);
+        matrix_s *matrix1 = create_matrix_from_file(file1);
+
+        matrix_s *new_matrix = addition_matrix(matrix, matrix1);
+        if (!matrix_cmp(new_matrix->rows, new_matrix->columns, data, new_matrix->data))
+        {
+            ok_count++;
+        }
+        free_matrix(new_matrix);
+        free_matrix(matrix);
+        fclose(file1);
+        fclose(file);
+    }
+
+    // 3 test
+    {
+        FILE * file1 = fopen("in_1.txt", "r");
+        FILE * file2 = fopen("in_2.txt", "r");
         matrix_s *matrix_a = create_matrix_from_file(file1);
         matrix_s *matrix_b = create_matrix_from_file(file2);
 
@@ -223,13 +244,83 @@ void addition_matrix_tests(void)
         fclose(file1);
         fclose(file2);
     }
-*/
+
     // result
-    //printf("%s: %s\n", __func__, (ok_count == 1) ? "OK" : "FAILED");
-//}
-/*
+    printf("%s: %s\n", func, (ok_count == 3) ? "OK" : "FAILED");
+}
+
 void multiply_matrix_tests(void)
 {
+    int ok_count = 0;
 
+    // 1 test
+    {
+        double data[3][3] = 
+                {
+                    {31.25, 37.0, 43.5},
+                    {68.0, 81.0, 96.0},
+                    {105.5, 126.0, 150.0}
+                };
+
+        FILE * file = fopen("in_1.txt", "r");
+        FILE * file1 = fopen("in_1.txt", "r");
+        matrix_s *matrix = create_matrix_from_file(file);
+        matrix_s *matrix1 = create_matrix_from_file(file1);
+
+        matrix_s *new_matrix = multiply_matrix(matrix, matrix1);
+        if (!matrix_cmp(new_matrix->rows, new_matrix->columns, data, new_matrix->data))
+        {
+            ok_count++;
+        }
+        free_matrix(new_matrix);
+        free_matrix(matrix);
+        fclose(file1);
+        fclose(file);
+    }
+
+    // 2 test
+    {
+        double data[3][2] = 
+                {
+                    {30.5, 37.0},
+                    {66.0, 81.0},
+                    {102.0, 126.0}
+                };
+
+        FILE * file = fopen("in_1.txt", "r");
+        FILE * file1 = fopen("in_2.txt", "r");
+        matrix_s *matrix = create_matrix_from_file(file);
+        matrix_s *matrix1 = create_matrix_from_file(file1);
+
+        matrix_s *new_matrix = multiply_matrix(matrix, matrix1);
+        if (!matrix_cmp(new_matrix->rows, new_matrix->columns, data, new_matrix->data))
+        {
+            ok_count++;
+        }
+        free_matrix(new_matrix);
+        free_matrix(matrix);
+        fclose(file1);
+        fclose(file);
+    }
+
+    // 3 test
+    {
+        FILE * file = fopen("in_1.txt", "r");
+        FILE * file1 = fopen("in_6.txt", "r");
+        matrix_s *matrix = create_matrix_from_file(file);
+        matrix_s *matrix1 = create_matrix_from_file(file1);
+
+        matrix_s *new_matrix = multiply_matrix(matrix, matrix1);
+        if (!new_matrix)
+        {
+            ok_count++;
+        }
+        free_matrix(matrix1);
+        free_matrix(matrix);
+        fclose(file1);
+        fclose(file);
+    }
+
+    // result
+    printf("%s: %s\n", func, (ok_count == 3) ? "OK" : "FAILED");
 }
- */
