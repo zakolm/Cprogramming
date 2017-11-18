@@ -162,7 +162,7 @@ void determinant_tests(void)
     printf("%s: %s\n", func, (ok_count == 2) ? "FAILED" : "OK");
 }
 
-int matrix_cmp(int rows, int columns , double data_a[rows][columns], double **data_b)
+int matrix_cmp(int rows, int columns, double data_a[rows][columns], double **data_b)
 {
     for (int i = 0; i < rows; ++i)
     {
@@ -184,11 +184,11 @@ void addition_matrix_tests(void)
     // 1 test
     {
         double data[3][3] = 
-                {
-                    {3.0, 4.0, 6.0},
-                    {8.0, 10.0, 12.0},
-                    {14.0, 16.0, 18.0}
-                };
+            {
+                {3.0, 4.0, 6.0},
+                {8.0, 10.0, 12.0},
+                {14.0, 16.0, 18.0}
+            };
         FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
 
@@ -205,11 +205,11 @@ void addition_matrix_tests(void)
     // 2 test
     {
         double data[3][3] = 
-                {
-                    {2.5, 4.0, 6.0},
-                    {8.0, 10.0, 12.0},
-                    {14.0, 16.0, 18.0},
-                };
+            {
+                {2.5, 4.0, 6.0},
+                {8.0, 10.0, 12.0},
+                {14.0, 16.0, 18.0},
+            };
 
         FILE * file = fopen("in_1.txt", "r");
         FILE * file1 = fopen("in_4.txt", "r");
@@ -256,11 +256,11 @@ void multiply_matrix_tests(void)
     // 1 test
     {
         double data[3][3] = 
-                {
-                    {31.25, 37.0, 43.5},
-                    {68.0, 81.0, 96.0},
-                    {105.5, 126.0, 150.0}
-                };
+            {
+                {31.25, 37.0, 43.5},
+                {68.0, 81.0, 96.0},
+                {105.5, 126.0, 150.0}
+            };
 
         FILE * file = fopen("in_1.txt", "r");
         FILE * file1 = fopen("in_1.txt", "r");
@@ -281,11 +281,11 @@ void multiply_matrix_tests(void)
     // 2 test
     {
         double data[3][2] = 
-                {
-                    {30.5, 37.0},
-                    {66.0, 81.0},
-                    {102.0, 126.0}
-                };
+            {
+                {30.5, 37.0},
+                {66.0, 81.0},
+                {102.0, 126.0}
+            };
 
         FILE * file = fopen("in_1.txt", "r");
         FILE * file1 = fopen("in_2.txt", "r");
