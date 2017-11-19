@@ -531,7 +531,7 @@ void check_sort(void)
             };
         int value[] =
             {
-            6, 4, 2, 1, 0. -3, -5
+            6, 4, 2, 1, 0, -3, -5
             };
         mysort(value, count_res, sizeof(value[0]), compare_int_and_ch);
 
