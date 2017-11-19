@@ -5,7 +5,7 @@
 #include "matrix.h"
 #include "constant.h"
 
-#define EPS 1E-5
+#define EPS 1e-5
 #define func __func__
 
 void scan_tests(void);
@@ -15,7 +15,7 @@ void multiply_matrix_tests(void);
 
 int main(void)
 {
-    scan_tests();
+    //scan_tests();
     determinant_tests();
     addition_matrix_tests();
     multiply_matrix_tests();
@@ -26,9 +26,11 @@ int main(void)
 void scan_tests(void)
 {
     int ok_count = 0;
+    int number_test = 0;
 
     // 1 test
     {
+    	number_test++;
         int res_row = 3, res_col = 3;
         FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
@@ -36,12 +38,17 @@ void scan_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_scan: test %d faild\n", number_test);
+        }
         free_matrix(matrix);
         fclose(file);
     }
 
     // 2 test
     {
+    	number_test++;
         int res_row = 3, res_col = 2;
         FILE * file = fopen("in_2.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
@@ -49,23 +56,33 @@ void scan_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_scan: test %d faild\n", number_test);
+        }
         free_matrix(matrix);
         fclose(file);
     }
 
     // 3 test
     {
+    	number_test++;
         FILE * file = fopen("in_3.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_scan: test %d faild\n", number_test);
+        }
         fclose(file);
     }
 
     // 4 test
     {
+    	number_test++;
         int res_row = 3, res_col = 3;
         FILE * file = fopen("in_4.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
@@ -73,65 +90,75 @@ void scan_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_scan: test %d faild\n", number_test);
+        }
         free_matrix(matrix);
         fclose(file);
     }
 
     // 5 test
     {
+    	number_test++;
         FILE * file = fopen("in_5.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_scan: test %d faild\n", number_test);
+        }
         fclose(file);
     }
 
     // 6 test
     {
+    	number_test++;
         FILE * file = fopen("in_8.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_scan: test %d faild\n", number_test);
+        }
         fclose(file);
     }
 
     // 7 test
     {
+    	number_test++;
         FILE * file = fopen("in_9.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         if (!matrix)
         {
             ok_count++;
         }
-        fclose(file);
-    }
-
-    // 8 test
-    {
-        FILE * file = fopen("in_20.txt", "r");
-        matrix_s *matrix = create_matrix_from_file(file);
-        if (!matrix)
+        else
         {
-            ok_count++;
+        	printf("test_scan: test %d faild\n", number_test);
         }
         fclose(file);
     }
 
     //result
-    printf("%s: %s\n", func, (ok_count == 8) ? "OK" : "FAILED");
+    printf("%s: %s\n", func, (ok_count == number_test) ? "OK" : "FAILED");
 }
 
 void determinant_tests(void)
 {
     int ok_count = 0;
+    int number_test = 0;
 
     // 1 test
     {
-        double res = 1.5;
+    	number_test++;
+        double res = -1.5;
         FILE * file = fopen("in_1.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         double det;
@@ -140,12 +167,17 @@ void determinant_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_determinant: test %d faild\n", number_test);
+        }
         free_matrix(matrix);
         fclose(file);
     }
 
     // 2 test
     {
+    	number_test++;
         FILE * file = fopen("in_2.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
         double det;
@@ -154,12 +186,16 @@ void determinant_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_determinant: test %d faild\n", number_test);
+        }
         free_matrix(matrix);
         fclose(file);
     }
 
     //result
-    printf("%s: %s\n", func, (ok_count == 2) ? "FAILED" : "OK");
+    printf("%s: %s\n", func, (ok_count == number_test) ? "OK" : "FAILED");
 }
 
 int matrix_cmp(int rows, int columns, double data_a[rows][columns], double **data_b)
@@ -180,9 +216,11 @@ int matrix_cmp(int rows, int columns, double data_a[rows][columns], double **dat
 void addition_matrix_tests(void)
 {
     int ok_count = 0;
+    int number_test = 0;
 
     // 1 test
     {
+    	number_test++;
         double data[3][3] = 
             {
             { 3.0, 4.0, 6.0 },
@@ -197,6 +235,10 @@ void addition_matrix_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_addition_matrix: test %d faild", number_test);
+        }
         free_matrix(new_matrix);
         free_matrix(matrix);
         fclose(file);
@@ -204,6 +246,7 @@ void addition_matrix_tests(void)
 
     // 2 test
     {
+    	number_test++;
         double data[3][3] = 
             {
             { 2.5, 4.0, 6.0 },
@@ -221,6 +264,10 @@ void addition_matrix_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_addition_matrix: test %d faild", number_test);
+        }
         free_matrix(new_matrix);
         free_matrix(matrix);
         fclose(file1);
@@ -229,6 +276,7 @@ void addition_matrix_tests(void)
 
     // 3 test
     {
+    	number_test++;
         FILE * file1 = fopen("in_1.txt", "r");
         FILE * file2 = fopen("in_2.txt", "r");
         matrix_s *matrix_a = create_matrix_from_file(file1);
@@ -239,6 +287,10 @@ void addition_matrix_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_addition_matrix: test %d faild", number_test);
+        }
         free_matrix(matrix_a);
         free_matrix(matrix_b);
         fclose(file1);
@@ -246,15 +298,17 @@ void addition_matrix_tests(void)
     }
 
     // result
-    printf("%s: %s\n", func, (ok_count == 3) ? "OK" : "FAILED");
+    printf("%s: %s\n", func, (ok_count == number_test) ? "OK" : "FAILED");
 }
 
 void multiply_matrix_tests(void)
 {
     int ok_count = 0;
+    int number_test = 0;
 
     // 1 test
     {
+    	number_test++;
         double data[3][3] = 
             {
             { 31.25, 37.0, 43.5 },
@@ -272,6 +326,10 @@ void multiply_matrix_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_multiply_matrix: test %d faild", number_test);
+        }
         free_matrix(new_matrix);
         free_matrix(matrix);
         fclose(file1);
@@ -280,6 +338,7 @@ void multiply_matrix_tests(void)
 
     // 2 test
     {
+    	number_test++;
         double data[3][2] = 
             {
             { 30.5, 37.0 },
@@ -297,6 +356,10 @@ void multiply_matrix_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_multiply_matrix: test %d faild", number_test);
+        }
         free_matrix(new_matrix);
         free_matrix(matrix);
         fclose(file1);
@@ -305,6 +368,7 @@ void multiply_matrix_tests(void)
 
     // 3 test
     {
+    	number_test++;
         FILE * file = fopen("in_1.txt", "r");
         FILE * file1 = fopen("in_6.txt", "r");
         matrix_s *matrix = create_matrix_from_file(file);
@@ -315,6 +379,10 @@ void multiply_matrix_tests(void)
         {
             ok_count++;
         }
+        else
+        {
+        	printf("test_multiply_matrix: test %d faild", number_test);
+        }
         free_matrix(matrix1);
         free_matrix(matrix);
         fclose(file1);
@@ -322,5 +390,5 @@ void multiply_matrix_tests(void)
     }
 
     // result
-    printf("%s: %s\n", func, (ok_count == 3) ? "OK" : "FAILED");
+    printf("%s: %s\n", func, (ok_count == number_test) ? "OK" : "FAILED");
 }
