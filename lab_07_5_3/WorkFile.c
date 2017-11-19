@@ -1,12 +1,13 @@
 #include "constant.h"
 #include "WorkFile.h"
+#include "MyMath.h"
 
 /*
 * Функция подсчета кол-ва эл-тов в файле. Возвращает OK - все хорошо или ERROR_EMPTY_FILE - ошибка.
 * file - файл откуда производится считывание.
 * count - кол-во эле-тов в файле.
 */
-int int_count_scan(FILE *file, int *count)
+static int int_count_scan(FILE *file, int *count)
 {
     *count = 0;
     int item = 0;
@@ -32,13 +33,30 @@ int int_count_scan(FILE *file, int *count)
 * pa - указатель на начало массива, в который производится считывание.
 * pb - указатель на конец массива, в который производится считывание.
 */
-void scan_array(FILE *file, int *pa, int *pb)
+int scan_array(FILE *file, int **pa, int **pb)
 {
-    fseek(file, 0, seek_set);
-    while (pa < pb && fscanf(file, "%d", pa) == 1)
+    int count = 0;
+    int rc = OK;
+    rc = int_count_scan(file, &count);
+    if (rc)
     {
-        pa++;
+        return rc;
     }
+
+    rc = create_array_int(pa, count);
+    if (rc)
+    {
+        return rc;
+    }
+    
+    *pb = *pa + count;
+    int *pc = *pa;
+    fseek(file, 0, seek_set);
+    while (pc < *pb && fscanf(file, "%d", pc) == 1)
+    {
+        pc++;
+    }
+    return rc;
 }
 /*
 * Функция печати массива в поток(консоль).  
