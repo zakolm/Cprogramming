@@ -485,7 +485,7 @@ void check_sort(void)
         	{
             6, 5, 7, 5, 4, 2, 7, 6, 1, 3
             };
-       	mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_int_and_ch);
+       	mysort(value, count_res, sizeof(value[0]), compare_int_and_ch);
 
     	if (!memcmp(res, value, count_res))
     	{
@@ -509,7 +509,7 @@ void check_sort(void)
         	{
             -1
             };
-       	mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_int_and_ch);
+       	mysort(value, count_res, sizeof(value[0]), compare_int_and_ch);
 
     	if (!memcmp(res, value, count_res))
     	{
@@ -533,7 +533,7 @@ void check_sort(void)
         	{
             6, 4, 2, 1, 0. -3, -5
             };
-       	mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_int_and_ch);
+       	mysort(value, count_res, sizeof(value[0]), compare_int_and_ch);
 
     	if (!memcmp(res, value, count_res))
     	{
@@ -557,7 +557,7 @@ void check_sort(void)
         	{
             1.0, 2.0, 3.0, 4.0, 5.0
             };
-       	mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_double);
+       	mysort(value, count_res, sizeof(value[0]), compare_double);
 
     	if (!memcmp(res, value, count_res))
     	{
@@ -581,7 +581,7 @@ void check_sort(void)
         	{
         	5.0, 4.0, 3.0, 2.0, 1.0
             };
-       	mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_double);
+       	mysort(value, count_res, sizeof(value[0]), compare_double);
 
     	if (!memcmp(res, value, count_res))
     	{
@@ -605,7 +605,7 @@ void check_sort(void)
         	{
         	1.4, 7.7, 1.6, 9.0, 1.2, 4.6, 1.1, 1.5, 0.9, 7.2, 8.4, 1.0, 4.1, 9.9
             };
-       	mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_double);
+       	mysort(value, count_res, sizeof(value[0]), compare_double);
 
     	if (!memcmp(res, value, count_res))
     	{
@@ -629,7 +629,7 @@ void check_sort(void)
 	    	{
 	    	'a', 'b', 'c', 'd', 'e'
 	    	};
-	    mysort(value, sizeof(value) / sizeof(value[0]), sizeof(value[0]), compare_int_and_ch);
+	    mysort(value, count_res, sizeof(value[0]), compare_int_and_ch);
 	    
 	    if (!memcmp(res, value, count_res))
     	{
