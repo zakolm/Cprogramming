@@ -34,7 +34,7 @@ size_t my_strspn(const char *string1, const char *string2)
     {
         for (j = 0; string2[j]; ++j)
         {
-            if (string2[i] == string1[j])// && !arr[j])
+            if (string1[i] == string2[j])// && !arr[j])
             {
                 break;
                 //arr[j] = 1;
