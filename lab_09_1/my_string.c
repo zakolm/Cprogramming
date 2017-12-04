@@ -30,11 +30,11 @@ size_t my_strspn(const char *string1, const char *string2)
     //int arr[len1];
     //size_t res = 0;
     size_t i,j;
-    for (i = 0; string1[i]; ++res)
+    for (i = 0; string1[i]; ++i)
     {
         for (j = 0; string2[j]; ++j)
         {
-            if (string2[res] == string1[j])// && !arr[j])
+            if (string2[i] == string1[j])// && !arr[j])
             {
                 break;
                 //arr[j] = 1;
@@ -47,7 +47,7 @@ size_t my_strspn(const char *string1, const char *string2)
         }
     }
 
-    return res;
+    return i;
     //return strspn(string1, string2);
 }
 
