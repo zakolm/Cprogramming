@@ -17,8 +17,8 @@ static size_t my_strlen(const char *src)
 size_t my_strspn(const char *string1, const char *string2)
 {
 
-    size_t len1 = my_strlen(string1);
-    size_t len2 = my_strlen(string2);
+    //size_t len1 = my_strlen(string1);
+    //size_t len2 = my_strlen(string2);
 
     /*for (size_t i = 0; i < len2; ++i)
         if (string1[0] != string2[i] && i == (len2 - 1))
@@ -28,11 +28,11 @@ size_t my_strspn(const char *string1, const char *string2)
 
     res++;*/
     //int arr[len1];
-    size_t res = 0;
-    size_t j = 0;
-    for (; res < len2; ++res)
+    //size_t res = 0;
+    size_t i,j;
+    for (i = 0; string1[i]; ++res)
     {
-        for (; j < len1; ++j)
+        for (j = 0; string2[j]; ++j)
         {
             if (string2[res] == string1[j])// && !arr[j])
             {
