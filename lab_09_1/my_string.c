@@ -1,5 +1,7 @@
 #include "my_string.h"
 
+#include <string.h>
+
 static size_t my_strlen(const char *src)
 {
     size_t len = 0;
@@ -14,7 +16,7 @@ static size_t my_strlen(const char *src)
 
 size_t my_strspn(const char *string1, const char *string2)
 {
-    size_t res = 0;
+    /*size_t res = 0;
     size_t len1 = my_strlen(string1);
     size_t len2 = my_strlen(string2);
 
@@ -38,7 +40,8 @@ size_t my_strspn(const char *string1, const char *string2)
         }
     }
 
-    return res;
+    return res;*/
+	return strspn(string1, string2);
 }
 
 static void my_strncpy(char * destination, const char * source, size_t num)
