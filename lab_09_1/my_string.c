@@ -27,7 +27,7 @@ size_t my_strspn(const char *string1, const char *string2)
     return i;
 }
 
-static void my_strncpy(char * destination, const char * source, size_t num)
+static void my_strncpy(char *destination, const char *source, size_t num)
 {
     for (size_t i = 0; i < num; ++i)
         destination[i] = source[i];
