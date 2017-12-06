@@ -2,3 +2,7 @@
 *.user
 *.o
 *.c.*
+*.config
+*.creator
+*.files
+*.includes
