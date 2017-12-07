@@ -1,6 +1,5 @@
 CC := gcc
 OPTS := -std=c99
-#CFLAGS := -Wall #-Werror #-pedantic
 
 all: test.exe
 

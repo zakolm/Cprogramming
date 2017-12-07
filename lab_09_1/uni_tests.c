@@ -215,7 +215,7 @@ void check_my_strdup(void)
         char res[]= "0123456789";
         char *istr;
 
-        istr = strdup(res);
+        istr = my_strdup(res);
         if (!istr || strcmp(res, istr))
         {
             printf("%s: FAILD %d test\n", name, number_test);
@@ -233,7 +233,7 @@ void check_my_strdup(void)
         char res[]= "";
         char *istr;
 
-        istr = strdup(res);
+        istr = my_strdup(res);
         if (!istr || strcmp(res, istr))
         {
             printf("%s: FAILD %d test\n", name, number_test);
@@ -251,15 +251,13 @@ void check_my_strdup(void)
         //char res[]= "";
         char *istr;
 
-        istr = strdup('\0');
-        if (!istr)//|| strcmp('\0', istr))
-        {
-            ok_count++;
-        }
-        else
+        istr = my_strdup("\0");
+        if (!istr|| strcmp("\0", istr))
         {
             printf("%s: FAILD %d test\n", name, number_test);
         }
+        else
+            ok_count++;
         free (istr);
     }
 
