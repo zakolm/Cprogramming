@@ -248,11 +248,11 @@ void check_my_strdup(void)
     //test 3
     {
         number_test++;
-        //char res[] = "";
+        char res[] = "\0";
         char *istr;
 
-        istr = my_strdup("\0");
-        if (!istr || strcmp("\0", istr))
+        istr = strdup(res);//my_strdup(res);
+        if (!istr || strcmp(res, istr))
         {
             printf("%s: FAILD %d test\n", name, number_test);
         }
