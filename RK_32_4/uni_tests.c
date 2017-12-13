@@ -70,7 +70,7 @@ void check_write_from_file(void)
     }
 
     //result
-    printf("check_write_from_file is %s", (ok_count == number_test) ? "OK" : "FAILD");
+    printf("check_write_from_file is %s\n", (ok_count == number_test) ? "OK" : "FAILD");
 }
 
 void check_add_front(void)
@@ -83,16 +83,16 @@ void check_add_front(void)
         number_test++;
         char res[][MAX_NAME] = {"Pupkin", "Dymov"};
         char groups[][MAX_GROUP] = {"iu7-22", "iu7-23"};
-        node_t *tmp = create_elem(res[0], groups[0]);
+        node_t *tmp = create_elem(res[1], groups[1]);
         node_t *head = add_front(head, tmp);
-        tmp = create_elem(res[1], groups[1]);
+        tmp = create_elem(res[0], groups[0]);
         head = add_front(head, tmp);
         int flag = 1;
         for (int i = 0; i < 2; ++i)
         {
             if (strcmp(head->name, res[i]) || strcmp(head->group, groups[i]))
             {
-                //printf("%s %s %s %s\n",head_tmp->name, students[i], head_tmp->group, groups[i]);
+                printf("%s %s %s %s\n",head->name, res[i], head->group, groups[i]);
                 flag = 0;
                 break;
             }
